@@ -115,6 +115,8 @@ test('storyboard validation', async () => {
   assert.match(validateStoryboard({title: 'T', scenes: [{...scene, recipe: 'intro', props: {title: 'x'.repeat(61)}}]}).errors[0], /title has 61/);
   assert.match(validateStoryboard({title: 'T', scenes: [{...scene, props: {captions: ['x'.repeat(86)]}}]}).errors[0], /captions\[0\] has 86/);
   assert.match(validateStoryboard({title: 'T', targetSeconds: 100, scenes: [scene]}).warnings[0], /add up to 5s/);
+  const crowded = {...scene, seconds: 3, props: {captions: ['one two three four five six seven eight nine ten', 'one two three four five six seven eight nine ten']}};
+  assert.match(validateStoryboard({title: 'T', scenes: [crowded]}).warnings[0], /20 words need about 7s/);
 });
 
 test('storyboard preview escapes its content', async () => {

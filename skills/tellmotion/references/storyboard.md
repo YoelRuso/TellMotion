@@ -53,4 +53,4 @@ node tools/storyboard.mjs duration <project>                                    
 `generate` can be re-run after changing the storyboard. It updates generated scenes, keeps the ones edited by hand and says which (`--force` overwrites them), and rewrites `src/project.ts`. It does not delete scene files that left the storyboard. If `src/project.ts` lists scenes the storyboard does not know about, it stops: add them to the storyboard, or use `--force` to drop them from the video.
 
 ## Timing
-Recipe scenes stretch their pauses to reach `seconds`, but never cut their animation short. Scenes planned shorter than their animation run long, and `duration` flags them. See the minimums in `references/recipes.md`.
+Give the viewer time to read: `validate` warns when a scene has more than about 3 words per second. Lengthen the scene or cut text; do not ignore the warning. Recipe scenes stretch their pauses to reach `seconds`, but never cut their animation short. Scenes planned shorter than their animation run long, and `duration` flags them. See the minimums in `references/recipes.md`.

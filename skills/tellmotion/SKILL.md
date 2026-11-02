@@ -17,7 +17,7 @@ If the user already gave content/structure, do not ask again. Use `AskUserQuesti
    - **Template**: use a theme from the catalog. Run `node tools/list-themes.mjs` (compact list) and ask for the id; to browse visually run `node tools/build-catalog.mjs <tmpdir>` and open `gallery.html` (serve with `node tools/serve.mjs <tmpdir>`).
    - **Custom design**: write 3 contrasting `theme.json` proposals (see `references/theme-format.md`), render previews and let the user choose (step 2).
    - **Bring your own**: user supplies brand colors/fonts or a Figma file → derive a `theme.json` from it.
-4. **Packs**: infer from the topic, do not ask unless unclear: `cloud` (architectures), `algorithms` (sorting, trees), `charts` (data), `flowchart` (processes), `timeline` (history/roadmaps), `code` (programming, CLI), `typography` (intros, quotes, A vs B), `science` (cycles, layers, waves). Combine freely; `references/packs.md` lists every component.
+4. **Packs**: infer from the topic, do not ask unless unclear, and add only what the custom scenes will use: `cloud` (architectures), `algorithms` (sorting, trees), `charts` (data), `flowchart` (processes), `timeline` (history/roadmaps), `code` (programming, CLI), `typography` (intros, quotes, A vs B), `science` (cycles, layers, waves). Combine freely; `references/packs.md` lists every component.
 
 ## 2. Custom design (skip when a template was chosen)
 1. Write 3 proposals as `theme.json` files in a temp folder (copy the closest catalog theme and change tokens; different families, e.g. technical / playful / editorial).
@@ -30,7 +30,7 @@ If the user already gave content/structure, do not ask again. Use `AskUserQuesti
 Rewriting an animation is expensive; rewriting a list of scenes is not. Skip this step only for a single scene or if the user asks to.
 1. Read `references/storyboard.md` and `references/recipes.md`, then write `storyboard.json`: one entry per scene, with its recipe (or `custom`), what it shows, its seconds and its real text.
 2. `node tools/storyboard.mjs validate <file>`, then `node tools/storyboard.mjs preview <file> --theme <id|file> --out <tmpdir>`. Show the page with the browser pane (`serve.mjs`), and also list the scenes in chat.
-3. Wait for the user's approval. Change the storyboard, not code, until they agree.
+3. Wait for the user's approval. Change the storyboard, not code, until they agree. Stop the preview server afterwards.
 
 After the approval, work autonomously until delivery.
 
@@ -67,7 +67,7 @@ Run it from the folder that should contain the project. One project per topic; a
 Needs Chrome, Edge or Chromium (`CHROME` overrides the path). Projects created before this script existed: `node <skill>/tools/render.mjs <project>`. The source is `tools/render.mjs`.
 
 ## 8. Deliver
-List scenes (name → what it shows), how to run (`npm start`), how to render (`npm run render`), how to change pace (`PACE`), texts (constants per scene), theme (`apply-theme.mjs`). State what was not verified. Update the workspace `CLAUDE.md` with the new project.
+List scenes (name → what it shows), how to run (`npm start`), how to render (`npm run render`), how to change pace (`PACE`), texts (constants per scene), theme (`apply-theme.mjs`). State what was not verified. If the workspace has a `CLAUDE.md`, add the new project to it.
 
 ## Token savings
 - Do not re-read files you just wrote; use `Edit`.

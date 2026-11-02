@@ -3,7 +3,7 @@
 Plans can change. Ideas and votes are welcome in [issues](https://github.com/YoelRuso/TellMotion/issues).
 
 ## Now
-- [ ] **Try the storyboard and recipes flow with a real agent and a real request**, and adjust `SKILL.md` to what happens
+- [ ] **Try the storyboard and recipes flow with more agents and requests** (one DNS video so far), and adjust `SKILL.md` to what happens
 - [ ] Test `npm run render` on macOS and Linux, and with Edge
 - [ ] Check the recipes in the themes not covered yet (`npm run sheets`)
 - [ ] **Keep growing the theme catalog** (gaps: more neon, light and corporate looks; community themes welcome)

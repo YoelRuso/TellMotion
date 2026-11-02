@@ -2,6 +2,12 @@
 
 All notable changes are documented here. The format follows [Keep a Changelog](https://keepachangelog.com/) and the project uses [Semantic Versioning](https://semver.org/).
 
+## [Unreleased]
+
+### Changed
+- `storyboard.mjs validate` warns when a scene has more text than can be read in its length.
+- From a first test with a real agent: `SKILL.md` asks for only the packs the custom scenes use, to stop the preview server after approval, and to update `CLAUDE.md` only if the workspace has one.
+
 ## [0.2.0] - 2026-11-02
 
 ### Added

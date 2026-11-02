@@ -8,6 +8,7 @@ import {loadRecipes, validateProps} from './recipes.mjs';
 const base = join(dirname(fileURLToPath(import.meta.url)), '..', '..', 'assets', 'base');
 const SCENE_ID = /^[a-z][a-z0-9]*(-[a-z0-9]+)*$/;
 const DURATION_MARGIN = 0.2; // how far the total may drift from targetSeconds before it is worth a warning
+const READING_WORDS_PER_SECOND = 3; // on-screen text, read while things move: slower than plain reading
 const HEADER = /^\/\/ GENERATED from storyboard\.json \(([0-9a-f]{12})\)/;
 
 /** Content of a scene with no recipe. The animation itself is written by hand in the generated file. */
@@ -30,6 +31,8 @@ export function loadStoryboard(file) {
     throw new Error(`Cannot read ${file}: ${e.message}`);
   }
 }
+
+const wordsIn = props => textsOf(props ?? {}).reduce((a, [, text]) => a + text.split(/\s+/).filter(Boolean).length, 0);
 
 export const totalSeconds = sb => (sb.scenes ?? []).reduce((a, s) => a + (s.seconds ?? 0), 0);
 
@@ -54,6 +57,8 @@ export function validateStoryboard(sb) {
     const recipe = s.recipe === 'custom' ? CUSTOM : recipes.get(s.recipe);
     if (!recipe) errors.push(`${name}: unknown recipe "${s.recipe}" (available: ${[...recipes.keys(), 'custom'].join(', ')})`);
     else for (const e of validateProps(recipe, s.props ?? {})) errors.push(`${name}: ${e}`);
+    const words = wordsIn(s.props);
+    if (s.seconds > 0 && words / READING_WORDS_PER_SECOND > s.seconds) warnings.push(`${name}: ${words} words need about ${Math.ceil(words / READING_WORDS_PER_SECOND)}s to read, but it lasts ${s.seconds}s`);
   });
 
   const total = totalSeconds(sb);
