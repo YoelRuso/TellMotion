@@ -33,7 +33,9 @@ The numbers are the limits the recipes were tested with, in characters unless th
 | `steps` (`recipes/steps`) | Ordered process of 2 to 5 stages, no branches | `title` 70 · `steps`: 2 to 5 of {`label` 28, `detail?` 110} · `caption?` 85 · `stepHold?` · `hold?` |
 | `outro` (`recipes/outro`) | Last scene of a video | `title` 50 · `takeaways?` up to 3 of 90 · `credits?` up to 4 of {`role` 24, `name` 40} · `cta?` 50 · `hold?` |
 
-`hold` and `stepHold` are seconds, and follow `PACE` like every other timing.
+All of them also take `seconds`, the total length of the scene: the pauses grow to reach it, and `storyboard.mjs generate` fills it in. `hold` and `stepHold` are the least seconds to pause, and follow `PACE` like every other timing.
+
+Approximate time the animation needs at normal pace, measured with short content. Plan at least this, and more when there is a lot to read: `intro` 5 s · `compare` 7 s with 2 points per side, about 2 s more per extra pair · `beforeAfter` 9 s with 2 points per side · `steps` 4 s per step · `outro` 6 s.
 
 ## What recipes do not cover
 

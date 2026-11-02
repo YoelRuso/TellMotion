@@ -1,0 +1,64 @@
+{
+  "title": "How Git branches work",
+  "targetSeconds": 75,
+  "scenes": [
+    {
+      "id": "opening",
+      "recipe": "intro",
+      "shows": "Title and what the viewer will learn",
+      "seconds": 7,
+      "props": {"title": "How Git branches work", "subtitle": "They are much cheaper than you think", "tag": "Git basics"}
+    },
+    {
+      "id": "pointer",
+      "recipe": "custom",
+      "shows": "A branch is a label that moves along a chain of commits",
+      "seconds": 14,
+      "props": {"title": "A branch is a pointer", "captions": ["Commits form a chain.", "A branch is only a label on one of them."]}
+    },
+    {
+      "id": "workflow",
+      "recipe": "steps",
+      "shows": "The everyday workflow, from creating a branch to deleting it",
+      "seconds": 16,
+      "props": {
+        "title": "The everyday workflow",
+        "steps": [
+          {"label": "Create a branch", "detail": "git switch -c creates the label and moves you onto it."},
+          {"label": "Commit your work", "detail": "Only the label you are on moves forward."},
+          {"label": "Merge it back", "detail": "main now includes everything from your branch."}
+        ]
+      }
+    },
+    {
+      "id": "merge-or-rebase",
+      "recipe": "compare",
+      "shows": "When to merge and when to rebase",
+      "seconds": 14,
+      "props": {
+        "title": "Merge vs Rebase",
+        "left": {"label": "Merge", "points": ["Keeps the real history", "Adds a merge commit"]},
+        "right": {"label": "Rebase", "points": ["Gives a straight line", "Rewrites your commits"]},
+        "captions": ["Both bring changes together."]
+      }
+    },
+    {
+      "id": "habit",
+      "recipe": "before-after",
+      "shows": "What changes when you branch for every idea",
+      "seconds": 13,
+      "props": {
+        "title": "Branch for every idea",
+        "before": {"points": ["Everything lands on main", "Experiments are scary"]},
+        "after": {"points": ["main always works", "Throw away what fails"]}
+      }
+    },
+    {
+      "id": "closing",
+      "recipe": "outro",
+      "shows": "What to remember",
+      "seconds": 10,
+      "props": {"title": "Branches are cheap", "takeaways": ["A branch is only a label", "Create one for every idea"], "cta": "Now try it in your own repo"}
+    }
+  ]
+}

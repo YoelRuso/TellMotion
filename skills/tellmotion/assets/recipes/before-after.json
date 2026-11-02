@@ -8,7 +8,8 @@
     "before": {"type": "object", "required": true, "props": {"label": {"type": "string", "maxChars": 22}, "points": {"type": "array", "required": true, "maxItems": 5, "maxChars": 65}}},
     "after": {"type": "object", "required": true, "props": {"label": {"type": "string", "maxChars": 22}, "points": {"type": "array", "required": true, "maxItems": 5, "maxChars": 65}}},
     "captions": {"type": "array", "maxItems": 2, "maxChars": 85},
-    "hold": {"type": "number"}
+    "hold": {"type": "number"},
+    "seconds": {"type": "number"}
   },
   "fixtures": {
     "short": {"title": "Adding a cache", "before": {"points": ["2 s per page", "High load"]}, "after": {"points": ["50 ms per page", "Low load"]}},

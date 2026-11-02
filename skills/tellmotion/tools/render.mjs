@@ -9,7 +9,7 @@
 //   --pad-color <#rrggbb>   color of the bars (default: the theme background)
 //   --fps <n>, --scale <n>  override project.meta
 //   --draft                 quick look: 30 fps at half size, in output/<name>-draft/
-//   --info                  print the duration of each scene; renders nothing
+//   --info                  print the duration of each scene; renders nothing (--json for a machine-readable report)
 //   --dry-run               estimate a size range per file from a few rendered samples; saves nothing
 //   Writes output/<name>/ inside the project. Needs Chrome, Edge or Chromium (set CHROME to override the path).
 //   ffmpeg comes with the project's dependencies (set FFMPEG to override the path).
@@ -77,6 +77,7 @@ export function parseArgs(argv) {
     else if (a === '--scale') opts.scale = number(a, argv[++i]);
     else if (a === '--draft') opts.draft = true;
     else if (a === '--info') opts.info = true;
+    else if (a === '--json') opts.json = true;
     else if (a === '--dry-run') opts.dryRun = true;
     else if (a.startsWith('--')) throw new Error(`Unknown option: ${a}`);
     else opts.project = a;
@@ -503,7 +504,7 @@ async function main(opts) {
 
   if (opts.info) {
     const info = await runPage(project, viteEntry, browser, {mode: 'info', name: 'info', fps: opts.fps, scale: opts.scale});
-    return printInfo(info);
+    return opts.json ? console.log(JSON.stringify({frames: info.frames, fps: info.fps, size: info.size, scenes: info.scenes})) : printInfo(info);
   }
   checkEncoders(ffmpeg, opts.formats);
   const pkgName = JSON.parse(readFileSync(join(project, 'package.json'), 'utf8')).name;

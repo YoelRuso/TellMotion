@@ -10,7 +10,7 @@ TellMotion turns an idea into a 2D explainer animation: a skill (instructions + 
 skills/tellmotion/       the distributable skill
   SKILL.md               agent instructions (the flow)
   themes/*.json          one file per visual theme (source of truth)
-  tools/                 zero-dependency Node tools (validate, build-catalog, apply-theme, list-themes, doctor, serve, render)
+  tools/                 zero-dependency Node tools (validate, build-catalog, apply-theme, list-themes, doctor, serve, render, storyboard)
   assets/base/           Motion Canvas project template
   assets/base/src/recipes/ scene recipes, copied into every project
   assets/recipes/*.json  each recipe's limits and short/long test content

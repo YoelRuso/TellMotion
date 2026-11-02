@@ -7,7 +7,8 @@
     "title": {"type": "string", "required": true, "maxChars": 60},
     "subtitle": {"type": "string", "maxChars": 120},
     "tag": {"type": "string", "maxChars": 40},
-    "hold": {"type": "number"}
+    "hold": {"type": "number"},
+    "seconds": {"type": "number"}
   },
   "fixtures": {
     "short": {"title": "Git branches", "subtitle": "In under two minutes", "tag": "Git basics"},

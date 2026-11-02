@@ -39,8 +39,9 @@ Elige un estilo de un catálogo de temas en crecimiento, describe lo que quieres
 |:-:|---|---|
 | **1** | **Descríbelo** | Cuéntale a tu agente qué quieres explicar. Solo pregunta lo que falta: tema, duración, ritmo. |
 | **2** | **Elige un estilo** | Una plantilla del catálogo, tres propuestas a medida o los colores de tu marca. |
-| **3** | **Se anima** | Se crea un proyecto de Motion Canvas con tu tema y los packs de componentes adecuados. |
-| **4** | **Revisa y renderiza** | Con comprobación de tipos y revisión fotograma a fotograma. Renderiza con un comando o ajusta cualquier texto, color o tiempo. |
+| **3** | **Aprueba el guion** | Una página con cada escena, su texto y su duración. Cambiar una línea aquí no cuesta nada; no se anima nada hasta que estés de acuerdo. |
+| **4** | **Se anima** | Se crea un proyecto de Motion Canvas con tu tema, recetas de escena listas y los packs de componentes adecuados. |
+| **5** | **Revisa y renderiza** | Con comprobación de tipos y revisión fotograma a fotograma. Renderiza con un comando o ajusta cualquier texto, color o tiempo. |
 
 ## 🖼️ Temas
 
@@ -155,6 +156,8 @@ node skills/tellmotion/tools/validate.mjs                    # valida todos los 
 node skills/tellmotion/tools/doctor.mjs                      # comprueba que la skill está completa
 node skills/tellmotion/tools/build-catalog.mjs out           # vistas previas SVG + galería
 bash skills/tellmotion/scripts/new-project.sh mi-video --theme blueprint --pack algorithms,charts --demos
+node skills/tellmotion/tools/storyboard.mjs validate storyboard.json   # comprueba un guion
+node skills/tellmotion/tools/storyboard.mjs generate storyboard.json mi-video   # lo convierte en escenas
 node skills/tellmotion/tools/render.mjs mi-video --draft     # renderiza un proyecto sin el editor
 ```
 
@@ -176,6 +179,7 @@ docs/assets/         imágenes del README
 - [x] Web con demo en vivo y galería con búsqueda
 - [x] Comando de render: mp4, WebM, GIF, miniaturas, vertical y cuadrado, estimación de peso
 - [x] Recetas de escena: intro, capítulo, comparativa, antes/después, pasos, cierre
+- [x] Guion para aprobar antes de animar, con comprobaciones y escenas generadas
 - [ ] Seguir ampliando el catálogo (temas de la comunidad bienvenidos)
 - [ ] Vídeos de ejemplo en distintos ámbitos (software, ciencia, algoritmos)
 - [ ] Empaquetado como plugin instalable

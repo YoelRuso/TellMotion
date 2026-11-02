@@ -1,16 +1,18 @@
 import {Layout, Rect, Txt, View2D} from '@motion-canvas/2d';
-import {createRef, waitFor} from '@motion-canvas/core';
+import {createRef} from '@motion-canvas/core';
 import {prepareScene} from '../components/Scene';
 import {C, FONT, fs, t} from '../config';
-import {accentText, headline, paragraph, revealWords} from './shared';
+import {accentText, headline, holdUntil, paragraph, revealWords} from './shared';
 
 export interface ChapterProps {
   title: string;
   /** Shown big on the left, e.g. "02". */
   number?: string;
   subtitle?: string;
-  /** Extra seconds on screen at the end. */
+  /** Least seconds on screen at the end. */
   hold?: number;
+  /** Total length of the scene; the final pause grows to reach it. */
+  seconds?: number;
 }
 
 /** Section divider: a big number, a rule that grows and the title. */
@@ -38,6 +40,6 @@ export function* chapter(view: View2D, p: ChapterProps) {
   yield* rule().height(300, t(0.4));
   yield* revealWords(words);
   if (p.subtitle) yield* subtitle().opacity(1, t(0.4));
-  yield* waitFor(t(p.hold ?? 1.5));
+  yield* holdUntil(p.seconds, p.hold ?? 1.5);
   yield* leave();
 }

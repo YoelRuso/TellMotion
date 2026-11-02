@@ -9,7 +9,8 @@
     "right": {"type": "object", "required": true, "props": {"label": {"type": "string", "required": true, "maxChars": 24}, "points": {"type": "array", "required": true, "maxItems": 5, "maxChars": 70}}},
     "captions": {"type": "array", "maxItems": 2, "maxChars": 85},
     "winner": {"type": "enum", "values": ["left", "right"]},
-    "hold": {"type": "number"}
+    "hold": {"type": "number"},
+    "seconds": {"type": "number"}
   },
   "fixtures": {
     "short": {"title": "Merge vs Rebase", "left": {"label": "Merge", "points": ["Keeps history", "Adds a commit"]}, "right": {"label": "Rebase", "points": ["Linear history", "Rewrites commits"]}},

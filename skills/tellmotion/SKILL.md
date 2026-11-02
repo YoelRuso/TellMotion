@@ -19,8 +19,6 @@ If the user already gave content/structure, do not ask again. Use `AskUserQuesti
    - **Bring your own**: user supplies brand colors/fonts or a Figma file → derive a `theme.json` from it.
 4. **Packs**: infer from the topic, do not ask unless unclear: `cloud` (architectures), `algorithms` (sorting, trees), `charts` (data), `flowchart` (processes), `timeline` (history/roadmaps), `code` (programming, CLI), `typography` (intros, quotes, A vs B), `science` (cycles, layers, waves). Combine freely; `references/packs.md` lists every component.
 
-After the brief, work autonomously until delivery.
-
 ## 2. Custom design (skip when a template was chosen)
 1. Write 3 proposals as `theme.json` files in a temp folder (copy the closest catalog theme and change tokens; different families, e.g. technical / playful / editorial).
 2. `node tools/validate.mjs <file>` for each, then `node tools/build-catalog.mjs <out> --themes <folder>`.
@@ -28,15 +26,23 @@ After the brief, work autonomously until delivery.
 4. Optional high-fidelity route with Figma (only if the user wants it and the Figma connector exists): `references/figma.md`.
 5. Save the chosen theme as `<project>/theme.custom.json` (and offer to contribute it to the catalog).
 
-## 3. Project
+## 3. Storyboard (the user approves it before anything is animated)
+Rewriting an animation is expensive; rewriting a list of scenes is not. Skip this step only for a single scene or if the user asks to.
+1. Read `references/storyboard.md` and `references/recipes.md`, then write `storyboard.json`: one entry per scene, with its recipe (or `custom`), what it shows, its seconds and its real text.
+2. `node tools/storyboard.mjs validate <file>`, then `node tools/storyboard.mjs preview <file> --theme <id|file> --out <tmpdir>`. Show the page with the browser pane (`serve.mjs`), and also list the scenes in chat.
+3. Wait for the user's approval. Change the storyboard, not code, until they agree.
+
+After the approval, work autonomously until delivery.
+
+## 4. Project
 ```bash
 bash <skill>/scripts/new-project.sh <name> --theme <id|path.json> [--pack a,b|all] [--demos]
 ```
 (`--demos` copies each pack's demo scene: handy to learn an API, then delete the demos.)
 Run it from the folder that should contain the project. One project per topic; add scenes to it for new videos. It copies the template, applies the theme (`src/theme.ts`, `src/fonts.ts`), installs dependencies and registers the project in `.claude/launch.json`. Change theme later: `node <skill>/tools/apply-theme.mjs <theme> <project>` then `npm install`.
 
-## 4. Scenes
-Read `references/recipes.md` first: intros, chapters, comparisons, before/after, step-by-step and closing credits are ready-made in `src/recipes/`, so use them instead of writing those scenes. For the custom scenes that explain the topic, read `references/motion-guide.md` (core API, layout recipe, pitfalls) and `references/packs.md` (pack components). Fixed rules:
+## 5. Scenes
+`node tools/storyboard.mjs generate <file> <project>` writes every scene and `src/project.ts`. Recipe scenes are finished. Each `custom` scene is a running placeholder with its title, captions and length: write its animation, keeping them. For those, read `references/motion-guide.md` (core API, layout recipe, pitfalls) and `references/packs.md` (pack components). Re-running `generate` keeps scenes you edited. Fixed rules:
 - One scene per block in `src/scenes/`, registered in `src/project.ts` (+ a `.meta` file per scene).
 - Use `prepareScene(view, title)`; call `enter()` first and `leave()` last; captions via `sub.say(text)`.
 - Text ≥ 28 px at 1920x1080; captions ≤ 85 characters; one category color per element type + legend in `src/config.ts` (`LEGEND`).
@@ -45,12 +51,12 @@ Read `references/recipes.md` first: intros, chapters, comparisons, before/after,
 - Events/requests/data = `send(root, points, {name})`.
 - Never hard-code colors or fonts in scenes: use `C`, `S`, `FONT`, `fs()` from `config.ts` so themes stay swappable.
 
-## 5. Verify (cheap)
-1. `npm run typecheck` in the project.
+## 6. Verify (cheap)
+1. `npm run typecheck` in the project, then `node tools/storyboard.mjs duration <project>`: if a scene is far from the approved plan, fix it or tell the user.
 2. `preview_start` (project name from `.claude/launch.json`), `resize_window` 1700x950, then click the timeline and `zoom` on `[215,0,800,330]`; batch several clicks+zooms in one `browser_batch`. `scroll right` on the timeline to reach later scenes.
 3. When done: `resize_window` preset `desktop`, `preview_stop`. Do not render mp4 unless asked.
 
-## 6. Render (when asked)
+## 7. Render (when asked)
 `npm run render` in the project writes `output/<name>/<name>.mp4` and `render.json` (duration per scene, file sizes), without opening the editor. Options (after `npm run render --`):
 - `--format mp4,webm,gif` · `--thumb` or `--thumb-at <seconds>` · `--fps <n>` · `--scale <n>`. WebM encoding is slow (minutes): request it only when needed.
 - `--aspect 9:16,1:1`: fits the video inside with bars in the theme background (`--pad-color` overrides); it does not re-lay out the scene, so text shrinks to about 56%. Say so to the user.
@@ -60,7 +66,7 @@ Read `references/recipes.md` first: intros, chapters, comparisons, before/after,
 
 Needs Chrome, Edge or Chromium (`CHROME` overrides the path). Projects created before this script existed: `node <skill>/tools/render.mjs <project>`. The source is `tools/render.mjs`.
 
-## 7. Deliver
+## 8. Deliver
 List scenes (name → what it shows), how to run (`npm start`), how to render (`npm run render`), how to change pace (`PACE`), texts (constants per scene), theme (`apply-theme.mjs`). State what was not verified. Update the workspace `CLAUDE.md` with the new project.
 
 ## Token savings

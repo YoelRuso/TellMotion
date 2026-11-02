@@ -3,7 +3,7 @@ import {all, waitFor} from '@motion-canvas/core';
 import {Arrow} from '../components/Arrow';
 import {prepareScene} from '../components/Scene';
 import {C, t} from '../config';
-import {FADED, Panel, panelHeight} from './shared';
+import {FADED, Panel, holdUntil, panelHeight} from './shared';
 
 export interface BeforeAfterSide {
   /** Heading of the panel; "Before" / "After" by default. */
@@ -17,8 +17,10 @@ export interface BeforeAfterProps {
   after: BeforeAfterSide;
   /** First caption with "before", second one with "after". */
   captions?: string[];
-  /** Extra seconds on screen at the end. */
+  /** Least seconds on screen at the end. */
   hold?: number;
+  /** Total length of the scene; the final pause grows to reach it. */
+  seconds?: number;
 }
 
 /** A change told in order: the old state fills in, an arrow draws, the old state fades and the new one lights up. */
@@ -46,6 +48,6 @@ export function* beforeAfter(view: View2D, p: BeforeAfterProps) {
     yield* waitFor(t(0.4));
   }
   yield* after.glow(true);
-  yield* waitFor(t(p.hold ?? 2));
+  yield* holdUntil(p.seconds, p.hold ?? 2);
   yield* all(sub.hide(), leave());
 }

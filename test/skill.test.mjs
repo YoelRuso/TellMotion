@@ -1,6 +1,7 @@
 import {test} from 'node:test';
 import assert from 'node:assert/strict';
-import {existsSync, readFileSync, readdirSync} from 'node:fs';
+import {existsSync, mkdirSync, mkdtempSync, readFileSync, readdirSync, rmSync, writeFileSync} from 'node:fs';
+import {tmpdir} from 'node:os';
 import {join} from 'node:path';
 import {fileURLToPath, pathToFileURL} from 'node:url';
 
@@ -98,6 +99,69 @@ test('recipe content validation reports what is wrong', async () => {
   assert.ok(errors.some(e => e.includes('at least 2')));
   assert.ok(errors.some(e => e.includes('steps[0].label has 29')));
   assert.ok(errors.some(e => e.includes('nope is not a known')));
+});
+
+const storyboardLib = () => import(pathToFileURL(join(skill, 'tools', 'lib', 'storyboard.mjs')).href);
+const fixture = () => JSON.parse(read('test', 'fixtures', 'storyboard.json'));
+
+test('storyboard validation', async () => {
+  const {validateStoryboard} = await storyboardLib();
+  assert.deepEqual(validateStoryboard(fixture()), {errors: [], warnings: []});
+  const scene = {id: 'a', recipe: 'custom', shows: 'x', seconds: 5};
+  assert.match(validateStoryboard({title: 'T', scenes: [{...scene, recipe: 'nope'}]}).errors[0], /unknown recipe "nope"/);
+  assert.match(validateStoryboard({title: 'T', scenes: [scene, scene]}).errors[0], /repeated id/);
+  assert.match(validateStoryboard({title: 'T', scenes: [{...scene, id: '1-a'}]}).errors[0], /kebab-case/);
+  assert.match(validateStoryboard({title: 'T', scenes: [{...scene, seconds: 0}]}).errors[0], /seconds/);
+  assert.match(validateStoryboard({title: 'T', scenes: [{...scene, recipe: 'intro', props: {title: 'x'.repeat(61)}}]}).errors[0], /title has 61/);
+  assert.match(validateStoryboard({title: 'T', scenes: [{...scene, props: {captions: ['x'.repeat(86)]}}]}).errors[0], /captions\[0\] has 86/);
+  assert.match(validateStoryboard({title: 'T', targetSeconds: 100, scenes: [scene]}).warnings[0], /add up to 5s/);
+});
+
+test('storyboard preview escapes its content', async () => {
+  const {previewHtml} = await storyboardLib();
+  const theme = JSON.parse(readFileSync(join(skill, 'themes', 'blueprint.json'), 'utf8'));
+  const html = previewHtml({title: '<script>x</script>', scenes: [{id: 'a', recipe: 'intro', shows: 'a & b', seconds: 5, props: {title: '<b>'}}]}, theme);
+  assert.ok(!html.includes('<script>x') && !html.includes('<b></'));
+  assert.ok(html.includes('&lt;script&gt;') && html.includes('a &amp; b'));
+});
+
+test('storyboard generate writes scenes and keeps the ones edited by hand', async () => {
+  const {generateScenes, compareDurations} = await storyboardLib();
+  const project = mkdtempSync(join(tmpdir(), 'tm-test-'));
+  try {
+    const scenes = join(project, 'src', 'scenes');
+    mkdirSync(scenes, {recursive: true});
+    mkdirSync(join(project, 'src', 'recipes'));
+    writeFileSync(join(project, 'src', 'recipes', 'shared.tsx'), '');
+    writeFileSync(join(project, 'src', 'project.ts'), read('skills', 'tellmotion', 'assets', 'base', 'src', 'project.ts'));
+    writeFileSync(join(scenes, 'example.tsx'), read('skills', 'tellmotion', 'assets', 'base', 'src', 'scenes', 'example.tsx'));
+    writeFileSync(join(scenes, 'example.meta'), '{}');
+
+    const sb = fixture();
+    const first = generateScenes(sb, project);
+    assert.equal(first.written.length, sb.scenes.length);
+    assert.deepEqual(first.removed, ['example.tsx']);
+    assert.ok(!existsSync(join(scenes, 'example.meta')));
+    assert.match(readFileSync(join(project, 'src', 'project.ts'), 'utf8'), /scenes: \[openingScene, pointerScene, workflowScene, mergeOrRebaseScene, habitScene, closingScene\]/);
+    assert.match(readFileSync(join(scenes, 'opening.tsx'), 'utf8'), /yield\* intro\(view, [^]*"seconds": 7/);
+    const seed = readFileSync(join(scenes, 'opening.meta'), 'utf8');
+
+    const edited = join(scenes, 'pointer.tsx');
+    writeFileSync(edited, readFileSync(edited, 'utf8') + '// mine\n');
+    const second = generateScenes(sb, project);
+    assert.deepEqual(second.kept, ['pointer.tsx']);
+    assert.match(readFileSync(edited, 'utf8'), /\/\/ mine/);
+    assert.equal(readFileSync(join(scenes, 'opening.meta'), 'utf8'), seed, 'meta files must not change');
+    assert.ok(!readFileSync(generateScenes(sb, project, {force: true}) && edited, 'utf8').includes('// mine'));
+
+    assert.throws(() => generateScenes({...sb, scenes: sb.scenes.slice(0, 1)}, project), /not in the storyboard/);
+    assert.throws(() => generateScenes({title: 'T', scenes: []}, project), /not valid/);
+
+    const [ok, off, missing] = compareDurations({scenes: [{id: 'a', seconds: 10}, {id: 'b', seconds: 10}, {id: 'c', seconds: 10}]}, [{name: 'a', seconds: 11}, {name: 'b', seconds: 20}]);
+    assert.deepEqual([ok.off, off.off, missing.real], [false, true, undefined]);
+  } finally {
+    rmSync(project, {recursive: true, force: true});
+  }
 });
 
 test('versions are consistent (package.json, llms.txt, CHANGELOG)', () => {

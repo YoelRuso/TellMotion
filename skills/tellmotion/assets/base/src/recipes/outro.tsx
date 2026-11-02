@@ -1,8 +1,8 @@
 import {Layout, Rect, Txt, View2D} from '@motion-canvas/2d';
-import {all, createRef, makeRef, sequence, waitFor} from '@motion-canvas/core';
+import {all, createRef, makeRef, sequence} from '@motion-canvas/core';
 import {prepareScene} from '../components/Scene';
 import {C, FONT, fs, t} from '../config';
-import {accentOn, fitList, headline, revealWords} from './shared';
+import {fitList, headline, holdUntil, revealWords} from './shared';
 import {boxProps, textOn} from '../components/Piece';
 
 export interface Credit {
@@ -18,8 +18,10 @@ export interface OutroProps {
   credits?: Credit[];
   /** Final call to action in a pill: a link, "Thanks for watching"... */
   cta?: string;
-  /** Extra seconds on screen at the end. */
+  /** Least seconds on screen at the end. */
   hold?: number;
+  /** Total length of the scene; the final pause grows to reach it. */
+  seconds?: number;
 }
 
 /** Closing card: title, what to remember, credits and a call to action. */
@@ -69,6 +71,6 @@ export function* outro(view: View2D, p: OutroProps) {
   if (items.length) yield* sequence(t(0.5), ...takeaways.map(r => r.opacity(1, t(0.4))));
   if (credits.length) yield* all(...credits.map(r => r.opacity(1, t(0.5))));
   if (p.cta) yield* cta().opacity(1, t(0.4));
-  yield* waitFor(t(p.hold ?? 3));
+  yield* holdUntil(p.seconds, p.hold ?? 3);
   yield* leave();
 }

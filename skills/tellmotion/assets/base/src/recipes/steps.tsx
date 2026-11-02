@@ -4,7 +4,7 @@ import {Arrow} from '../components/Arrow';
 import {Piece, boxProps, hiddenState, textOn} from '../components/Piece';
 import {prepareScene} from '../components/Scene';
 import {C, FONT, fs, t} from '../config';
-import {accentOn, fitText} from './shared';
+import {accentOn, fitText, holdUntil} from './shared';
 
 export interface Step {
   label: string;
@@ -20,8 +20,10 @@ export interface StepsProps {
   caption?: string;
   /** Seconds on each step. */
   stepHold?: number;
-  /** Extra seconds on screen at the end. */
+  /** Least seconds on screen at the end. */
   hold?: number;
+  /** Total length of the scene; the final pause grows to reach it. */
+  seconds?: number;
 }
 
 class StepCard extends Piece {
@@ -53,6 +55,8 @@ export function* steps(view: View2D, p: StepsProps) {
 
   const cards = p.steps.map((s, i) => new StepCard(root, x(i), y, w, h, C.cat[i % C.cat.length], i + 1, s.label));
   const arrows = cards.slice(1).map((card, i) => new Arrow(root, [[cards[i].right[0] + 8, y], [card.left[0] - 8, y]]));
+  // With a target length, the extra time goes to the steps rather than to one long pause at the end
+  const stepWait = Math.max(t(p.stepHold ?? 1.5), p.seconds ? (p.seconds - n * t(1.8) - t(2.2)) / n : 0);
   const detail = createRef<Txt>();
   root.add(<Txt ref={detail} y={190} width={1560} textWrap textAlign={'center'} fontFamily={FONT} fontSize={fs(40)} lineHeight={fs(40) * 1.3} fill={C.text} opacity={0} />);
 
@@ -66,10 +70,10 @@ export function* steps(view: View2D, p: StepsProps) {
       detail().text(p.steps[i].detail!);
       yield* detail().opacity(1, t(0.35));
     }
-    yield* waitFor(t(p.stepHold ?? 1.5));
+    yield* waitFor(stepWait);
     if (p.steps[i].detail && i < n - 1) yield* detail().opacity(0, t(0.25));
   }
   yield* cards[n - 1].glow(false);
-  yield* waitFor(t(p.hold ?? 2));
+  yield* holdUntil(p.seconds, p.hold ?? 2);
   yield* all(sub.hide(), leave());
 }

@@ -8,7 +8,8 @@
     "takeaways": {"type": "array", "maxItems": 3, "maxChars": 90},
     "credits": {"type": "objects", "maxItems": 4, "props": {"role": {"type": "string", "required": true, "maxChars": 24}, "name": {"type": "string", "required": true, "maxChars": 40}}},
     "cta": {"type": "string", "maxChars": 50},
-    "hold": {"type": "number"}
+    "hold": {"type": "number"},
+    "seconds": {"type": "number"}
   },
   "fixtures": {
     "short": {"title": "Thanks for watching", "cta": "tellmotion.dev"},

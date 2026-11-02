@@ -31,7 +31,7 @@ if (existsSync(skillMd)) {
 } else bad('SKILL.md not found');
 
 // references and scripts
-for (const f of ['references/theme-format.md', 'references/motion-guide.md', 'references/packs.md', 'references/recipes.md', 'scripts/new-project.sh', 'tools/apply-theme.mjs', 'tools/validate.mjs', 'tools/build-catalog.mjs', 'tools/list-themes.mjs', 'tools/render.mjs']) {
+for (const f of ['references/theme-format.md', 'references/motion-guide.md', 'references/packs.md', 'references/recipes.md', 'references/storyboard.md', 'tools/storyboard.mjs', 'scripts/new-project.sh', 'tools/apply-theme.mjs', 'tools/validate.mjs', 'tools/build-catalog.mjs', 'tools/list-themes.mjs', 'tools/render.mjs']) {
   check(existsSync(join(root, f)), f, `missing ${f}`);
 }
 

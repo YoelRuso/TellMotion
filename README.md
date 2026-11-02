@@ -39,8 +39,9 @@ Pick a look from a growing theme catalog, describe what you want to explain, get
 |:-:|---|---|
 | **1** | **Describe it** | Tell your agent what to explain. It only asks what is missing: topic, length, pace. |
 | **2** | **Pick a look** | A template from the catalog, three custom proposals, or your own brand colors. |
-| **3** | **It animates** | A Motion Canvas project is scaffolded with your theme and the right component packs. |
-| **4** | **Review & render** | Type-checked and reviewed frame by frame. Render with one command, or tweak any text, color or timing. |
+| **3** | **Approve the storyboard** | A page with every scene, its text and its length. Changing a line here costs nothing; nothing is animated until you agree. |
+| **4** | **It animates** | A Motion Canvas project is scaffolded with your theme, ready-made scene recipes and the right component packs. |
+| **5** | **Review & render** | Type-checked and reviewed frame by frame. Render with one command, or tweak any text, color or timing. |
 
 ## 🖼️ Themes
 
@@ -155,6 +156,8 @@ node skills/tellmotion/tools/validate.mjs                    # validate every th
 node skills/tellmotion/tools/doctor.mjs                      # check the skill is complete
 node skills/tellmotion/tools/build-catalog.mjs out           # SVG previews + gallery
 bash skills/tellmotion/scripts/new-project.sh my-video --theme blueprint --pack algorithms,charts --demos
+node skills/tellmotion/tools/storyboard.mjs validate storyboard.json   # check a storyboard
+node skills/tellmotion/tools/storyboard.mjs generate storyboard.json my-video   # turn it into scenes
 node skills/tellmotion/tools/render.mjs my-video --draft     # render a project without the editor
 ```
 
@@ -176,6 +179,7 @@ docs/assets/         README images
 - [x] Website with live theme demo and searchable gallery
 - [x] Render command: mp4, WebM, GIF, thumbnails, vertical and square, size estimates
 - [x] Scene recipes: intro, chapter, compare, before/after, steps, outro
+- [x] Storyboard to approve before animating, with checks and generated scenes
 - [ ] Keep growing the catalog (community themes welcome)
 - [ ] Example videos in different domains (software, science, algorithms)
 - [ ] Packaging as an installable plugin

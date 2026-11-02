@@ -1,5 +1,5 @@
 import {Circle, Layout, Node, Rect, Txt} from '@motion-canvas/2d';
-import {all, createRef, makeRef, sequence} from '@motion-canvas/core';
+import {all, createRef, makeRef, sequence, useThread, waitFor} from '@motion-canvas/core';
 import {Piece, boxProps, hiddenState, textOn} from '../components/Piece';
 import {C, FONT, MOVE, S, fs, t} from '../config';
 
@@ -73,6 +73,15 @@ export function* revealWords(words: Txt[], stagger = 0.12) {
 export function paragraph(ref: ReturnType<typeof createRef<Txt>>, text: string, width: number, maxLines: number, sizes: number[], color = C.muted, align: 'center' | 'left' = 'center') {
   const {size} = fitText(text, width, maxLines, sizes);
   return <Txt ref={ref} text={text} width={width} textWrap textAlign={align} fontFamily={FONT} fontSize={fs(size)} lineHeight={fs(size) * LINE} fill={color} opacity={0} />;
+}
+
+/**
+ * Final pause of a scene: at least `hold`, and longer if that is what it takes to last `seconds` in total.
+ * The animation is never cut short, so a target that is too small shows up as a longer scene.
+ */
+export function* holdUntil(seconds: number | undefined, hold: number, exit = 0.6) {
+  const left = seconds ? seconds - useThread().time() - t(exit) : 0;
+  yield* waitFor(Math.max(t(hold), left));
 }
 
 /** Opacity of a panel that gives way to another one: faded, but its text stays readable. */

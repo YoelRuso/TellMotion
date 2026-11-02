@@ -2,7 +2,7 @@ import {Circle, Node, Txt, View2D} from '@motion-canvas/2d';
 import {all, createRef, waitFor} from '@motion-canvas/core';
 import {captionFill, prepareScene} from '../components/Scene';
 import {C, FONT, fs, t} from '../config';
-import {FADED, Panel, panelHeight} from './shared';
+import {FADED, Panel, holdUntil, panelHeight} from './shared';
 
 export interface CompareSide {
   label: string;
@@ -17,8 +17,10 @@ export interface CompareProps {
   captions?: string[];
   /** Side to highlight at the end. */
   winner?: 'left' | 'right';
-  /** Extra seconds on screen at the end. */
+  /** Least seconds on screen at the end. */
   hold?: number;
+  /** Total length of the scene; the final pause grows to reach it. */
+  seconds?: number;
 }
 
 /** A vs B: two panels whose points appear in turns, and optionally a winner. */
@@ -49,6 +51,6 @@ export function* compare(view: View2D, p: CompareProps) {
     const [on, off] = p.winner === 'left' ? [left, right] : [right, left];
     yield* all(on.glow(true), off.root().opacity(FADED, t(0.4)));
   }
-  yield* waitFor(t(p.hold ?? 2));
+  yield* holdUntil(p.seconds, p.hold ?? 2);
   yield* all(sub.hide(), leave());
 }

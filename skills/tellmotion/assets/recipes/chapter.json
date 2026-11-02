@@ -7,7 +7,8 @@
     "title": {"type": "string", "required": true, "maxChars": 60},
     "number": {"type": "string", "maxChars": 3},
     "subtitle": {"type": "string", "maxChars": 80},
-    "hold": {"type": "number"}
+    "hold": {"type": "number"},
+    "seconds": {"type": "number"}
   },
   "fixtures": {
     "short": {"title": "Merging", "number": "04"},

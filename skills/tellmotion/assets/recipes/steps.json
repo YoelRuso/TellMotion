@@ -8,7 +8,8 @@
     "steps": {"type": "objects", "required": true, "minItems": 2, "maxItems": 5, "props": {"label": {"type": "string", "required": true, "maxChars": 28}, "detail": {"type": "string", "maxChars": 110}}},
     "caption": {"type": "string", "maxChars": 85},
     "stepHold": {"type": "number"},
-    "hold": {"type": "number"}
+    "hold": {"type": "number"},
+    "seconds": {"type": "number"}
   },
   "fixtures": {
     "short": {"title": "Three steps", "steps": [{"label": "Write"}, {"label": "Review"}, {"label": "Ship"}]},

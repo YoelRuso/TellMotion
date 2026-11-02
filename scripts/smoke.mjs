@@ -36,6 +36,18 @@ if (findBrowser()) {
     failed++;
     console.error('✗ render failed');
   } else console.log('✓ render');
+
+  // The whole storyboard flow on that project: generated scenes must type-check and run
+  console.log('\n▶ storyboard: generate + typecheck + duration');
+  const tool = join(root, 'skills', 'tellmotion', 'tools', 'storyboard.mjs');
+  const fixture = join(root, 'test', 'fixtures', 'storyboard.json');
+  const c = spawnSync(process.execPath, [tool, 'generate', fixture, name], {cwd: work, stdio: 'inherit'});
+  const d = c.status === 0 ? spawnSync('npm', ['run', 'typecheck'], {cwd: join(work, name), stdio: 'inherit', shell: true}) : c;
+  const e = d.status === 0 ? spawnSync(process.execPath, [tool, 'duration', name], {cwd: work, stdio: 'inherit'}) : d;
+  if (e.status !== 0) {
+    failed++;
+    console.error('✗ storyboard failed');
+  } else console.log('✓ storyboard');
 } else console.log('\n! render skipped: no browser found');
 
 // On Windows a child process can hold the folder for a moment; a leftover temp folder must not fail the test
