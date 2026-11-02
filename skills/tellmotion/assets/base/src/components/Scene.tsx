@@ -156,7 +156,7 @@ function legend() {
 }
 
 // Caption bar fill that keeps text readable for every theme (glass themes use white text; chalk-style themes have no fill)
-const captionFill = THEME.shape.fill === 'glass' ? 'rgba(20,10,60,0.35)' : THEME.shape.fill === 'none' ? C.bg : C.surface;
+export const captionFill = THEME.shape.fill === 'glass' ? 'rgba(20,10,60,0.35)' : THEME.shape.fill === 'none' ? C.bg : C.surface;
 
 /** Short caption at the bottom of the scene. Keep texts under ~85 characters. */
 export class Subtitle {
@@ -185,16 +185,16 @@ export class Subtitle {
 
 /**
  * Prepares a scene: background, title + legend and subtitle.
- * `title = null` omits the header (title cards). Use enter() first and leave() last.
+ * `title = null` omits the header (title cards); `legend: false` keeps the title only. Use enter() first and leave() last.
  */
-export function prepareScene(view: View2D, title: string | null) {
+export function prepareScene(view: View2D, title: string | null, opts: {legend?: boolean} = {}) {
   view.fill(C.bg);
   const root = createRef<Node>();
   view.add(<Node ref={root} opacity={0} />);
   root().add(background());
   if (title !== null) {
     root().add(<Txt text={title} fontFamily={FONT} fontWeight={700} fontSize={fs(32)} fill={C.text} position={[-910, -500]} offset={[-1, 0]} />);
-    root().add(legend());
+    if (opts.legend !== false) root().add(legend());
   }
   const sub = new Subtitle(root());
   return {

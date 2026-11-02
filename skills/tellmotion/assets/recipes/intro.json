@@ -1,0 +1,16 @@
+{
+  "id": "intro",
+  "function": "intro",
+  "description": "Opening card: tag, title revealed word by word, a rule and a subtitle.",
+  "useWhen": "The first scene of a video.",
+  "props": {
+    "title": {"type": "string", "required": true, "maxChars": 60},
+    "subtitle": {"type": "string", "maxChars": 120},
+    "tag": {"type": "string", "maxChars": 40},
+    "hold": {"type": "number"}
+  },
+  "fixtures": {
+    "short": {"title": "Git branches", "subtitle": "In under two minutes", "tag": "Git basics"},
+    "long": {"title": "How distributed systems stay consistent when machines fail", "subtitle": "A calm, visual walk through replication, quorums and leader election, with one example from start to finish", "tag": "Distributed systems course, lesson 12"}
+  }
+}

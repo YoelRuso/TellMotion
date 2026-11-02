@@ -1,0 +1,16 @@
+{
+  "id": "chapter",
+  "function": "chapter",
+  "description": "Section divider: a big number, a rule that grows and the title.",
+  "useWhen": "Between the parts of a video longer than about two minutes.",
+  "props": {
+    "title": {"type": "string", "required": true, "maxChars": 60},
+    "number": {"type": "string", "maxChars": 3},
+    "subtitle": {"type": "string", "maxChars": 80},
+    "hold": {"type": "number"}
+  },
+  "fixtures": {
+    "short": {"title": "Merging", "number": "04"},
+    "long": {"title": "What really happens when two people edit the same line", "number": "12", "subtitle": "Conflicts are not errors: they are questions that Git asks you to answer"}
+  }
+}

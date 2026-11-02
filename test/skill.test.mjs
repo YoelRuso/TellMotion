@@ -75,6 +75,31 @@ test('render options and output plan', async () => {
   assert.equal(sizeRange(1024 * 1024), '768 KB - 1.7 MB');
 });
 
+test('each recipe has code, an exported function and fixtures within its limits', async () => {
+  const {loadRecipes, validateProps} = await import(pathToFileURL(join(skill, 'tools', 'lib', 'recipes.mjs')).href);
+  const recipes = loadRecipes();
+  assert.deepEqual(recipes.map(r => r.id), ['before-after', 'chapter', 'compare', 'intro', 'outro', 'steps']);
+  const guide = readFileSync(join(skill, 'references', 'recipes.md'), 'utf8');
+  for (const r of recipes) {
+    const src = readFileSync(join(skill, 'assets', 'base', 'src', 'recipes', `${r.id}.tsx`), 'utf8');
+    assert.match(src, new RegExp(`export function\\* ${r.function}\\(view: View2D`), `${r.id}: function ${r.function} not found`);
+    assert.ok(guide.includes(`\`${r.function}\``), `references/recipes.md does not mention ${r.function}`);
+    assert.ok(r.fixtures.short && r.fixtures.long, `${r.id}: needs short and long fixtures`);
+    for (const [name, props] of Object.entries(r.fixtures)) assert.deepEqual(validateProps(r, props), [], `${r.id}/${name}`);
+  }
+});
+
+test('recipe content validation reports what is wrong', async () => {
+  const {loadRecipes, validateProps} = await import(pathToFileURL(join(skill, 'tools', 'lib', 'recipes.mjs')).href);
+  const steps = loadRecipes().find(r => r.id === 'steps');
+  assert.deepEqual(validateProps(steps, {title: 'Ok', steps: [{label: 'A'}, {label: 'B'}]}), []);
+  const errors = validateProps(steps, {steps: [{label: 'x'.repeat(29)}], nope: 1});
+  assert.ok(errors.some(e => e.includes('title is required')));
+  assert.ok(errors.some(e => e.includes('at least 2')));
+  assert.ok(errors.some(e => e.includes('steps[0].label has 29')));
+  assert.ok(errors.some(e => e.includes('nope is not a known')));
+});
+
 test('versions are consistent (package.json, llms.txt, CHANGELOG)', () => {
   const v = JSON.parse(read('package.json')).version;
   assert.match(read('llms.txt'), new RegExp(`^Version: ${v.replace(/\./g, '\\.')}$`, 'm'));

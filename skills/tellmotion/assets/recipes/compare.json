@@ -1,0 +1,18 @@
+{
+  "id": "compare",
+  "function": "compare",
+  "description": "A vs B: two panels whose points appear in turns, and optionally a winner.",
+  "useWhen": "Two options exist at the same time and the viewer has to tell them apart.",
+  "props": {
+    "title": {"type": "string", "required": true, "maxChars": 70},
+    "left": {"type": "object", "required": true, "props": {"label": {"type": "string", "required": true, "maxChars": 24}, "points": {"type": "array", "required": true, "maxItems": 5, "maxChars": 70}}},
+    "right": {"type": "object", "required": true, "props": {"label": {"type": "string", "required": true, "maxChars": 24}, "points": {"type": "array", "required": true, "maxItems": 5, "maxChars": 70}}},
+    "captions": {"type": "array", "maxItems": 2, "maxChars": 85},
+    "winner": {"type": "enum", "values": ["left", "right"]},
+    "hold": {"type": "number"}
+  },
+  "fixtures": {
+    "short": {"title": "Merge vs Rebase", "left": {"label": "Merge", "points": ["Keeps history", "Adds a commit"]}, "right": {"label": "Rebase", "points": ["Linear history", "Rewrites commits"]}},
+    "long": {"title": "Synchronous requests versus asynchronous messages between two services", "left": {"label": "Synchronous requests", "points": ["The caller waits until the other service answers the request", "Simple to follow from a single trace on a single screen", "A slow dependency quickly slows down everything behind it", "Failures show up immediately, right where they happened", "Easy to reason about when there are only a few services"]}, "right": {"label": "Asynchronous messages", "points": ["The caller leaves a message on a queue and carries on working", "Harder to follow: one action is spread over several services", "A slow consumer only makes the queue grow for a little while", "Failures can stay hidden until the dead letter queue fills up", "Scales better when many consumers share the same workload"]}, "captions": ["Both talk between services, but they fail in very different ways.", "If the user does not need the answer now, prefer messages."], "winner": "right"}
+  }
+}

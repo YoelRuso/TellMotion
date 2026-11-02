@@ -7,7 +7,7 @@ description: Turn an idea into a polished 2D explainer animation (1920x1080) - p
 
 One repeatable flow, cheap in tokens. Works for any topic that fits 2D: diagrams, processes, architectures, algorithms, timelines, concepts. (Not for 3D or live-action video.)
 
-Layout of this skill: `themes/` (theme.json catalog) · `tools/` (Node, zero deps) · `assets/base` (Motion Canvas template) · `assets/packs/` (optional component packs) · `scripts/new-project.sh` · `references/`.
+Layout of this skill: `themes/` (theme.json catalog) · `tools/` (Node, zero deps) · `assets/base` (Motion Canvas template, with scene recipes) · `assets/packs/` (optional component packs) · `scripts/new-project.sh` · `references/`.
 
 ## 1. Brief (one round, ask only what is missing)
 If the user already gave content/structure, do not ask again. Use `AskUserQuestion` (max 4 questions) for what is missing:
@@ -36,7 +36,7 @@ bash <skill>/scripts/new-project.sh <name> --theme <id|path.json> [--pack a,b|al
 Run it from the folder that should contain the project. One project per topic; add scenes to it for new videos. It copies the template, applies the theme (`src/theme.ts`, `src/fonts.ts`), installs dependencies and registers the project in `.claude/launch.json`. Change theme later: `node <skill>/tools/apply-theme.mjs <theme> <project>` then `npm install`.
 
 ## 4. Scenes
-Read `references/motion-guide.md` (core API, layout recipe, pitfalls) and `references/packs.md` (pack components). Fixed rules:
+Read `references/recipes.md` first: intros, chapters, comparisons, before/after, step-by-step and closing credits are ready-made in `src/recipes/`, so use them instead of writing those scenes. For the custom scenes that explain the topic, read `references/motion-guide.md` (core API, layout recipe, pitfalls) and `references/packs.md` (pack components). Fixed rules:
 - One scene per block in `src/scenes/`, registered in `src/project.ts` (+ a `.meta` file per scene).
 - Use `prepareScene(view, title)`; call `enter()` first and `leave()` last; captions via `sub.say(text)`.
 - Text ≥ 28 px at 1920x1080; captions ≤ 85 characters; one category color per element type + legend in `src/config.ts` (`LEGEND`).

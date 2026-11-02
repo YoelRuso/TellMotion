@@ -1,0 +1,17 @@
+{
+  "id": "steps",
+  "function": "steps",
+  "description": "A process: numbered cards joined by arrows, lit one at a time, with a sentence for the active step.",
+  "useWhen": "An ordered process of 2 to 5 stages. For branches or loops, write a custom scene.",
+  "props": {
+    "title": {"type": "string", "required": true, "maxChars": 70},
+    "steps": {"type": "objects", "required": true, "minItems": 2, "maxItems": 5, "props": {"label": {"type": "string", "required": true, "maxChars": 28}, "detail": {"type": "string", "maxChars": 110}}},
+    "caption": {"type": "string", "maxChars": 85},
+    "stepHold": {"type": "number"},
+    "hold": {"type": "number"}
+  },
+  "fixtures": {
+    "short": {"title": "Three steps", "steps": [{"label": "Write"}, {"label": "Review"}, {"label": "Ship"}]},
+    "long": {"title": "From a pull request to production, with every check along the way", "caption": "Each stage must pass before the next one is allowed to start.", "steps": [{"label": "Open a pull request", "detail": "A developer proposes a change and asks the rest of the team to look at it before anything else happens."}, {"label": "Run the automated tests", "detail": "The pipeline builds the project and runs every test, so reviewers only ever see changes that already work."}, {"label": "Review by a teammate", "detail": "Someone else reads the code, asks questions and either approves it or requests changes from the author."}, {"label": "Merge to the main branch", "detail": "Once approved and green, the change joins the main branch and becomes part of the next release automatically."}, {"label": "Deploy to production", "detail": "The new version reaches a small share of users first and, if the metrics look healthy, then reaches everyone."}]}
+  }
+}

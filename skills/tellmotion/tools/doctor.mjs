@@ -4,6 +4,7 @@
 import {existsSync, readFileSync, readdirSync} from 'node:fs';
 import {dirname, join} from 'node:path';
 import {fileURLToPath} from 'node:url';
+import {loadRecipes, validateProps} from './lib/recipes.mjs';
 import {loadAllThemes, validateTheme} from './lib/theme.mjs';
 import {renderPreview} from './lib/render-preview.mjs';
 import {findBrowser} from './render.mjs';
@@ -30,7 +31,7 @@ if (existsSync(skillMd)) {
 } else bad('SKILL.md not found');
 
 // references and scripts
-for (const f of ['references/theme-format.md', 'references/motion-guide.md', 'references/packs.md', 'scripts/new-project.sh', 'tools/apply-theme.mjs', 'tools/validate.mjs', 'tools/build-catalog.mjs', 'tools/list-themes.mjs', 'tools/render.mjs']) {
+for (const f of ['references/theme-format.md', 'references/motion-guide.md', 'references/packs.md', 'references/recipes.md', 'scripts/new-project.sh', 'tools/apply-theme.mjs', 'tools/validate.mjs', 'tools/build-catalog.mjs', 'tools/list-themes.mjs', 'tools/render.mjs']) {
   check(existsSync(join(root, f)), f, `missing ${f}`);
 }
 
@@ -55,6 +56,16 @@ if (existsSync(packsDir)) {
     }
   }
 } else bad('assets/packs not found');
+
+// recipes
+const recipes = loadRecipes();
+check(recipes.length > 0, `${recipes.length} scene recipe(s)`, 'no scene recipes found');
+for (const r of recipes) {
+  const hasCode = existsSync(join(root, 'assets/base/src/recipes', `${r.id}.tsx`));
+  const errors = Object.values(r.fixtures).flatMap(f => validateProps(r, f));
+  if (!hasCode) bad(`recipe ${r.id}: src/recipes/${r.id}.tsx missing`);
+  else if (errors.length) bad(`recipe ${r.id}: ${errors[0]}`);
+}
 
 // themes
 const themes = loadAllThemes();

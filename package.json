@@ -13,6 +13,7 @@
     "validate": "node skills/tellmotion/tools/validate.mjs",
     "doctor": "node skills/tellmotion/tools/doctor.mjs",
     "catalog": "node skills/tellmotion/tools/build-catalog.mjs site/public --no-gallery",
-    "assets": "node scripts/readme-assets.mjs"
+    "assets": "node scripts/readme-assets.mjs",
+    "sheets": "node scripts/recipe-sheets.mjs"
   }
 }

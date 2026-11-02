@@ -1,0 +1,17 @@
+{
+  "id": "outro",
+  "function": "outro",
+  "description": "Closing card: title, what to remember, credits and a call to action.",
+  "useWhen": "The last scene of a video.",
+  "props": {
+    "title": {"type": "string", "required": true, "maxChars": 50},
+    "takeaways": {"type": "array", "maxItems": 3, "maxChars": 90},
+    "credits": {"type": "objects", "maxItems": 4, "props": {"role": {"type": "string", "required": true, "maxChars": 24}, "name": {"type": "string", "required": true, "maxChars": 40}}},
+    "cta": {"type": "string", "maxChars": 50},
+    "hold": {"type": "number"}
+  },
+  "fixtures": {
+    "short": {"title": "Thanks for watching", "cta": "tellmotion.dev"},
+    "long": {"title": "Three ideas to take with you after this lesson", "takeaways": ["A branch is only a movable label on one commit, so creating one is cheap", "Merging joins two histories, and a conflict is a question you get to answer", "Keep branches short: the longer they live, the harder they are to bring back"], "credits": [{"role": "Written and animated by", "name": "The TellMotion community"}, {"role": "Reviewed by", "name": "Everyone who opened an issue"}, {"role": "Made with", "name": "Motion Canvas and TellMotion"}, {"role": "License", "name": "CC BY 4.0, share it freely"}], "cta": "Find the next lesson at tellmotion.dev/learn"}
+  }
+}

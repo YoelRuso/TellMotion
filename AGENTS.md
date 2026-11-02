@@ -12,6 +12,8 @@ skills/tellmotion/       the distributable skill
   themes/*.json          one file per visual theme (source of truth)
   tools/                 zero-dependency Node tools (validate, build-catalog, apply-theme, list-themes, doctor, serve, render)
   assets/base/           Motion Canvas project template
+  assets/base/src/recipes/ scene recipes, copied into every project
+  assets/recipes/*.json  each recipe's limits and short/long test content
   assets/packs/<pack>/   optional component packs (*.tsx, pack.json, demo/)
   references/            guides loaded on demand by the skill
   scripts/new-project.sh scaffolds a project from the template
@@ -29,6 +31,7 @@ npm run doctor           # check the skill is complete
 npm run catalog          # rebuild site/public/themes.json + previews
 npm run test:smoke       # scaffold + install + typecheck with all packs, plus a real render (slow, needs network)
 npm run assets           # regenerate README images (needs Chrome + ffmpeg)
+npm run sheets -- <dir>  # render every recipe in contrasting themes, one contact sheet per theme (needs bash, network, a browser)
 cd site && npm run build # build the website
 ```
 
@@ -39,6 +42,7 @@ cd site && npm run build # build the website
 - **Template and packs read the theme** through `src/config.ts` (`C`, `S`, `FONT`, `fs()`, `t()`); never hard-code colors or fonts in components.
 - **Text >= 28 px** at 1920x1080 in template/pack demos; captions <= 85 characters.
 - After touching `assets/`, scaffold a project and type-check it (`npm run test:smoke`).
+- After touching a recipe, run `npm run sheets` and look at the sheets: tests cannot see overflowing text or poor contrast. A recipe only counts as tested if its long fixture is close to its limits.
 - Bump the version in `package.json`, `llms.txt` and `CHANGELOG.md` together (a test checks they match).
 - Licensing: code MIT, themes/site content CC BY 4.0. Do not add assets or fonts without a compatible license.
 

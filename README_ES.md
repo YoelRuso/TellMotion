@@ -69,6 +69,21 @@ Piezas animadas listas para usar que se adaptan a cualquier tema.
 
 API completa: [`references/packs.md`](skills/tellmotion/references/packs.md).
 
+## 🎬 Recetas de escena
+
+Cada proyecto incluye seis escenas probadas: `intro`, `chapter`, `compare`, `beforeAfter`, `steps` y `outro`. Una escena que usa una receta es solo su contenido, así que el agente dedica el esfuerzo a la historia y no a la maquetación:
+
+```tsx
+export default makeScene2D(function* (view) {
+  yield* steps(view, {
+    title: 'Tres pasos',
+    steps: [{label: 'Escribir'}, {label: 'Revisar'}, {label: 'Publicar'}],
+  });
+});
+```
+
+Se adaptan a todos los temas. La escena que de verdad explica tu tema sigue siendo a medida, con los packs de componentes. Límites y propiedades: [`references/recipes.md`](skills/tellmotion/references/recipes.md).
+
 ## 🎞️ Renderiza sin abrir el editor
 
 Cada proyecto nuevo se exporta con un solo comando. El resultado queda en `output/<nombre>/`:
@@ -160,6 +175,7 @@ docs/assets/         imágenes del README
 - [x] 24 temas, 8 packs de componentes, plantilla genérica de Motion Canvas
 - [x] Web con demo en vivo y galería con búsqueda
 - [x] Comando de render: mp4, WebM, GIF, miniaturas, vertical y cuadrado, estimación de peso
+- [x] Recetas de escena: intro, capítulo, comparativa, antes/después, pasos, cierre
 - [ ] Seguir ampliando el catálogo (temas de la comunidad bienvenidos)
 - [ ] Vídeos de ejemplo en distintos ámbitos (software, ciencia, algoritmos)
 - [ ] Empaquetado como plugin instalable

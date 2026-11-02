@@ -1,0 +1,17 @@
+{
+  "id": "before-after",
+  "function": "beforeAfter",
+  "description": "A change told in order: the old state fills in, an arrow draws, the old state fades and the new one lights up.",
+  "useWhen": "One thing changes over time: a refactor, a fix, a new process.",
+  "props": {
+    "title": {"type": "string", "required": true, "maxChars": 70},
+    "before": {"type": "object", "required": true, "props": {"label": {"type": "string", "maxChars": 22}, "points": {"type": "array", "required": true, "maxItems": 5, "maxChars": 65}}},
+    "after": {"type": "object", "required": true, "props": {"label": {"type": "string", "maxChars": 22}, "points": {"type": "array", "required": true, "maxItems": 5, "maxChars": 65}}},
+    "captions": {"type": "array", "maxItems": 2, "maxChars": 85},
+    "hold": {"type": "number"}
+  },
+  "fixtures": {
+    "short": {"title": "Adding a cache", "before": {"points": ["2 s per page", "High load"]}, "after": {"points": ["50 ms per page", "Low load"]}},
+    "long": {"title": "What changed in the deployment process after moving to a pipeline", "before": {"label": "Manual deployments", "points": ["Someone copies the files to the server by hand on Friday", "Every release depends on a long checklist in a shared doc", "Rolling back means restoring last night's full backup", "Bugs are found by users, usually a few hours later", "Only two people in the team know how the whole thing works"]}, "after": {"label": "Automated pipeline", "points": ["Every merge is built, tested and released the same way", "The checklist now lives in the repository, as reviewed code", "Rolling back is a single click and takes under one minute", "Bugs are caught by tests, before any user can ever see them", "Anyone on the team can release, even on their very first day"]}, "captions": ["For two years, each release was a small ceremony.", "Now releasing is so boring that nobody stops to look at it."]}
+  }
+}

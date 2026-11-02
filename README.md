@@ -69,6 +69,21 @@ Ready-made animated pieces that adapt to any theme.
 
 Full API: [`references/packs.md`](skills/tellmotion/references/packs.md).
 
+## 🎬 Scene recipes
+
+Every project comes with six tested scenes: `intro`, `chapter`, `compare`, `beforeAfter`, `steps` and `outro`. A scene that uses one is only its content, so the agent spends its effort on the story instead of on layout:
+
+```tsx
+export default makeScene2D(function* (view) {
+  yield* steps(view, {
+    title: 'Three steps',
+    steps: [{label: 'Write'}, {label: 'Review'}, {label: 'Ship'}],
+  });
+});
+```
+
+They adapt to every theme. The scene that really explains your topic is still custom, built from the component packs. Limits and props: [`references/recipes.md`](skills/tellmotion/references/recipes.md).
+
 ## 🎞️ Render without opening the editor
 
 Every new project can export itself with one command. It writes to `output/<name>/`:
@@ -160,6 +175,7 @@ docs/assets/         README images
 - [x] 24 themes, 8 component packs, generic Motion Canvas template
 - [x] Website with live theme demo and searchable gallery
 - [x] Render command: mp4, WebM, GIF, thumbnails, vertical and square, size estimates
+- [x] Scene recipes: intro, chapter, compare, before/after, steps, outro
 - [ ] Keep growing the catalog (community themes welcome)
 - [ ] Example videos in different domains (software, science, algorithms)
 - [ ] Packaging as an installable plugin
