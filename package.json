@@ -1,6 +1,6 @@
 {
   "name": "tellmotion-repository",
-  "version": "0.1.0",
+  "version": "0.2.0",
   "private": true,
   "type": "module",
   "description": "TellMotion: turn an idea into a polished 2D explainer animation (skill, themes, site).",

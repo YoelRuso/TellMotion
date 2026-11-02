@@ -2,7 +2,7 @@
 
 > An open-source skill that turns an idea into a polished 2D explainer animation (1920x1080). The user picks a ready-made visual theme (or asks for a custom design), and the agent builds a Motion Canvas project with reusable component packs: cloud, algorithms, charts, flowchart, timeline, code, typography and science.
 
-Version: 0.1.0
+Version: 0.2.0
 Repository: https://github.com/YoelRuso/TellMotion
 Website: https://yoelruso.github.io/TellMotion/
 License: code MIT, themes and content CC BY 4.0
@@ -46,7 +46,7 @@ The user describes what to explain, for example:
 - "Visualize quicksort step by step with animated bars. Use the neon-night theme."
 - "Animate our onboarding flow. Show me 3 visual proposals first."
 
-The skill (`skills/tellmotion/SKILL.md`) then runs this flow: short brief, design (template theme, three custom proposals, or bring-your-own brand), scaffold a Motion Canvas project, write the scenes, verify, deliver.
+The skill (`skills/tellmotion/SKILL.md`) then runs this flow: short brief, design (template theme, three custom proposals, or bring-your-own brand), a storyboard the user approves, scaffold a Motion Canvas project, generate the scenes from ready-made recipes and write the custom ones, verify, render on request with `npm run render`, deliver.
 
 ## Docs
 
@@ -54,9 +54,11 @@ The skill (`skills/tellmotion/SKILL.md`) then runs this flow: short brief, desig
 - Theme format: skills/tellmotion/references/theme-format.md
 - Component packs: skills/tellmotion/references/packs.md
 - Motion Canvas guide: skills/tellmotion/references/motion-guide.md
+- Scene recipes: skills/tellmotion/references/recipes.md
+- Storyboard format: skills/tellmotion/references/storyboard.md
 - Contributing a theme: CONTRIBUTING.md
 - Theme catalog (JSON, generated): https://yoelruso.github.io/TellMotion/themes.json
 
 ## Requirements
 
-Node 18+ and npm. An AI agent that supports skills (built for Claude Code). Figma is optional.
+Node 18+ and npm. An AI agent that supports skills (built for Claude Code). Chrome, Edge or Chromium to render to video. Figma is optional.
