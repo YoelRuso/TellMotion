@@ -229,17 +229,10 @@ dialog.modal::backdrop { background: rgba(3, 3, 8, 0.75); backdrop-filter: blur(
 .btn.copied { background: #16a34a; border-color: transparent; color: #fff; }
 
 /* ---------- examples ---------- */
-.examples { display: grid; grid-template-columns: repeat(2, 1fr); gap: 20px; }
+.examples { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; }
 .ex { border-radius: var(--radius); overflow: hidden; border: 1px solid var(--line); background: var(--card); position: relative; }
 .ex .thumb { aspect-ratio: 16 / 9; position: relative; overflow: hidden; }
 .ex .thumb video { display: block; width: 100%; height: 100%; background: #000; }
-.ex .thumb img { width: 100%; height: 100%; object-fit: cover; filter: saturate(0.8) brightness(0.75); transition: transform 0.6s, filter 0.4s; }
-.ex:hover .thumb img { transform: scale(1.06); filter: saturate(1.1) brightness(0.95); }
-.ex .play { position: absolute; inset: 0; display: grid; place-items: center; }
-.ex .play span { width: 64px; height: 64px; border-radius: 50%; background: rgba(255, 255, 255, 0.92); display: grid; place-items: center; box-shadow: 0 10px 40px rgba(0, 0, 0, 0.5); transition: transform 0.3s; }
-.ex:hover .play span { transform: scale(1.12); }
-.ex .play svg { width: 26px; height: 26px; margin-left: 3px; fill: #0a0a12; }
-.ex .soon { position: absolute; top: 12px; left: 12px; padding: 4px 12px; border-radius: 999px; background: rgba(0, 0, 0, 0.65); border: 1px solid var(--line); font-family: var(--mono); font-size: 11px; letter-spacing: 0.08em; text-transform: uppercase; }
 .ex .info { padding: 18px 20px 22px; }
 .ex h3 { font-size: 1.25rem; }
 .ex p { color: var(--muted); font-size: 0.93rem; margin-top: 6px; }

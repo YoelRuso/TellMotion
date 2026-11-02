@@ -5,7 +5,12 @@ All notable changes are documented here. The format follows [Keep a Changelog](h
 ## [Unreleased]
 
 ### Added
-- Website: playable example videos, "How Git branches work" and "How DNS works".
+- Website: five playable example videos: Git branches, DNS, quicksort, the water cycle and the history of the web.
+- `examples/`: the projects behind quicksort, the water cycle and the history of the web.
+
+### Fixed
+- Captions and the `compare` badge were unreadable in themes whose surface is as light as their text.
+- The `outro` list is centered under the title when its ideas are short.
 
 ### Changed
 - `storyboard.mjs validate` warns when a scene has more text than can be read in its length.

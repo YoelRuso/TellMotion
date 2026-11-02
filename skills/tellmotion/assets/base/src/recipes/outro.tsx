@@ -32,8 +32,10 @@ export function* outro(view: View2D, p: OutroProps) {
   const credits: Layout[] = [];
   const cta = createRef<Layout>();
   const items = p.takeaways ?? [];
-  const textWidth = 1320;
-  const size = fitList(items, textWidth, 300, 20, [44, 40, 36, 32]);
+  const maxWidth = 1320;
+  const size = fitList(items, maxWidth, 300, 20, [44, 40, 36, 32]);
+  // As wide as the longest idea, so that a short list stays centered under the title
+  const textWidth = Math.min(maxWidth, Math.max(0, ...items.map(i => i.length)) * 0.6 * fs(size));
 
   root.add(
     <Layout layout direction={'column'} alignItems={'center'} gap={48} y={-10}>

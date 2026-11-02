@@ -156,7 +156,13 @@ function legend() {
 }
 
 // Caption bar fill that keeps text readable for every theme (glass themes use white text; chalk-style themes have no fill)
-export const captionFill = THEME.shape.fill === 'glass' ? 'rgba(20,10,60,0.35)' : THEME.shape.fill === 'none' ? C.bg : C.surface;
+const lightness = (hex: string) => {
+  const n = parseInt(hex.slice(1, 7), 16);
+  return (0.299 * (n >> 16) + 0.587 * ((n >> 8) & 255) + 0.114 * (n & 255)) / 255;
+};
+// Themes that fill boxes with accents can have a surface as light as their text; the background is always readable
+const surfaceIsReadable = !/^#[0-9a-f]{6}/i.test(C.surface) || !/^#[0-9a-f]{6}/i.test(C.text) || Math.abs(lightness(C.surface) - lightness(C.text)) > 0.4;
+export const captionFill = THEME.shape.fill === 'glass' ? 'rgba(20,10,60,0.35)' : THEME.shape.fill === 'none' || !surfaceIsReadable ? C.bg : C.surface;
 
 /** Short caption at the bottom of the scene. Keep texts under ~85 characters. */
 export class Subtitle {

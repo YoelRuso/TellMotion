@@ -1,0 +1,48 @@
+{
+  "title": "The water cycle",
+  "targetSeconds": 60,
+  "scenes": [
+    {
+      "id": "opening",
+      "recipe": "intro",
+      "shows": "Title card",
+      "seconds": 6,
+      "props": {"title": "The water cycle", "subtitle": "The same water, travelling around the planet", "tag": "Science for kids"}
+    },
+    {
+      "id": "evaporation",
+      "recipe": "custom",
+      "shows": "A sun shines over a wavy sea. Small drops rise from the water into the air and fade out.",
+      "seconds": 11,
+      "props": {"title": "1. Evaporation", "captions": ["The sun warms the sea, lakes and rivers.", "Some water turns into vapour and rises into the air."]}
+    },
+    {
+      "id": "condensation",
+      "recipe": "custom",
+      "shows": "The rising dots slow down high in the sky and gather together, forming a cloud that grows.",
+      "seconds": 10,
+      "props": {"title": "2. Condensation", "captions": ["High up the air is cold, so the vapour turns into tiny droplets.", "Millions of droplets together make a cloud."]}
+    },
+    {
+      "id": "precipitation",
+      "recipe": "custom",
+      "shows": "The cloud darkens and drops fall from it onto a hill and into the sea.",
+      "seconds": 9,
+      "props": {"title": "3. Precipitation", "captions": ["When droplets get too heavy, they fall as rain or snow."]}
+    },
+    {
+      "id": "collection",
+      "recipe": "custom",
+      "shows": "Rain runs down the hill as a river that flows into the sea, then the four stages appear around a ring, and a drop travels once around it.",
+      "seconds": 14,
+      "props": {"title": "4. Collection", "captions": ["Rivers carry the water back to the sea.", "And then it all starts again: a cycle with no beginning or end."]}
+    },
+    {
+      "id": "closing",
+      "recipe": "outro",
+      "shows": "What to remember",
+      "seconds": 9,
+      "props": {"title": "Nothing is lost", "takeaways": ["The sun powers the whole cycle", "The water you drink has been around for ages"]}
+    }
+  ]
+}

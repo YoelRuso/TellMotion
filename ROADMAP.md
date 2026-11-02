@@ -7,7 +7,8 @@ Plans can change. Ideas and votes are welcome in [issues](https://github.com/Yoe
 - [ ] Test `npm run render` on macOS and Linux, and with Edge
 - [ ] Check the recipes in the themes not covered yet (`npm run sheets`)
 - [ ] **Keep growing the theme catalog** (gaps: more neon, light and corporate looks; community themes welcome)
-- [ ] **More example videos** on the website (Git branches and DNS are up; water cycle and quicksort next)
+- [ ] **More example videos** on the website (five so far, sources in `examples/`)
+- [ ] Check recipe text against strong theme decorations: on `synthwave`, the title and closing cards sit on top of the sun
 - [ ] Verify the full `npx skills add` install per agent (discovery with `--list` is confirmed) and document install locations
 
 ## Next

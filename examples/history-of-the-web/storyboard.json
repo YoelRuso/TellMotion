@@ -1,0 +1,52 @@
+{
+  "title": "A short history of the web",
+  "targetSeconds": 68,
+  "scenes": [
+    {
+      "id": "opening",
+      "recipe": "intro",
+      "shows": "Title card",
+      "seconds": 6,
+      "props": {"title": "A short history of the web", "subtitle": "From one proposal to billions of pockets", "tag": "Timeline"}
+    },
+    {
+      "id": "beginnings",
+      "recipe": "custom",
+      "shows": "A timeline axis from 1989 to 2016 draws itself. The 1989 and 1993 milestones appear in turn, and each glows while its caption is on screen.",
+      "seconds": 13,
+      "props": {"title": "The beginnings", "captions": ["1989: Tim Berners-Lee proposes the web at CERN, to share research.", "1993: the Mosaic browser shows images next to text, and people notice."]}
+    },
+    {
+      "id": "growth",
+      "recipe": "custom",
+      "shows": "The same timeline, with the earlier milestones dimmed. 1998 and 2004 appear in turn.",
+      "seconds": 13,
+      "props": {"title": "Finding and sharing", "captions": ["1998: Google is founded, and finding things gets much easier.", "2004: the idea of \"Web 2.0\" spreads, as readers become writers too."]}
+    },
+    {
+      "id": "mobile",
+      "recipe": "custom",
+      "shows": "The same timeline. 2007 and 2016 appear, and then the whole line lights up.",
+      "seconds": 13,
+      "props": {"title": "In every pocket", "captions": ["2007: the iPhone puts the full web in a pocket.", "2016: worldwide, phones and tablets overtake computers for browsing."]}
+    },
+    {
+      "id": "then-and-now",
+      "recipe": "before-after",
+      "shows": "How different the web was in 1993",
+      "seconds": 13,
+      "props": {
+        "title": "Then and now",
+        "before": {"label": "1993", "points": ["Hundreds of websites", "Mostly text and links", "Used from a desk"]},
+        "after": {"label": "Today", "points": ["Over a billion websites", "Video, apps and live data", "Used from anywhere"]}
+      }
+    },
+    {
+      "id": "closing",
+      "recipe": "outro",
+      "shows": "What to remember",
+      "seconds": 9,
+      "props": {"title": "Still under construction", "takeaways": ["The web began as a way to share research", "Each new step let more people take part"]}
+    }
+  ]
+}

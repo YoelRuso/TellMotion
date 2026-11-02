@@ -17,6 +17,7 @@ skills/tellmotion/       the distributable skill
   assets/packs/<pack>/   optional component packs (*.tsx, pack.json, demo/)
   references/            guides loaded on demand by the skill
   scripts/new-project.sh scaffolds a project from the template
+examples/                source projects of example videos on the website (rendered copies in site/public/examples/)
 site/                    Astro website, generated from the themes (see site/README.md)
 scripts/                 repo maintenance (readme-assets.mjs, smoke.mjs)
 test/                    node:test suites

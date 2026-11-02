@@ -1,0 +1,53 @@
+{
+  "title": "Quicksort, visualized",
+  "targetSeconds": 72,
+  "scenes": [
+    {
+      "id": "opening",
+      "recipe": "intro",
+      "shows": "Title card",
+      "seconds": 6,
+      "props": {"title": "Quicksort, visualized", "subtitle": "Sort a list by splitting it around one number", "tag": "Algorithms"}
+    },
+    {
+      "id": "pivot",
+      "recipe": "custom",
+      "shows": "Seven unsorted bars appear. The last one lights up as the pivot, and a line at its height shows what counts as smaller or bigger.",
+      "seconds": 11,
+      "props": {"title": "Step 1: pick a pivot", "captions": ["Here are seven numbers in no particular order.", "Pick one as the pivot. We will use the last one: 6."]}
+    },
+    {
+      "id": "partition",
+      "recipe": "custom",
+      "shows": "A pointer walks along the bars comparing each one with the pivot. Smaller bars swap to the left. The pivot then moves between both groups and turns green: it is in its final place.",
+      "seconds": 22,
+      "props": {"title": "Step 2: partition", "captions": ["Compare each bar with the pivot, from left to right.", "Smaller than the pivot? Swap it to the left side.", "Bigger? Leave it where it is and keep walking.", "Finally the pivot moves between both groups. It is now in its final place."]}
+    },
+    {
+      "id": "recursion",
+      "recipe": "custom",
+      "shows": "The bars on each side of the pivot separate into two groups. Each group repeats the same steps at speed, and bars turn green one after another until all are sorted.",
+      "seconds": 14,
+      "props": {"title": "Step 3: repeat on each side", "captions": ["Each side is now a smaller version of the same problem.", "Keep splitting until every bar is in its place."]}
+    },
+    {
+      "id": "cost",
+      "recipe": "compare",
+      "shows": "When quicksort is fast and when it is slow",
+      "seconds": 11,
+      "props": {
+        "title": "How fast is it?",
+        "left": {"label": "Usually", "points": ["Splits near the middle", "About n log n steps"]},
+        "right": {"label": "Worst case", "points": ["Splits very unevenly", "About n² steps"]},
+        "captions": ["A good pivot makes all the difference."]
+      }
+    },
+    {
+      "id": "closing",
+      "recipe": "outro",
+      "shows": "What to remember",
+      "seconds": 8,
+      "props": {"title": "Divide and conquer", "takeaways": ["Each pivot lands in its final place", "Then repeat on the two smaller sides"]}
+    }
+  ]
+}

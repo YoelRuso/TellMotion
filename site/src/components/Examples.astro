@@ -1,12 +1,11 @@
 ---
-import themes from '../../public/themes.json';
 const base = import.meta.env.BASE_URL.endsWith('/') ? import.meta.env.BASE_URL : import.meta.env.BASE_URL + '/'; // always ends with a slash (Astro omits it for a sub-path base)
-const prev = (id: string) => `${base}${(themes.find((t: any) => t.id === id) ?? themes[0]).preview}`;
 const examples = [
   {title: 'How Git branches work', text: 'Commits, branches and merges explained step by step.', theme: 'blueprint', by: 'pack: code', video: 'git-branches'},
   {title: 'How DNS works', text: 'From a name in the address bar to the right server, for people new to web development.', theme: 'neon-night', by: 'recipes + custom scenes', video: 'how-dns-works'},
-  {title: 'The water cycle', text: 'Evaporation, condensation and precipitation as a living loop.', theme: 'soft-clay', by: 'pack: science'},
-  {title: 'Quicksort, visualized', text: 'Pivot, partition and recursion on a row of animated bars.', theme: 'neon-night', by: 'pack: algorithms'},
+  {title: 'Quicksort, visualized', text: 'Pivot, partition and recursion on a row of animated bars.', theme: 'sticker-pop', by: 'pack: algorithms', video: 'quicksort'},
+  {title: 'The water cycle', text: 'Evaporation, condensation and rain, for young learners.', theme: 'ocean-deep', by: 'pack: science', video: 'water-cycle'},
+  {title: 'A short history of the web', text: 'From a proposal at CERN to billions of pockets, on one timeline.', theme: 'swiss-minimal', by: 'pack: timeline', video: 'history-of-the-web'},
 ];
 ---
 <section id="examples">
@@ -14,24 +13,16 @@ const examples = [
     <div class="section-head reveal">
       <span class="eyebrow">Examples</span>
       <h2>Same flow. <span class="grad">Completely different stories.</span></h2>
-      <p>Real videos made with the skill, each in its own theme. Press play. More are on the way.</p>
+      <p>Software, algorithms, science and history: real videos made with the skill, each in its own theme. Press play.</p>
     </div>
     <div class="examples">
       {examples.map((e, i) => (
-        <article class={`ex reveal d${i % 4}`}>
+        <article class={`ex reveal d${i % 3}`}>
           <div class="thumb">
-            {e.video ? (
-              <video controls playsinline preload="none" poster={`${base}examples/${e.video}.jpg`} aria-label={`${e.title}, animated explainer video`}>
-                <source src={`${base}examples/${e.video}.mp4`} type="video/mp4" />
-                <a href={`${base}examples/${e.video}.mp4`}>Download the video</a>
-              </video>
-            ) : (
-              <>
-                <img src={prev(e.theme)} alt="" loading="lazy" />
-                <div class="play"><span><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M8 5v14l11-7z" /></svg></span></div>
-                <span class="soon">Coming soon</span>
-              </>
-            )}
+            <video controls playsinline preload="none" poster={`${base}examples/${e.video}.jpg`} aria-label={`${e.title}, animated explainer video`}>
+              <source src={`${base}examples/${e.video}.mp4`} type="video/mp4" />
+              <a href={`${base}examples/${e.video}.mp4`}>Download the video</a>
+            </video>
           </div>
           <div class="info">
             <h3>{e.title}</h3>
