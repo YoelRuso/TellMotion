@@ -24,6 +24,8 @@ DEST="$(pwd)/$NAME"
 
 cp -r "$SKILL_DIR/assets/base" "$DEST"
 sed -i "s/__NAME__/$NAME/" "$DEST/package.json"
+mkdir -p "$DEST/scripts"
+cp "$SKILL_DIR/tools/render.mjs" "$DEST/scripts/render.mjs"
 printf '{\n  "version": 0,\n  "timeEvents": [],\n  "seed": %d\n}' "$RANDOM" > "$DEST/src/scenes/example.meta"
 
 # ---- packs ----
@@ -75,7 +77,7 @@ npm start        # editor at http://localhost:9000
 - Theme: \`src/theme.ts\` (generated). Change it with \`node <skill>/tools/apply-theme.mjs <theme> .\`
 - Global pace and legend: \`src/config.ts\`
 - Scenes: \`src/scenes/\`, registered in \`src/project.ts\`
-- Render: "Video Settings" → Render (use the "Video (FFmpeg)" exporter for .mp4)
+- Render: \`npm run render\` writes \`output/$NAME/$NAME.mp4\` without opening the editor (needs Chrome, Edge or Chromium; options: \`--fps <n>\`, \`--scale <n>\`)
 EOF
 
 LJ="$(pwd)/.claude/launch.json"

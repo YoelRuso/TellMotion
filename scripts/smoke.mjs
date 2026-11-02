@@ -1,11 +1,12 @@
 #!/usr/bin/env node
 // End-to-end smoke test: scaffold a project with ALL packs and demos for a few themes, install and type-check it.
 // Usage: node scripts/smoke.mjs [themeId ...]     (needs bash, npm and network access for npm install)
-import {mkdtempSync, rmSync} from 'node:fs';
+import {existsSync, mkdtempSync, rmSync, statSync} from 'node:fs';
 import {spawnSync} from 'node:child_process';
 import {tmpdir} from 'node:os';
 import {dirname, join, resolve} from 'node:path';
 import {fileURLToPath} from 'node:url';
+import {findBrowser} from '../skills/tellmotion/tools/render.mjs';
 
 const root = resolve(dirname(fileURLToPath(import.meta.url)), '..');
 const script = join(root, 'skills', 'tellmotion', 'scripts', 'new-project.sh');
@@ -23,5 +24,24 @@ for (const theme of themes) {
     console.error(`✗ ${theme} failed`);
   } else console.log(`✓ ${theme}`);
 }
-rmSync(work, {recursive: true, force: true});
+
+// Real render of the minimal template. Guards against Motion Canvas updates breaking the private Renderer API used by render.mjs.
+if (findBrowser()) {
+  console.log('\n▶ render: scaffold + npm run render');
+  const name = 'smoke-render';
+  const a = spawnSync('bash', [script, name, '--theme', 'blueprint'], {cwd: work, stdio: 'inherit'});
+  const b = a.status === 0 ? spawnSync('npm', ['run', 'render', '--', '--fps', '10', '--scale', '0.25'], {cwd: join(work, name), stdio: 'inherit', shell: true}) : a;
+  const mp4 = join(work, name, 'output', name, `${name}.mp4`);
+  if (b.status !== 0 || !existsSync(mp4) || statSync(mp4).size === 0) {
+    failed++;
+    console.error('✗ render failed');
+  } else console.log('✓ render');
+} else console.log('\n! render skipped: no browser found');
+
+// On Windows a child process can hold the folder for a moment; a leftover temp folder must not fail the test
+try {
+  rmSync(work, {recursive: true, force: true, maxRetries: 10, retryDelay: 300});
+} catch {
+  console.log(`! could not remove ${work}`);
+}
 process.exit(failed ? 1 : 0);

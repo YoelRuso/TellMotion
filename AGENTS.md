@@ -10,7 +10,7 @@ TellMotion turns an idea into a 2D explainer animation: a skill (instructions + 
 skills/tellmotion/       the distributable skill
   SKILL.md               agent instructions (the flow)
   themes/*.json          one file per visual theme (source of truth)
-  tools/                 zero-dependency Node tools (validate, build-catalog, apply-theme, list-themes, doctor, serve)
+  tools/                 zero-dependency Node tools (validate, build-catalog, apply-theme, list-themes, doctor, serve, render)
   assets/base/           Motion Canvas project template
   assets/packs/<pack>/   optional component packs (*.tsx, pack.json, demo/)
   references/            guides loaded on demand by the skill
@@ -27,7 +27,7 @@ npm test                 # unit tests: themes, skill structure, versions
 npm run validate         # validate every theme
 npm run doctor           # check the skill is complete
 npm run catalog          # rebuild site/public/themes.json + previews
-npm run test:smoke       # scaffold + install + typecheck with all packs (slow, needs network)
+npm run test:smoke       # scaffold + install + typecheck with all packs, plus a real render (slow, needs network)
 npm run assets           # regenerate README images (needs Chrome + ffmpeg)
 cd site && npm run build # build the website
 ```
@@ -46,3 +46,4 @@ cd site && npm run build # build the website
 - In JSX `.map()` rendering several siblings that need refs/signals, wrap them in one `<Node>`, not a fragment.
 - `figma.createVector` does not render; use `createNodeFromSvg`. The Figma helper is not tested end to end.
 - Old ffmpeg builds lack `xfade`; `readme-assets.mjs` blends frames manually.
+- `tools/render.mjs` uses Motion Canvas' `Renderer`, which is not a public API; `test:smoke` renders a real scene to catch breakage. It is copied into each project at scaffold time, so it must stay a single file.

@@ -6,6 +6,7 @@ import {dirname, join} from 'node:path';
 import {fileURLToPath} from 'node:url';
 import {loadAllThemes, validateTheme} from './lib/theme.mjs';
 import {renderPreview} from './lib/render-preview.mjs';
+import {findBrowser} from './render.mjs';
 
 const root = join(dirname(fileURLToPath(import.meta.url)), '..');
 let failed = 0;
@@ -29,7 +30,7 @@ if (existsSync(skillMd)) {
 } else bad('SKILL.md not found');
 
 // references and scripts
-for (const f of ['references/theme-format.md', 'references/motion-guide.md', 'references/packs.md', 'scripts/new-project.sh', 'tools/apply-theme.mjs', 'tools/validate.mjs', 'tools/build-catalog.mjs', 'tools/list-themes.mjs']) {
+for (const f of ['references/theme-format.md', 'references/motion-guide.md', 'references/packs.md', 'scripts/new-project.sh', 'tools/apply-theme.mjs', 'tools/validate.mjs', 'tools/build-catalog.mjs', 'tools/list-themes.mjs', 'tools/render.mjs']) {
   check(existsSync(join(root, f)), f, `missing ${f}`);
 }
 
@@ -70,6 +71,10 @@ for (const {file, theme} of themes) {
   }
 }
 if (!invalid) ok('all themes valid and renderable');
+
+// optional: only rendering to video needs a browser
+const browser = findBrowser();
+console.log(browser ? `  ✓ browser for rendering: ${browser}` : '  ! no Chrome, Edge or Chromium found: "npm run render" will not work (set CHROME to its path)');
 
 console.log(failed ? `\nNot ready: ${failed} problem(s).` : '\nTellMotion is ready.');
 process.exit(failed ? 1 : 0);

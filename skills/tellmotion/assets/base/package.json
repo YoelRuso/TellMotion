@@ -6,7 +6,8 @@
     "start": "vite",
     "serve": "vite",
     "build": "tsc && vite build",
-    "typecheck": "tsc --noEmit"
+    "typecheck": "tsc --noEmit",
+    "render": "node scripts/render.mjs"
   },
   "dependencies": {
     "@motion-canvas/2d": "^3.17.0",

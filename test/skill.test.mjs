@@ -2,7 +2,7 @@ import {test} from 'node:test';
 import assert from 'node:assert/strict';
 import {existsSync, readFileSync, readdirSync} from 'node:fs';
 import {join} from 'node:path';
-import {fileURLToPath} from 'node:url';
+import {fileURLToPath, pathToFileURL} from 'node:url';
 
 const repo = join(fileURLToPath(new URL('.', import.meta.url)), '..');
 const skill = join(repo, 'skills', 'tellmotion');
@@ -32,6 +32,23 @@ test('each pack has valid metadata and the components it declares', () => {
       .join('\n');
     for (const c of meta.components) assert.match(src, new RegExp(`(class|function\\*?)\\s+${c}\\b`), `${p.name}: component ${c} not found`);
   }
+});
+
+test('new projects get the render script', () => {
+  const pkg = JSON.parse(readFileSync(join(skill, 'assets', 'base', 'package.json'), 'utf8'));
+  assert.equal(pkg.scripts.render, 'node scripts/render.mjs');
+  assert.ok(pkg.dependencies['@motion-canvas/ffmpeg'], 'the template needs the ffmpeg exporter');
+  assert.match(readFileSync(join(skill, 'scripts', 'new-project.sh'), 'utf8'), /tools\/render\.mjs" "\$DEST\/scripts\/render\.mjs"/);
+});
+
+test('render.mjs stays dependency-free and honours CHROME', async () => {
+  const src = readFileSync(join(skill, 'tools', 'render.mjs'), 'utf8');
+  // Only the tool's own imports: the page code further down is served to the browser from the project
+  const header = src.slice(0, src.indexOf('const ROUTE'));
+  for (const [, mod] of header.matchAll(/^import .* from '([^']+)';$/gm)) assert.match(mod, /^node:/, `render.mjs imports ${mod}`);
+  const {findBrowser} = await import(pathToFileURL(join(skill, 'tools', 'render.mjs')).href);
+  const self = fileURLToPath(import.meta.url);
+  assert.equal(findBrowser({CHROME: self}), self);
 });
 
 test('versions are consistent (package.json, llms.txt, CHANGELOG)', () => {
