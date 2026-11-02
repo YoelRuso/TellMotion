@@ -47,11 +47,11 @@ export class Cell extends Piece {
     yield* all(
       this.box().stroke(color, t(d)),
       solid ? this.box().fill(color, t(d)) : this.box().fill(this.baseFill, 0),
-      this.val().fill(solid ? C.onAccent : C.text, t(d)),
+      this.val().fill(solid ? C.onAccent : textOn(), t(d)),
     );
   }
 
   *unmark(d = 0.3) {
-    yield* all(this.box().stroke(this.baseStroke, t(d)), this.box().fill(this.baseFill, t(d)), this.val().fill(C.text, t(d)));
+    yield* all(this.box().stroke(this.baseStroke, t(d)), this.box().fill(this.baseFill, t(d)), this.val().fill(textOn(), t(d)));
   }
 }

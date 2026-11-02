@@ -19,7 +19,7 @@ skills/tellmotion/       the distributable skill
   scripts/new-project.sh scaffolds a project from the template
 examples/                source projects of example videos on the website (rendered copies in site/public/examples/)
 site/                    Astro website, generated from the themes (see site/README.md)
-scripts/                 repo maintenance (readme-assets.mjs, smoke.mjs)
+scripts/                 repo maintenance (readme-assets.mjs, smoke.mjs, recipe-sheets.mjs, pack-sheets.mjs)
 test/                    node:test suites
 llms.txt                 agent-readable install instructions
 ```
@@ -33,6 +33,7 @@ npm run catalog          # rebuild site/public/themes.json + previews
 npm run test:smoke       # scaffold + install + typecheck with all packs, plus a real render (slow, needs network)
 npm run assets           # regenerate README images (needs Chrome + ffmpeg)
 npm run sheets -- <dir>  # render every recipe in contrasting themes, one contact sheet per theme (needs bash, network, a browser)
+npm run sheets:packs -- <dir>  # render every pack demo and the pieces at their limits, one contact sheet per scene and theme (same needs)
 cd site && npm run build # build the website
 ```
 
@@ -44,6 +45,7 @@ cd site && npm run build # build the website
 - **Text >= 28 px** at 1920x1080 in template/pack demos; captions <= 85 characters.
 - After touching `assets/`, scaffold a project and type-check it (`npm run test:smoke`).
 - After touching a recipe, run `npm run sheets` and look at the sheets: tests cannot see overflowing text or poor contrast. A recipe only counts as tested if its long fixture is close to its limits.
+- After touching a pack or a core component, run `npm run sheets:packs` and look at the sheets. Add new limits to `scripts/pack-sheet-stress.tsx`.
 - Bump the version in `package.json`, `llms.txt` and `CHANGELOG.md` together (a test checks they match).
 - Licensing: code MIT, themes/site content CC BY 4.0. Do not add assets or fonts without a compatible license.
 

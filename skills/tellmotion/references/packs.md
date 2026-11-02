@@ -14,7 +14,7 @@ All packs follow the same conventions: constructor `new X(parent, opts)` (positi
 |---|---|---|
 | **cloud** | `Service` (db icon), `Queue` (`push`/`pop`, `dlq`), `Lambda`, `Database` | architectures, pipelines, event flows |
 | **algorithms** | `Cell` (`setValue`, `mark`), `Bar` (`moveTo`, `setValue`, `mark`), `Pointer`, `TreeNode` + `link()`, `swap(a, b)` | sorting, searching, arrays, stacks, trees, graphs |
-| **charts** | `BarChart` (`grow`, `update`, `highlight`), `LineChart` (`draw`), `PieChart` (`sweep`, `highlight`), `Counter` (`countTo`) | data stories, metrics, comparisons |
+| **charts** | `BarChart` (`prefix`, `suffix`, `decimals`; `grow`, `update`, `highlight`), `LineChart` (`draw`), `PieChart` (`sweep`, `highlight`), `Counter` (`countTo`) | data stories, metrics, comparisons |
 | **flowchart** | `Terminator`, `Process`, `Decision`, `DataIO`, `Tag` (Yes/No) | processes, decision trees, procedures |
 | **timeline** | `Timeline` (`drawAxis`, `showBands`, `reveal`, `revealAll`, `focus`) | history, roadmaps, project phases |
 | **code** | `CodeView` (`focus(from,to)`, `unfocus`, `change`), `Terminal` (`run(cmd, output)`) | programming tutorials, CLI demos |
@@ -22,7 +22,8 @@ All packs follow the same conventions: constructor `new X(parent, opts)` (positi
 | **science** | `Cycle` (`show`, `go`, `orbit`), `Layers` (`reveal`, `focus`), `Wave` (`travel`), `Particles` (`drift`) | natural cycles, strata, waves, molecules |
 
 ## Notes
-- Create edges (`link`, arrows) before the nodes they connect so they sit behind.
+- Join pieces with `connect(parent, a, b)` from `Arrow.tsx`; it picks the facing sides and adds elbows. Tree and graph edges use `link()`, created before the nodes so they sit behind.
+- `Terminal` wraps long lines and scrolls when it is full.
 - `code` adds dependencies (`@lezer/*`, `@codemirror/language`) automatically through `pack.json`; code uses the theme font when it is monospace, otherwise a system monospace font (`MONO` in `config.ts`).
 - Line numbers in `CodeView.focus(from, to)` are 0-based and inclusive.
 - Keep one idea per scene: show a chart, then hide it (`root().opacity(0)`) before the next element.

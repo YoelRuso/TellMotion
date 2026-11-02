@@ -37,7 +37,7 @@ export class PieChart {
             closed
             fill={d.color ?? C.cat[i % 5]}
             stroke={C.bg}
-            lineWidth={5}
+            lineWidth={() => (this.slices[i].endAngle() > starts[i] ? 5 : 0)}
           />
         ))}
         {o.data.map((d, i) => {

@@ -32,7 +32,7 @@ export interface CodeViewOpts {
 
 /**
  * Code pack · code panel with themed syntax highlighting.
- * `focus(from, to)` highlights lines (1-based like `lines()` of Motion Canvas: 0-based!), `change()` animates edits.
+ * `focus(from, to)` highlights lines (0-based, like `lines()` of Motion Canvas), `change()` animates edits.
  */
 export class CodeView {
   public root = createRef<Node>();

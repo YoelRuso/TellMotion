@@ -14,6 +14,7 @@
     "doctor": "node skills/tellmotion/tools/doctor.mjs",
     "catalog": "node skills/tellmotion/tools/build-catalog.mjs site/public --no-gallery",
     "assets": "node scripts/readme-assets.mjs",
-    "sheets": "node scripts/recipe-sheets.mjs"
+    "sheets": "node scripts/recipe-sheets.mjs",
+    "sheets:packs": "node scripts/pack-sheets.mjs"
   }
 }

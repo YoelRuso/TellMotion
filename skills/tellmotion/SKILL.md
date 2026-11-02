@@ -48,7 +48,7 @@ Run it from the folder that should contain the project. One project per topic; a
 - Text ≥ 28 px at 1920x1080; captions ≤ 85 characters; one category color per element type + legend in `src/config.ts` (`LEGEND`).
 - Show only what is needed per scene; `glow()` the active element and `dim()` the rest.
 - Editable text, timings and colors as constants at the top of each scene (`EDITABLE TEXT` comment); global speed in `PACE`.
-- Events/requests/data = `send(root, points, {name})`.
+- Join pieces with `connect(root, a, b)`. Requests and events travel with `send(root, arrow.points, {shape: 'dot' | 'diamond', to: piece})`, so the shape tells them apart and the piece reacts on arrival.
 - Never hard-code colors or fonts in scenes: use `C`, `S`, `FONT`, `fs()` from `config.ts` so themes stay swappable.
 
 ## 6. Verify (cheap)

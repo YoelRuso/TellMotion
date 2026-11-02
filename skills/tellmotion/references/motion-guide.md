@@ -5,9 +5,10 @@ Components live in `src/components/`. Everything reads the active theme through 
 ## Core components
 - `prepareScene(view, title|null)` → `{root, sub, enter(), leave()}`; `sub.say(text)`, `sub.hide()`.
 - `Box(parent,{x,y,label,color,w?,h?,pill?,fs?,weight?})` — the generic block; `setState(text,color)`.
-- `Arrow(parent, points, {async?, color?, plain?})` — `draw(d)`, `hide()`, `show()`; elbows via extra points.
-- `Packet` / `send(parent, points, {name?, color?, d?, below?})` — envelope that travels along points.
-- `Piece` base (all boxes): `appear(d)`, `glow(on)`, `dim(on)`, `hide()`, and `left/right/top/bottom` points.
+- `Arrow(parent, points, {async?, color?, plain?})` — `draw(d)`, `hide()`, `show()`; elbows via extra points; `arrow.points` holds its route.
+- `connect(parent, a, b, {from?, to?, async?, color?, plain?})` — arrow between two pieces of the same parent, with the elbows it needs. Prefer it to writing coordinates.
+- `Packet` / `send(parent, points, {shape?, name?, color?, d?, below?, to?})` — marker that follows the points without stopping at corners. `shape`: `dot` for requests, `diamond` for events, `envelope` (default) for real messages such as emails. `d` is optional: by default the time depends on the distance. Pass `to: piece` and it reacts on arrival: `send(root, arrow.points, {shape: 'dot', to: gateway})`.
+- `Piece` base (all boxes): `appear(d)`, `glow(on)`, `ping()` (brief reaction), `dim(on)`, `hide()`, and `left/right/top/bottom` points.
 - Theme helpers: `boxProps(color)`, `textOn()`, `shadowOf(color)`.
 
 ## Cloud pack (`--pack cloud`)

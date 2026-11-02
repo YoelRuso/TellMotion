@@ -89,6 +89,19 @@ export class Piece {
     );
   }
 
+  private *blink(d: number) {
+    yield* this.glow(true, d * 0.3);
+    yield* this.glow(false, d * 0.7);
+  }
+
+  /** Brief reaction when something reaches this piece: a flash and a ring that fades out. Leaves it unhighlighted. */
+  *ping(d = 0.6) {
+    const ring = this.box().clone({fill: 'rgba(0,0,0,0)', stroke: this.color, lineWidth: S.stroke + 3, lineDash: [], shadowBlur: 0, opacity: 0.8});
+    this.root().add(ring);
+    yield* all(ring.opacity(0, t(d)), ring.scale([1 + 48 / this.w, 1 + 48 / this.h], t(d)), this.blink(d));
+    ring.remove();
+  }
+
   /** Dim (true) or restore (false). */
   *dim(on = true, d = 0.3) {
     yield* this.root().opacity(on ? 0.2 : 1, t(d));

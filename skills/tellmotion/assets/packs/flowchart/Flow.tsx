@@ -1,6 +1,6 @@
 import {Line, Node, Rect, Txt} from '@motion-canvas/2d';
 import {createRef} from '@motion-canvas/core';
-import {C, FONT, fs, t} from '../config';
+import {C, FONT, P, fs, t} from '../config';
 import {Piece, boxProps, hiddenState, textOn} from './Piece';
 
 export interface FlowOpts {
@@ -62,6 +62,14 @@ export class Decision extends FlowShape {
 export class DataIO extends FlowShape {
   constructor(parent: Node, o: FlowOpts) {
     super(parent, o, 'io', {w: 320, h: 100, color: C.cat[4]});
+  }
+
+  // The slanted sides are 14 px inside the bounding box at mid-height.
+  get left(): P {
+    return [this.x - this.w / 2 + 14, this.y];
+  }
+  get right(): P {
+    return [this.x + this.w / 2 - 14, this.y];
   }
 }
 

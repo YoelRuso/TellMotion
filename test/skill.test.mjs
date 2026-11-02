@@ -27,6 +27,7 @@ test('each pack has valid metadata and the components it declares', () => {
     const meta = JSON.parse(readFileSync(join(dir, p.name, 'pack.json'), 'utf8'));
     assert.equal(meta.name, p.name);
     assert.ok(meta.description.length > 10);
+    assert.ok(existsSync(join(dir, p.name, 'demo', `demo-${p.name}.tsx`)), `${p.name}: demo scene missing`);
     const src = readdirSync(join(dir, p.name))
       .filter(f => f.endsWith('.tsx'))
       .map(f => readFileSync(join(dir, p.name, f), 'utf8'))
