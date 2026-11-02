@@ -9,6 +9,8 @@ All notable changes are documented here. The format follows [Keep a Changelog](h
 - `examples/`: the projects behind quicksort, the water cycle and the history of the web.
 
 ### Fixed
+- Website hero: the animated packets now tell one story in order (request, database, event, consumers), match the legend and no longer restart when the theme changes.
+- Reference diagram: the arrow between Orders and the Event Bus now points to the bus, since Orders publishes to it.
 - Captions and the `compare` badge were unreadable in themes whose surface is as light as their text.
 - The `outro` list is centered under the title when its ideas are short.
 

@@ -165,7 +165,9 @@ export function renderPreview(theme, opts = {}) {
     );
   };
   out.push(arrow(262, 500, 338, 500, false), arrow(542, 500, 618, 500, false));
-  for (let i = 2; i < 5; i++) out.push(arrow(685 + i * 230 + 95, 332, 685 + i * 230 + 95, 448, true));
+  // Orders publishes to the bus; Payments and Alerts consume from it.
+  out.push(arrow(685 + 2 * 230 + 95, 448, 685 + 2 * 230 + 95, 332, true));
+  for (let i = 3; i < 5; i++) out.push(arrow(685 + i * 230 + 95, 332, 685 + i * 230 + 95, 448, true));
   for (let i = 0; i < 4; i++) out.push(arrow(685 + i * 230 + 95, 572, 685 + i * 230 + 95, 688, false));
 
   card(0, 70, 440, 190, 120, 'CLIENT', 'Client', 'Web · Mobile');
