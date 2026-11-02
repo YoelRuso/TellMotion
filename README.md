@@ -40,7 +40,7 @@ Pick a look from a growing theme catalog, describe what you want to explain, get
 | **1** | **Describe it** | Tell your agent what to explain. It only asks what is missing: topic, length, pace. |
 | **2** | **Pick a look** | A template from the catalog, three custom proposals, or your own brand colors. |
 | **3** | **It animates** | A Motion Canvas project is scaffolded with your theme and the right component packs. |
-| **4** | **Review & render** | Type-checked and reviewed frame by frame. Render to mp4 or tweak any text, color or timing. |
+| **4** | **Review & render** | Type-checked and reviewed frame by frame. Render with one command, or tweak any text, color or timing. |
 
 ## 🖼️ Themes
 
@@ -68,6 +68,30 @@ Ready-made animated pieces that adapt to any theme.
 | **cloud** | Service · Queue · Lambda · Database | architectures, event flows |
 
 Full API: [`references/packs.md`](skills/tellmotion/references/packs.md).
+
+## 🎞️ Render without opening the editor
+
+Every new project can export itself with one command. It writes to `output/<name>/`:
+
+```bash
+npm run render                                          # mp4
+npm run render -- --format mp4,webm,gif --thumb         # more formats and a thumbnail
+npm run render -- --aspect 9:16,1:1                     # vertical and square
+npm run render -- --dry-run --format mp4,webm,gif       # estimate file sizes, save nothing
+```
+
+| Option | What it does |
+|---|---|
+| `--format mp4,webm,gif` | Files to produce (default: mp4). WebM encoding can take minutes |
+| `--aspect 16:9,9:16,1:1` | Fits the video inside the format, with bars in the theme color. Scenes are not re-laid out, so text looks smaller |
+| `--thumb` · `--thumb-at <seconds>` | Writes `thumb.png`, from the middle of the first scene or from that moment |
+| `--draft` | Quick look: 30 fps at half size, in `output/<name>-draft/` |
+| `--info` | Prints the duration of each scene without rendering |
+| `--dry-run` | Prints a rough size range per file, from a few rendered samples. Saves nothing |
+| `--fps <n>` · `--scale <n>` | Override the project settings |
+| `--pad-color <#rrggbb>` | Color of the bars |
+
+Needs Chrome, Edge or Chromium; ffmpeg comes with the project's dependencies. Tested on Windows with Chrome so far. For projects created before this command existed: `node <skill>/tools/render.mjs <project>`.
 
 ## 🚀 Install in 2 minutes
 
@@ -102,7 +126,7 @@ node ~/.claude/skills/tellmotion/tools/doctor.mjs
 Then just ask:
 > Make an animation explaining how Git branches work. Theme: blueprint.
 
-**Requirements:** Node 18+ and npm, plus an AI agent that supports skills (built for Claude Code). Figma is optional.
+**Requirements:** Node 18+ and npm, plus an AI agent that supports skills (built for Claude Code). Chrome, Edge or Chromium to render to video. Figma is optional.
 
 ### Try asking…
 - *"Visualize quicksort step by step with animated bars. Use the neon-night theme."*
@@ -116,6 +140,7 @@ node skills/tellmotion/tools/validate.mjs                    # validate every th
 node skills/tellmotion/tools/doctor.mjs                      # check the skill is complete
 node skills/tellmotion/tools/build-catalog.mjs out           # SVG previews + gallery
 bash skills/tellmotion/scripts/new-project.sh my-video --theme blueprint --pack algorithms,charts --demos
+node skills/tellmotion/tools/render.mjs my-video --draft     # render a project without the editor
 ```
 
 ## 🗺️ What's inside
@@ -134,6 +159,7 @@ docs/assets/         README images
 - [x] Theme format, preview generator (no Figma needed) and `apply-theme`
 - [x] 24 themes, 8 component packs, generic Motion Canvas template
 - [x] Website with live theme demo and searchable gallery
+- [x] Render command: mp4, WebM, GIF, thumbnails, vertical and square, size estimates
 - [ ] Keep growing the catalog (community themes welcome)
 - [ ] Example videos in different domains (software, science, algorithms)
 - [ ] Packaging as an installable plugin

@@ -40,7 +40,7 @@ Elige un estilo de un catálogo de temas en crecimiento, describe lo que quieres
 | **1** | **Descríbelo** | Cuéntale a tu agente qué quieres explicar. Solo pregunta lo que falta: tema, duración, ritmo. |
 | **2** | **Elige un estilo** | Una plantilla del catálogo, tres propuestas a medida o los colores de tu marca. |
 | **3** | **Se anima** | Se crea un proyecto de Motion Canvas con tu tema y los packs de componentes adecuados. |
-| **4** | **Revisa y renderiza** | Con comprobación de tipos y revisión fotograma a fotograma. Renderiza a mp4 o ajusta cualquier texto, color o tiempo. |
+| **4** | **Revisa y renderiza** | Con comprobación de tipos y revisión fotograma a fotograma. Renderiza con un comando o ajusta cualquier texto, color o tiempo. |
 
 ## 🖼️ Temas
 
@@ -68,6 +68,30 @@ Piezas animadas listas para usar que se adaptan a cualquier tema.
 | **cloud** | Service · Queue · Lambda · Database | arquitecturas, flujos de eventos |
 
 API completa: [`references/packs.md`](skills/tellmotion/references/packs.md).
+
+## 🎞️ Renderiza sin abrir el editor
+
+Cada proyecto nuevo se exporta con un solo comando. El resultado queda en `output/<nombre>/`:
+
+```bash
+npm run render                                          # mp4
+npm run render -- --format mp4,webm,gif --thumb         # más formatos y una miniatura
+npm run render -- --aspect 9:16,1:1                     # vertical y cuadrado
+npm run render -- --dry-run --format mp4,webm,gif       # estima el peso de los archivos, sin guardar nada
+```
+
+| Opción | Qué hace |
+|---|---|
+| `--format mp4,webm,gif` | Archivos que se generan (por defecto, mp4). Codificar WebM puede tardar minutos |
+| `--aspect 16:9,9:16,1:1` | Encaja el vídeo en el formato, con franjas del color del tema. Las escenas no se recolocan, así que el texto se ve más pequeño |
+| `--thumb` · `--thumb-at <segundos>` | Crea `thumb.png`, a mitad de la primera escena o en ese momento |
+| `--draft` | Vista rápida: 30 fps y mitad de tamaño, en `output/<nombre>-draft/` |
+| `--info` | Muestra la duración de cada escena sin renderizar |
+| `--dry-run` | Muestra un rango orientativo de peso por archivo, a partir de unas muestras renderizadas. No guarda nada |
+| `--fps <n>` · `--scale <n>` | Sustituyen los ajustes del proyecto |
+| `--pad-color <#rrggbb>` | Color de las franjas |
+
+Necesita Chrome, Edge o Chromium; ffmpeg viene con las dependencias del proyecto. Por ahora solo está probado en Windows con Chrome. En proyectos creados antes de que existiera este comando: `node <skill>/tools/render.mjs <proyecto>`.
 
 ## 🚀 Instalación en 2 minutos
 
@@ -102,7 +126,7 @@ node ~/.claude/skills/tellmotion/tools/doctor.mjs
 Después, simplemente pide:
 > Haz una animación que explique cómo funcionan las ramas de Git. Tema: blueprint.
 
-**Requisitos:** Node 18+ y npm, y un agente de IA compatible con skills (pensada para Claude Code). Figma es opcional.
+**Requisitos:** Node 18+ y npm, y un agente de IA compatible con skills (pensada para Claude Code). Chrome, Edge o Chromium para renderizar a vídeo. Figma es opcional.
 
 ### Prueba a pedir…
 - *"Visualiza quicksort paso a paso con barras animadas. Usa el tema neon-night."*
@@ -116,6 +140,7 @@ node skills/tellmotion/tools/validate.mjs                    # valida todos los 
 node skills/tellmotion/tools/doctor.mjs                      # comprueba que la skill está completa
 node skills/tellmotion/tools/build-catalog.mjs out           # vistas previas SVG + galería
 bash skills/tellmotion/scripts/new-project.sh mi-video --theme blueprint --pack algorithms,charts --demos
+node skills/tellmotion/tools/render.mjs mi-video --draft     # renderiza un proyecto sin el editor
 ```
 
 ## 🗺️ Qué hay dentro
@@ -134,6 +159,7 @@ docs/assets/         imágenes del README
 - [x] Formato de tema, generador de vistas previas (sin Figma) y `apply-theme`
 - [x] 24 temas, 8 packs de componentes, plantilla genérica de Motion Canvas
 - [x] Web con demo en vivo y galería con búsqueda
+- [x] Comando de render: mp4, WebM, GIF, miniaturas, vertical y cuadrado, estimación de peso
 - [ ] Seguir ampliando el catálogo (temas de la comunidad bienvenidos)
 - [ ] Vídeos de ejemplo en distintos ámbitos (software, ciencia, algoritmos)
 - [ ] Empaquetado como plugin instalable
