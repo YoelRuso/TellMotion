@@ -1,6 +1,12 @@
 ---
-import {GITHUB_URL} from '../config';
-const repo = GITHUB_URL.replace('https://github.com/', '');
+import {CLONE_CMD, COPY_CMD, DOCTOR_CMD, INSTALL_PROMPT, NPX_CMD} from '../config';
+const agents = ['Claude Code', 'Cursor', 'Codex', 'OpenCode', 'GitHub Copilot'];
+const flow = [
+  {t: 'Reads the instructions', d: 'Your agent opens a short, human-readable file.'},
+  {t: 'Asks for your OK', d: 'Global or this project only. Nothing happens without you.'},
+  {t: 'Installs and verifies', d: 'It copies the skill and runs a self-check.'},
+];
+const ask = 'Make an animation explaining how Git branches work. Theme: blueprint.';
 const prompts = [
   {tag: 'software', text: 'Make an animation explaining how Git branches work. Theme: blueprint.'},
   {tag: 'algorithms', text: 'Visualize quicksort step by step with animated bars. Use the neon-night theme.'},
@@ -12,39 +18,78 @@ const prompts = [
   <div class="wrap">
     <div class="section-head reveal">
       <span class="eyebrow">Install</span>
-      <h2>Two minutes to your <span class="grad">first animation</span>.</h2>
-      <p>TellMotion is a plain folder of instructions, tools and templates. Copy it into your agent's skills directory and ask.</p>
+      <h2>Install in <span class="grad">2 minutes</span>.</h2>
+      <p>No setup scripts, no config files. Paste one message into your AI agent and it does the rest.</p>
     </div>
-    <div class="install">
-      <div class="reveal">
-        <div class="stepnum">1 · Get it</div>
-        <div class="term">
-          <header><span>terminal</span><button class="copy" data-copy={`git clone ${GITHUB_URL}.git`}>Copy</button></header>
-          <pre><span class="c"># clone the repository</span>
-<span class="p">$</span> git clone {GITHUB_URL}.git</pre>
+
+    <div class="ihero reveal">
+      <div class="ihero-head">
+        <span class="stepbadge">1</span>
+        <div>
+          <h3>Let your agent do it</h3>
+          <p>Send this message to your agent:</p>
         </div>
-        <div class="stepnum">2 · Install the skill</div>
-        <div class="term">
-          <header><span>terminal</span><button class="copy" data-copy="cp -r tellmotion/skills/tellmotion ~/.claude/skills/">Copy</button></header>
-          <pre><span class="c"># global (all projects) — or use .claude/skills in one project</span>
-<span class="p">$</span> cp -r tellmotion/skills/tellmotion ~/.claude/skills/</pre>
-        </div>
-        <div class="stepnum">3 · Ask</div>
-        <div class="term">
-          <header><span>your agent</span><button class="copy" data-copy="Make an animation explaining how Git branches work. Theme: blueprint.">Copy</button></header>
-          <pre><span class="p">&gt;</span> Make an animation explaining how Git branches work.
-  Theme: blueprint.</pre>
-        </div>
-        <ul class="req">
-          <li>Needs Node 18+ and npm, plus an AI agent that supports skills (built for Claude Code).</li>
-          <li>Figma is optional — previews are generated without it.</li>
-          <li>Output is a Motion Canvas project: preview in the editor, render to mp4 with FFmpeg.</li>
-        </ul>
       </div>
-      <div class="try reveal d1">
-        <h3>Try asking…</h3>
+      <div class="agents" aria-label="Works with">
+        {agents.map(a => <span>{a}</span>)}
+      </div>
+      <div class="bigprompt">
+        <code><span class="p">&gt;</span> {INSTALL_PROMPT}</code>
+        <button class="copy big" data-copy={INSTALL_PROMPT}>Copy message</button>
+      </div>
+      <ol class="flow">
+        {flow.map((f, i) => (
+          <li><b>{i + 1}</b><div><strong>{f.t}</strong><span>{f.d}</span></div></li>
+        ))}
+      </ol>
+    </div>
+
+    <div class="iask reveal d1">
+      <div class="ihero-head">
+        <span class="stepbadge">2</span>
+        <div>
+          <h3>Then just ask</h3>
+          <p>Describe what you want to explain and name a theme (or ask for custom proposals).</p>
+        </div>
+      </div>
+      <div class="bigprompt">
+        <code><span class="p">&gt;</span> {ask}</code>
+        <button class="copy big" data-copy={ask}>Copy</button>
+      </div>
+      <div class="try">
         {prompts.map(p => <button data-copy={p.text}><span>{p.tag} · click to copy</span>{p.text}</button>)}
       </div>
     </div>
+
+    <details class="more reveal">
+      <summary>Other ways to install</summary>
+      <div class="more-grid">
+        <div>
+          <div class="stepnum">One command (needs Node 18+)</div>
+          <div class="term">
+            <header><span>terminal</span><button class="copy" data-copy={NPX_CMD}>Copy</button></header>
+            <pre><span class="p">$</span> {NPX_CMD}</pre>
+          </div>
+        </div>
+        <div>
+          <div class="stepnum">Manual (works everywhere)</div>
+          <div class="term">
+            <header><span>terminal</span><button class="copy" data-copy={`${CLONE_CMD}\n${COPY_CMD}`}>Copy</button></header>
+            <pre><span class="p">$</span> {CLONE_CMD}
+<span class="p">$</span> {COPY_CMD}
+<span class="c"># or use .claude/skills/ inside one project</span></pre>
+          </div>
+        </div>
+        <div>
+          <div class="stepnum">Verify any install</div>
+          <div class="term">
+            <header><span>terminal</span><button class="copy" data-copy={DOCTOR_CMD}>Copy</button></header>
+            <pre><span class="p">$</span> {DOCTOR_CMD}</pre>
+          </div>
+        </div>
+      </div>
+    </details>
+
+    <p class="req reveal">Needs Node 18+ and npm, plus an AI agent that supports skills (built for Claude Code). Figma is optional.</p>
   </div>
 </section>
