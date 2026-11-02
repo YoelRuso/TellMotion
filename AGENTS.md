@@ -46,4 +46,4 @@ cd site && npm run build # build the website
 - In JSX `.map()` rendering several siblings that need refs/signals, wrap them in one `<Node>`, not a fragment.
 - `figma.createVector` does not render; use `createNodeFromSvg`. The Figma helper is not tested end to end.
 - Old ffmpeg builds lack `xfade`; `readme-assets.mjs` blends frames manually.
-- `tools/render.mjs` uses Motion Canvas' `Renderer`, which is not a public API; `test:smoke` renders a real scene to catch breakage. It is copied into each project at scaffold time, so it must stay a single file.
+- `tools/render.mjs` uses Motion Canvas' `Renderer`, which is not a public API; `test:smoke` renders a real scene to catch breakage. It is copied into each project at scaffold time, so it must stay a single file. Its `--dry-run` range (`ESTIMATE_RANGE`) comes from comparing estimates with real renders: re-measure if the sampling or encoder settings change.

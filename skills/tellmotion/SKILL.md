@@ -51,7 +51,14 @@ Read `references/motion-guide.md` (core API, layout recipe, pitfalls) and `refer
 3. When done: `resize_window` preset `desktop`, `preview_stop`. Do not render mp4 unless asked.
 
 ## 6. Render (when asked)
-`npm run render` in the project writes `output/<name>/<name>.mp4` and `render.json` (duration per scene), without opening the editor. Options: `--fps <n>`, `--scale <n>`; use `--fps 30` for a faster draft. Needs Chrome, Edge or Chromium (`CHROME` overrides the path). Projects created before this script existed: `node <skill>/tools/render.mjs <project>`. The source is `tools/render.mjs`.
+`npm run render` in the project writes `output/<name>/<name>.mp4` and `render.json` (duration per scene, file sizes), without opening the editor. Options (after `npm run render --`):
+- `--format mp4,webm,gif` · `--thumb` or `--thumb-at <seconds>` · `--fps <n>` · `--scale <n>`. WebM encoding is slow (minutes): request it only when needed.
+- `--aspect 9:16,1:1`: fits the video inside with bars in the theme background (`--pad-color` overrides); it does not re-lay out the scene, so text shrinks to about 56%. Say so to the user.
+- `--draft`: 30 fps at half size, in `output/<name>-draft/`. Use it to review.
+- `--info`: duration of each scene, nothing rendered. Cheap: prefer it over rendering to check pacing.
+- `--dry-run`: size range per file from rendered samples, nothing saved. Use it before a large render or when the user worries about size.
+
+Needs Chrome, Edge or Chromium (`CHROME` overrides the path). Projects created before this script existed: `node <skill>/tools/render.mjs <project>`. The source is `tools/render.mjs`.
 
 ## 7. Deliver
 List scenes (name → what it shows), how to run (`npm start`), how to render (`npm run render`), how to change pace (`PACE`), texts (constants per scene), theme (`apply-theme.mjs`). State what was not verified. Update the workspace `CLAUDE.md` with the new project.

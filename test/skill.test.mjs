@@ -51,6 +51,30 @@ test('render.mjs stays dependency-free and honours CHROME', async () => {
   assert.equal(findBrowser({CHROME: self}), self);
 });
 
+test('render options and output plan', async () => {
+  const {parseArgs, planOutputs, targetSize, encodeArgs, sizeRange} = await import(pathToFileURL(join(skill, 'tools', 'render.mjs')).href);
+  assert.deepEqual(parseArgs([]).formats, ['mp4']);
+  const draft = parseArgs(['--draft']);
+  assert.equal(draft.fps, 30);
+  assert.equal(draft.scale, 0.5);
+  assert.equal(parseArgs(['--draft', '--fps', '60']).fps, 60);
+  assert.equal(parseArgs(['--thumb-at', '0']).thumbAt, 0);
+  for (const bad of [['--format', 'avi'], ['--aspect', '4:3'], ['--fps', 'x'], ['--nope'], ['--info', '--dry-run'], ['--pad-color', 'red']]) assert.throws(() => parseArgs(bad));
+
+  const size = {x: 1920, y: 1080};
+  assert.deepEqual(targetSize('16:9', size), size);
+  assert.deepEqual(targetSize('9:16', size), {x: 1080, y: 1920});
+  assert.deepEqual(targetSize('1:1', size), {x: 1080, y: 1080});
+
+  const plan = planOutputs('v', ['mp4', 'gif'], ['16:9', '9:16'], true);
+  assert.deepEqual(plan.map(p => p.file), ['v.mp4', 'v.gif', 'thumb.png', 'v-9x16.mp4', 'v-9x16.gif', 'thumb-9x16.png']);
+  assert.deepEqual(plan.filter(p => p.master).map(p => p.file), ['v.mp4']);
+
+  const args = encodeArgs(plan[3], {input: 'in.mp4', output: 'out.mp4', size, color: '#123456', thumbAt: 1});
+  assert.ok(args.some(a => a.includes('pad=1080:1920') && a.includes('color=#123456')));
+  assert.equal(sizeRange(1024 * 1024), '768 KB - 1.7 MB');
+});
+
 test('versions are consistent (package.json, llms.txt, CHANGELOG)', () => {
   const v = JSON.parse(read('package.json')).version;
   assert.match(read('llms.txt'), new RegExp(`^Version: ${v.replace(/\./g, '\\.')}$`, 'm'));
