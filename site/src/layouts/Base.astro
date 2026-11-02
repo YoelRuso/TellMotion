@@ -1,7 +1,7 @@
 ---
 import '../styles/global.css';
 import {DESCRIPTION, FONTS_URL, NAME, TAGLINE} from '../config';
-const base = import.meta.env.BASE_URL;
+const base = import.meta.env.BASE_URL.endsWith('/') ? import.meta.env.BASE_URL : import.meta.env.BASE_URL + '/'; // always ends with a slash (Astro omits it for a sub-path base)
 const title = `${NAME} — ${TAGLINE}`;
 ---
 <!doctype html>
