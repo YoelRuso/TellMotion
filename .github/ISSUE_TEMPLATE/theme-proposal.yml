@@ -1,0 +1,38 @@
+name: Theme proposal
+description: Suggest a new visual theme (or submit one).
+labels: [theme]
+body:
+  - type: input
+    id: name
+    attributes:
+      label: Theme name
+      placeholder: e.g. Blueprint
+    validations:
+      required: true
+  - type: dropdown
+    id: family
+    attributes:
+      label: Family
+      options: [technical, editorial, playful, neon, retro, academic, futuristic, nature, corporate, dark, light]
+    validations:
+      required: true
+  - type: textarea
+    id: look
+    attributes:
+      label: The look
+      description: Describe the mood, palette, shapes, fonts (open-licensed) and motion. References welcome.
+    validations:
+      required: true
+  - type: textarea
+    id: json
+    attributes:
+      label: theme.json (optional)
+      description: If you already wrote it, paste it. See references/theme-format.md.
+      render: json
+  - type: checkboxes
+    id: license
+    attributes:
+      label: License
+      options:
+        - label: I agree to share this theme under CC BY 4.0
+          required: true

@@ -1,0 +1,26 @@
+name: Bug report
+description: Something does not work as expected.
+labels: [bug]
+body:
+  - type: textarea
+    id: what
+    attributes:
+      label: What happened?
+      description: What did you ask the agent, what did you expect and what happened instead?
+    validations:
+      required: true
+  - type: input
+    id: version
+    attributes:
+      label: TellMotion version
+      description: See `llms.txt` or `CHANGELOG.md`.
+  - type: input
+    id: agent
+    attributes:
+      label: Agent and OS
+      placeholder: e.g. Claude Code, Windows 11, Node 20
+  - type: textarea
+    id: doctor
+    attributes:
+      label: Output of `node <skill>/tools/doctor.mjs`
+      render: text

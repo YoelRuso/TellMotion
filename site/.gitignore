@@ -1,0 +1,6 @@
+node_modules/
+dist/
+.astro/
+public/themes.json
+public/previews/
+src/lib/render-preview.mjs

@@ -1,0 +1,66 @@
+{
+  "id": "cyanotype",
+  "name": "Cyanotype",
+  "family": "technical",
+  "moods": [
+    "precise",
+    "engineering",
+    "numbered"
+  ],
+  "description": "Navy cyanotype sheet with cyan linework, numbered steps and a dimension line.",
+  "prompt": "Navy cyanotype blueprint: very dark blue sheet, cyan hairlines and cyan-outlined boxes, numbered yellow step markers on key elements, a dimension line with arrows above the main area and a drawing title block. Methodical, step-by-step feel.",
+  "fonts": {
+    "family": "IBM Plex Mono",
+    "fontsource": "ibm-plex-mono",
+    "google": "IBM+Plex+Mono:wght@400;700",
+    "fallback": "monospace",
+    "weights": [
+      400,
+      700
+    ]
+  },
+  "colors": {
+    "ok": "#7dff9b",
+    "error": "#ff6b6b",
+    "background": "#082554",
+    "surface": "#0b3170",
+    "text": "#e6f6ff",
+    "muted": "#8fc8ee",
+    "line": "#bfe9ff",
+    "stroke": "#5ad1ff",
+    "onAccent": "#082554",
+    "async": "#ffd86b",
+    "categories": [
+      "#5ad1ff",
+      "#ffd86b",
+      "#e6f6ff",
+      "#ffd86b",
+      "#5ad1ff"
+    ]
+  },
+  "background": {
+    "kind": "grid",
+    "color": "#5ad1ff",
+    "opacity": 0.07,
+    "step": 48
+  },
+  "shape": {
+    "radius": 2,
+    "stroke": 2,
+    "dash": null,
+    "fill": "surface",
+    "strokeFrom": "stroke",
+    "shadow": "none",
+    "doubleBorder": false
+  },
+  "decor": [
+    "step-numbers",
+    "dimension-line",
+    "title-block"
+  ],
+  "motion": {
+    "pace": 1.1,
+    "easing": "inOutCubic",
+    "entrance": "pop"
+  }
+}

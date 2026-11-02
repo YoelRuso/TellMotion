@@ -1,0 +1,60 @@
+{
+  "id": "retro-terminal",
+  "name": "Retro Terminal",
+  "family": "retro",
+  "moods": [
+    "retro",
+    "hacker",
+    "nostalgic"
+  ],
+  "description": "Green phosphor CRT: black screen, glowing green outlines and scanlines.",
+  "prompt": "Retro CRT terminal: near-black screen with faint horizontal scanlines, glowing phosphor-green square outlines and text, amber for events, pixel/terminal font, titles written like a shell prompt. Nostalgic and hacker-like.",
+  "fonts": {
+    "family": "VT323",
+    "fontsource": "vt323",
+    "google": "VT323",
+    "fallback": "monospace",
+    "weights": [
+      400
+    ],
+    "scale": 1.3
+  },
+  "colors": {
+    "ok": "#33ff66",
+    "error": "#ff5c5c",
+    "background": "#050a06",
+    "surface": "#07130a",
+    "text": "#7dff9b",
+    "muted": "#3fbf62",
+    "line": "#33ff66",
+    "onAccent": "#050a06",
+    "async": "#ffd84a",
+    "categories": [
+      "#7dff9b",
+      "#ffd84a",
+      "#33ff66",
+      "#ffd84a",
+      "#4de1c1"
+    ]
+  },
+  "background": {
+    "kind": "solid"
+  },
+  "shape": {
+    "radius": 0,
+    "stroke": 2,
+    "dash": null,
+    "fill": "surface",
+    "strokeFrom": "accent",
+    "shadow": "glow",
+    "doubleBorder": false
+  },
+  "decor": [
+    "scanlines"
+  ],
+  "motion": {
+    "pace": 1,
+    "easing": "linear",
+    "entrance": "fade"
+  }
+}

@@ -1,0 +1,35 @@
+---
+import themes from '../../public/themes.json';
+const base = import.meta.env.BASE_URL;
+const prev = (id: string) => `${base}${(themes.find((t: any) => t.id === id) ?? themes[0]).preview}`;
+const examples = [
+  {title: 'How Git branches work', text: 'Commits, branches and merges explained step by step.', theme: 'blueprint', pack: 'flowchart + code'},
+  {title: 'The water cycle', text: 'Evaporation, condensation and precipitation as a living loop.', theme: 'soft-clay', pack: 'science'},
+  {title: 'Quicksort, visualized', text: 'Pivot, partition and recursion on a row of animated bars.', theme: 'neon-night', pack: 'algorithms'},
+];
+---
+<section id="examples">
+  <div class="wrap">
+    <div class="section-head reveal">
+      <span class="eyebrow">Examples</span>
+      <h2>Same flow. <span class="grad">Completely different stories.</span></h2>
+      <p>Software, science and algorithms — made with the same skill, each in a different theme and pack.</p>
+    </div>
+    <div class="examples">
+      {examples.map((e, i) => (
+        <article class={`ex reveal d${i}`}>
+          <div class="thumb">
+            <img src={prev(e.theme)} alt="" loading="lazy" />
+            <div class="play"><span><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M8 5v14l11-7z" /></svg></span></div>
+            <span class="soon">Coming soon</span>
+          </div>
+          <div class="info">
+            <h3>{e.title}</h3>
+            <p>{e.text}</p>
+            <div class="by">theme: {e.theme} · pack: {e.pack}</div>
+          </div>
+        </article>
+      ))}
+    </div>
+  </div>
+</section>

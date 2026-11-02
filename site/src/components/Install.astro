@@ -1,0 +1,50 @@
+---
+import {GITHUB_URL} from '../config';
+const repo = GITHUB_URL.replace('https://github.com/', '');
+const prompts = [
+  {tag: 'software', text: 'Make an animation explaining how Git branches work. Theme: blueprint.'},
+  {tag: 'algorithms', text: 'Visualize quicksort step by step with animated bars. Use the neon-night theme.'},
+  {tag: 'science', text: 'Explain the water cycle for kids in a soft, friendly style.'},
+  {tag: 'custom design', text: 'Animate our onboarding flow. Show me 3 visual proposals first.'},
+];
+---
+<section id="install">
+  <div class="wrap">
+    <div class="section-head reveal">
+      <span class="eyebrow">Install</span>
+      <h2>Two minutes to your <span class="grad">first animation</span>.</h2>
+      <p>TellMotion is a plain folder of instructions, tools and templates. Copy it into your agent's skills directory and ask.</p>
+    </div>
+    <div class="install">
+      <div class="reveal">
+        <div class="stepnum">1 · Get it</div>
+        <div class="term">
+          <header><span>terminal</span><button class="copy" data-copy={`git clone ${GITHUB_URL}.git`}>Copy</button></header>
+          <pre><span class="c"># clone the repository</span>
+<span class="p">$</span> git clone {GITHUB_URL}.git</pre>
+        </div>
+        <div class="stepnum">2 · Install the skill</div>
+        <div class="term">
+          <header><span>terminal</span><button class="copy" data-copy="cp -r tellmotion/skills/tellmotion ~/.claude/skills/">Copy</button></header>
+          <pre><span class="c"># global (all projects) — or use .claude/skills in one project</span>
+<span class="p">$</span> cp -r tellmotion/skills/tellmotion ~/.claude/skills/</pre>
+        </div>
+        <div class="stepnum">3 · Ask</div>
+        <div class="term">
+          <header><span>your agent</span><button class="copy" data-copy="Make an animation explaining how Git branches work. Theme: blueprint.">Copy</button></header>
+          <pre><span class="p">&gt;</span> Make an animation explaining how Git branches work.
+  Theme: blueprint.</pre>
+        </div>
+        <ul class="req">
+          <li>Needs Node 18+ and npm, plus an AI agent that supports skills (built for Claude Code).</li>
+          <li>Figma is optional — previews are generated without it.</li>
+          <li>Output is a Motion Canvas project: preview in the editor, render to mp4 with FFmpeg.</li>
+        </ul>
+      </div>
+      <div class="try reveal d1">
+        <h3>Try asking…</h3>
+        {prompts.map(p => <button data-copy={p.text}><span>{p.tag} · click to copy</span>{p.text}</button>)}
+      </div>
+    </div>
+  </div>
+</section>

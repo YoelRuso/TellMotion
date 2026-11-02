@@ -1,0 +1,29 @@
+---
+import '../styles/global.css';
+import {DESCRIPTION, FONTS_URL, NAME, TAGLINE} from '../config';
+const base = import.meta.env.BASE_URL;
+const title = `${NAME} — ${TAGLINE}`;
+---
+<!doctype html>
+<html lang="en" data-base={base}>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>{title}</title>
+    <meta name="description" content={DESCRIPTION} />
+    <meta name="theme-color" content="#06060b" />
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={DESCRIPTION} />
+    <meta property="og:type" content="website" />
+    <meta name="twitter:card" content="summary_large_image" />
+    <link rel="icon" type="image/svg+xml" href={`${base}favicon.svg`} />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link rel="stylesheet" href={FONTS_URL} />
+  </head>
+  <body>
+    <a class="skip" href="#main">Skip to content</a>
+    <div class="ambient" aria-hidden="true"></div>
+    <slot />
+  </body>
+</html>

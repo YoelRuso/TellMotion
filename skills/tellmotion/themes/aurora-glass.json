@@ -1,0 +1,78 @@
+{
+  "id": "aurora-glass",
+  "name": "Aurora Glass",
+  "family": "futuristic",
+  "moods": [
+    "modern",
+    "dreamy",
+    "premium"
+  ],
+  "description": "Violet-to-pink gradient with glowing blobs and frosted translucent cards.",
+  "prompt": "Glassmorphism on an aurora gradient: diagonal violet-to-magenta-to-pink background with soft glowing color blobs, frosted translucent white cards with thin white borders and soft shadows, white rounded geometric sans-serif. Dreamy and premium.",
+  "fonts": {
+    "family": "Plus Jakarta Sans",
+    "fontsource": "plus-jakarta-sans",
+    "google": "Plus+Jakarta+Sans:wght@400;700",
+    "fallback": "sans-serif",
+    "weights": [
+      400,
+      700
+    ]
+  },
+  "colors": {
+    "ok": "#a7f3d0",
+    "error": "#fecaca",
+    "background": "#6a35e0",
+    "surface": "#ffffff",
+    "text": "#ffffff",
+    "muted": "#e4e0ff",
+    "line": "#ffffff",
+    "stroke": "rgba(255,255,255,0.5)",
+    "onAccent": "#1b1040",
+    "async": "#fde68a",
+    "categories": [
+      "#ddd6fe",
+      "#fde68a",
+      "#a7f3d0",
+      "#fbcfe8",
+      "#bae6fd"
+    ]
+  },
+  "background": {
+    "kind": "gradient",
+    "gradient": {
+      "angle": 135,
+      "stops": [
+        [
+          "#3b2fd1",
+          0
+        ],
+        [
+          "#8b3df0",
+          0.55
+        ],
+        [
+          "#f0539a",
+          1
+        ]
+      ]
+    }
+  },
+  "shape": {
+    "radius": 26,
+    "stroke": 1.5,
+    "dash": null,
+    "fill": "glass",
+    "strokeFrom": "stroke",
+    "shadow": "soft",
+    "doubleBorder": false
+  },
+  "decor": [
+    "blobs"
+  ],
+  "motion": {
+    "pace": 1.1,
+    "easing": "inOutSine",
+    "entrance": "fade"
+  }
+}

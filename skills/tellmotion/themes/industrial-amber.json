@@ -1,0 +1,67 @@
+{
+  "id": "industrial-amber",
+  "name": "Industrial Amber",
+  "family": "technical",
+  "moods": [
+    "industrial",
+    "serious",
+    "high-contrast"
+  ],
+  "description": "Graphite background with amber outlines, hazard-stripe borders and a dimension line.",
+  "prompt": "Industrial control-room look: charcoal graphite background with a faint grid, amber double-line boxes with square corners, hazard stripes along the top and bottom edges, uppercase titles, coral-red for events. Serious and high-contrast.",
+  "fonts": {
+    "family": "JetBrains Mono",
+    "fontsource": "jetbrains-mono",
+    "google": "JetBrains+Mono:wght@400;700",
+    "fallback": "monospace",
+    "weights": [
+      400,
+      700
+    ]
+  },
+  "colors": {
+    "ok": "#7dff9b",
+    "error": "#ff6b6b",
+    "background": "#1b1d21",
+    "surface": "#23262c",
+    "text": "#f2f2f2",
+    "muted": "#9aa0aa",
+    "line": "#c9ced6",
+    "stroke": "#ffb020",
+    "onAccent": "#1b1d21",
+    "async": "#ff6b4a",
+    "categories": [
+      "#7dd3fc",
+      "#ffb020",
+      "#f2f2f2",
+      "#ffb020",
+      "#7dd3fc"
+    ]
+  },
+  "background": {
+    "kind": "grid",
+    "color": "#ffffff",
+    "opacity": 0.04,
+    "step": 48
+  },
+  "shape": {
+    "radius": 0,
+    "stroke": 2,
+    "dash": null,
+    "fill": "surface",
+    "strokeFrom": "stroke",
+    "shadow": "none",
+    "doubleBorder": true
+  },
+  "decor": [
+    "hazard-stripes",
+    "step-numbers",
+    "dimension-line",
+    "title-block"
+  ],
+  "motion": {
+    "pace": 1,
+    "easing": "inOutQuad",
+    "entrance": "slide"
+  }
+}

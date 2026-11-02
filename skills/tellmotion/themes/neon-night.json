@@ -1,0 +1,60 @@
+{
+  "id": "neon-night",
+  "name": "Neon Night",
+  "family": "neon",
+  "moods": [
+    "techy",
+    "bold",
+    "night"
+  ],
+  "description": "Midnight-blue canvas with glowing neon outlines and a faint dot grid.",
+  "prompt": "Dark midnight-blue background with a subtle dot grid. Dark navy cards outlined in glowing neon colors (violet, amber, cyan, pink, green) with soft glow. Monospace type, techy and energetic.",
+  "fonts": {
+    "family": "JetBrains Mono",
+    "fontsource": "jetbrains-mono",
+    "google": "JetBrains+Mono:wght@400;700",
+    "fallback": "monospace",
+    "weights": [
+      400,
+      700
+    ]
+  },
+  "colors": {
+    "ok": "#34d399",
+    "error": "#fb7185",
+    "background": "#0a0f1f",
+    "surface": "#111a33",
+    "text": "#e6edff",
+    "muted": "#8ea0c9",
+    "line": "#6b7ba8",
+    "onAccent": "#0a0f1f",
+    "async": "#f472b6",
+    "categories": [
+      "#a78bfa",
+      "#fbbf24",
+      "#22d3ee",
+      "#f472b6",
+      "#34d399"
+    ]
+  },
+  "background": {
+    "kind": "dots",
+    "color": "#1c2750",
+    "opacity": 1,
+    "step": 48
+  },
+  "shape": {
+    "radius": 12,
+    "stroke": 2,
+    "dash": null,
+    "fill": "surface",
+    "strokeFrom": "accent",
+    "shadow": "glow",
+    "doubleBorder": false
+  },
+  "motion": {
+    "pace": 1,
+    "easing": "inOutSine",
+    "entrance": "fade"
+  }
+}

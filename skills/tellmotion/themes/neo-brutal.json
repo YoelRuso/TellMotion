@@ -1,0 +1,57 @@
+{
+  "id": "neo-brutal",
+  "name": "Neo Brutal",
+  "family": "playful",
+  "moods": [
+    "bold",
+    "fun",
+    "loud"
+  ],
+  "description": "Cream background, flat saturated blocks, thick black outlines and hard offset shadows.",
+  "prompt": "Neo-brutalist look: warm cream background, flat saturated color blocks (lavender, orange, mint, yellow, pink), thick 4px black outlines, hard offset black shadows, chunky geometric sans-serif. Loud, playful, confident.",
+  "fonts": {
+    "family": "Space Grotesk",
+    "fontsource": "space-grotesk",
+    "google": "Space+Grotesk:wght@400;700",
+    "fallback": "sans-serif",
+    "weights": [
+      400,
+      700
+    ]
+  },
+  "colors": {
+    "ok": "#16a34a",
+    "error": "#dc2626",
+    "background": "#fff4d6",
+    "surface": "#ffffff",
+    "text": "#111111",
+    "muted": "#111111",
+    "line": "#111111",
+    "onAccent": "#111111",
+    "async": "#111111",
+    "categories": [
+      "#c4b5fd",
+      "#ff9f43",
+      "#5eead4",
+      "#ffd23f",
+      "#ff6b9d"
+    ]
+  },
+  "background": {
+    "kind": "solid"
+  },
+  "shape": {
+    "radius": 14,
+    "stroke": 4,
+    "dash": null,
+    "fill": "accent",
+    "strokeFrom": "line",
+    "shadow": "hard",
+    "doubleBorder": false
+  },
+  "motion": {
+    "pace": 0.85,
+    "easing": "inOutQuad",
+    "entrance": "pop"
+  }
+}

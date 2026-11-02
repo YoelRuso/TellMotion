@@ -1,0 +1,59 @@
+{
+  "id": "clean-editorial",
+  "name": "Clean Editorial",
+  "family": "editorial",
+  "moods": [
+    "clean",
+    "calm",
+    "professional"
+  ],
+  "description": "Light, airy editorial look: soft green-gray background, white rounded cards, hairline borders and gentle shadows.",
+  "prompt": "Light and airy editorial style on a soft green-gray background. White rounded cards with hairline borders and gentle shadows, friendly modern sans-serif, one vivid accent color per element type. Calm, professional, easy to read.",
+  "fonts": {
+    "family": "Inter",
+    "fontsource": "inter",
+    "google": "Inter:wght@400;600;700",
+    "fallback": "sans-serif",
+    "weights": [
+      400,
+      600,
+      700
+    ]
+  },
+  "colors": {
+    "ok": "#1f9d55",
+    "error": "#e5484d",
+    "background": "#eef3f1",
+    "surface": "#ffffff",
+    "text": "#1c1f23",
+    "muted": "#5b6470",
+    "line": "#5b6470",
+    "stroke": "#d3dcdf",
+    "onAccent": "#ffffff",
+    "async": "#2f7de1",
+    "categories": [
+      "#7c5cff",
+      "#f26b3a",
+      "#1f9d55",
+      "#2f7de1",
+      "#5b6470"
+    ]
+  },
+  "background": {
+    "kind": "solid"
+  },
+  "shape": {
+    "radius": 20,
+    "stroke": 2,
+    "dash": null,
+    "fill": "surface",
+    "strokeFrom": "stroke",
+    "shadow": "soft",
+    "doubleBorder": false
+  },
+  "motion": {
+    "pace": 1,
+    "easing": "inOutCubic",
+    "entrance": "pop"
+  }
+}

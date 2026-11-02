@@ -1,0 +1,62 @@
+---
+import themes from '../../public/themes.json';
+import {GITHUB_URL} from '../config';
+const base = import.meta.env.BASE_URL;
+const families = [...new Set(themes.map((t: any) => t.family))].sort();
+const count = (f: string) => themes.filter((t: any) => t.family === f).length;
+---
+<section id="themes">
+  <div class="wrap">
+    <div class="section-head reveal">
+      <span class="eyebrow">Theme gallery</span>
+      <h2>{themes.length}+ looks. Pick one, <span class="grad">or invent yours</span>.</h2>
+      <p>Each theme is a single JSON file with colors, fonts, shapes and motion. Click one to see the palette and copy its prompt.</p>
+    </div>
+
+    <div class="toolbar reveal" role="toolbar" aria-label="Filter themes">
+      <input id="q" type="search" placeholder="Search by name or mood…" aria-label="Search themes" />
+      <button class="fchip" data-family="all" aria-pressed="true">All <small>{themes.length}</small></button>
+      {families.map(f => <button class="fchip" data-family={f} aria-pressed="false">{f} <small>{count(f)}</small></button>)}
+    </div>
+
+    <div class="gallery" id="gallery">
+      {themes.map((t: any) => (
+        <button class="card reveal" data-id={t.id} data-family={t.family} data-search={`${t.name} ${t.family} ${t.moods.join(' ')} ${t.description}`.toLowerCase()} aria-haspopup="dialog">
+          <div class="thumb"><img src={`${base}${t.preview}`} alt={`${t.name} theme preview`} loading="lazy" width="1920" height="1080" /></div>
+          <div class="meta">
+            <strong>{t.name}</strong>
+            <span>{t.family} · {t.moods.slice(0, 2).join(', ')}</span>
+            <div class="dots">
+              {[t.palette.background, ...t.palette.categories.slice(0, 4)].map((c: string) => <i style={`background:${c}`}></i>)}
+            </div>
+          </div>
+        </button>
+      ))}
+    </div>
+    <p class="empty" id="empty" hidden>No theme matches that search.</p>
+  </div>
+
+  <dialog class="modal" id="modal" aria-label="Theme details">
+    <button class="close" id="m-close" aria-label="Close">×</button>
+    <div class="prev" id="m-prev"></div>
+    <div class="body">
+      <div>
+        <h3 id="m-name"></h3>
+        <div class="tags" id="m-tags" style="margin-top:10px"></div>
+      </div>
+      <p class="desc" id="m-desc"></p>
+      <div class="swatches" id="m-sw"></div>
+      <div class="promptbox"><textarea id="m-prompt" readonly aria-label="Prompt for this theme"></textarea></div>
+      <div class="actions">
+        <button class="btn primary" id="m-copy-prompt">Copy prompt</button>
+        <button class="btn" id="m-copy-id">Copy theme id</button>
+        <a class="btn" id="m-json" target="_blank" rel="noopener" href={GITHUB_URL}>theme.json ↗</a>
+        <div class="nav-arrows"><button id="m-prevb" aria-label="Previous theme">←</button><button id="m-nextb" aria-label="Next theme">→</button></div>
+      </div>
+    </div>
+  </dialog>
+</section>
+
+<script>
+  import '../scripts/gallery.ts';
+</script>

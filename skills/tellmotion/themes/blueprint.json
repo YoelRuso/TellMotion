@@ -1,0 +1,63 @@
+{
+  "id": "blueprint",
+  "name": "Blueprint",
+  "family": "technical",
+  "moods": [
+    "precise",
+    "engineering",
+    "calm"
+  ],
+  "description": "Engineering drawing on blue paper: fine white linework, drafting grid and a title block.",
+  "prompt": "Technical blueprint style: deep blue paper background with a fine white drafting grid, thin white linework, square-ish boxes, monospace lettering, yellow highlights and a drawing title block in the corner. Precise and engineered.",
+  "fonts": {
+    "family": "IBM Plex Mono",
+    "fontsource": "ibm-plex-mono",
+    "google": "IBM+Plex+Mono:wght@400;700",
+    "fallback": "monospace",
+    "weights": [
+      400,
+      700
+    ]
+  },
+  "colors": {
+    "ok": "#7dff9b",
+    "error": "#ff6b6b",
+    "background": "#0d3b73",
+    "surface": "#0f4585",
+    "text": "#e8f1ff",
+    "muted": "#9ec1f2",
+    "line": "#cfe3ff",
+    "onAccent": "#0d3b73",
+    "async": "#ffd86b",
+    "categories": [
+      "#9ad0ff",
+      "#ffd86b",
+      "#ffffff",
+      "#ffd86b",
+      "#9ad0ff"
+    ]
+  },
+  "background": {
+    "kind": "grid",
+    "color": "#ffffff",
+    "opacity": 0.06,
+    "step": 48
+  },
+  "shape": {
+    "radius": 4,
+    "stroke": 2,
+    "dash": null,
+    "fill": "surface",
+    "strokeFrom": "line",
+    "shadow": "none",
+    "doubleBorder": false
+  },
+  "decor": [
+    "title-block"
+  ],
+  "motion": {
+    "pace": 1.1,
+    "easing": "inOutCubic",
+    "entrance": "pop"
+  }
+}

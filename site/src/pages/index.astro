@@ -1,0 +1,28 @@
+---
+import Base from '../layouts/Base.astro';
+import Nav from '../components/Nav.astro';
+import Hero from '../components/Hero.astro';
+import HowItWorks from '../components/HowItWorks.astro';
+import Packs from '../components/Packs.astro';
+import Gallery from '../components/Gallery.astro';
+import Examples from '../components/Examples.astro';
+import Install from '../components/Install.astro';
+import Faq from '../components/Faq.astro';
+import Footer from '../components/Footer.astro';
+---
+<Base>
+  <Nav />
+  <main id="main">
+    <Hero />
+    <HowItWorks />
+    <Packs />
+    <Gallery />
+    <Examples />
+    <Install />
+    <Faq />
+  </main>
+  <Footer />
+  <script>
+    import '../scripts/ui.ts';
+  </script>
+</Base>

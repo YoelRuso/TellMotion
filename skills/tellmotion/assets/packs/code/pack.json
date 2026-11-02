@@ -1,0 +1,1 @@
+{"name":"code","description":"Code panel with themed syntax highlighting, line focus and animated edits, plus a typing terminal.","components":["CodeView","Terminal"],"dependencies":{"@lezer/javascript":"^1.4.0","@lezer/python":"^1.1.0","@lezer/highlight":"^1.2.0","@codemirror/language":"^6.10.0"}}

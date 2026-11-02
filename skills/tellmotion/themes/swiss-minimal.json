@@ -1,0 +1,57 @@
+{
+  "id": "swiss-minimal",
+  "name": "Swiss Minimal",
+  "family": "editorial",
+  "moods": [
+    "minimal",
+    "sharp",
+    "editorial"
+  ],
+  "description": "White page, black outlines, no rounded corners and a single red accent.",
+  "prompt": "Swiss International style: pure white background, thin black outlines, perfectly square corners, grotesque sans-serif, a single red accent used for key elements and events, generous whitespace. Sharp, rational, editorial.",
+  "fonts": {
+    "family": "Archivo",
+    "fontsource": "archivo",
+    "google": "Archivo:wght@400;700",
+    "fallback": "sans-serif",
+    "weights": [
+      400,
+      700
+    ]
+  },
+  "colors": {
+    "ok": "#1a7f37",
+    "error": "#e3000f",
+    "background": "#ffffff",
+    "surface": "#ffffff",
+    "text": "#111111",
+    "muted": "#666666",
+    "line": "#111111",
+    "onAccent": "#ffffff",
+    "async": "#e3000f",
+    "categories": [
+      "#111111",
+      "#e3000f",
+      "#111111",
+      "#e3000f",
+      "#888888"
+    ]
+  },
+  "background": {
+    "kind": "solid"
+  },
+  "shape": {
+    "radius": 0,
+    "stroke": 2,
+    "dash": null,
+    "fill": "surface",
+    "strokeFrom": "line",
+    "shadow": "none",
+    "doubleBorder": false
+  },
+  "motion": {
+    "pace": 0.9,
+    "easing": "inOutCubic",
+    "entrance": "slide"
+  }
+}

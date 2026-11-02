@@ -1,0 +1,1 @@
+{"name":"charts","description":"Animated bar, line and pie charts plus a counting number.","components":["BarChart","LineChart","PieChart","Counter"],"dependencies":{}}

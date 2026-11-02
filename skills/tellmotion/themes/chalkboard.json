@@ -1,0 +1,64 @@
+{
+  "id": "chalkboard",
+  "name": "Chalkboard",
+  "family": "academic",
+  "moods": [
+    "classroom",
+    "friendly",
+    "handwritten"
+  ],
+  "description": "Dark green slate with dashed chalk outlines and handwritten lettering.",
+  "prompt": "Classroom chalkboard: dark green-black slate with faint chalk dust, dashed pastel chalk outlines (lavender, orange, green, blue, pink) around empty boxes, handwritten chalk lettering. Friendly and teacher-like.",
+  "fonts": {
+    "family": "Caveat",
+    "fontsource": "caveat",
+    "google": "Caveat:wght@400;700",
+    "fallback": "cursive",
+    "weights": [
+      400,
+      700
+    ],
+    "scale": 1.2
+  },
+  "colors": {
+    "ok": "#8be28b",
+    "error": "#ff9f9f",
+    "background": "#25322d",
+    "surface": "#25322d",
+    "text": "#f6f5ee",
+    "muted": "#cbd5cd",
+    "line": "#f6f5ee",
+    "onAccent": "#25322d",
+    "async": "#7cc8ff",
+    "categories": [
+      "#c6a8ff",
+      "#ffb86b",
+      "#8be28b",
+      "#7cc8ff",
+      "#ff9fb2"
+    ]
+  },
+  "background": {
+    "kind": "solid"
+  },
+  "shape": {
+    "radius": 18,
+    "stroke": 3,
+    "dash": [
+      9,
+      6
+    ],
+    "fill": "none",
+    "strokeFrom": "accent",
+    "shadow": "none",
+    "doubleBorder": false
+  },
+  "decor": [
+    "dust"
+  ],
+  "motion": {
+    "pace": 1,
+    "easing": "inOutQuad",
+    "entrance": "slide"
+  }
+}

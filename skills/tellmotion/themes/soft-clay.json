@@ -1,0 +1,64 @@
+{
+  "id": "soft-clay",
+  "name": "Soft Clay",
+  "family": "playful",
+  "moods": [
+    "friendly",
+    "soft",
+    "kid-friendly"
+  ],
+  "description": "Lavender background with puffy pastel clay-like cards and soft colored shadows.",
+  "prompt": "Claymorphism: lavender background, puffy pastel cards with very large corner radius, soft inner highlights and soft colored drop shadows, rounded friendly sans-serif, a different pastel tint per element type. Soft, cute and approachable.",
+  "fonts": {
+    "family": "Nunito",
+    "fontsource": "nunito",
+    "google": "Nunito:wght@400;700",
+    "fallback": "sans-serif",
+    "weights": [
+      400,
+      700
+    ]
+  },
+  "colors": {
+    "ok": "#2fb592",
+    "error": "#e5484d",
+    "background": "#f3ecff",
+    "surface": "#ffffff",
+    "text": "#3b2f63",
+    "muted": "#7a6ea8",
+    "line": "#8b7bd6",
+    "onAccent": "#ffffff",
+    "async": "#ff7ab6",
+    "categories": [
+      "#8b7bd6",
+      "#ff8a50",
+      "#2fb592",
+      "#ff6aa9",
+      "#4f9bff"
+    ],
+    "tints": [
+      "#e4dcff",
+      "#ffe1d0",
+      "#d3f5ea",
+      "#ffd9ec",
+      "#d6e8ff"
+    ]
+  },
+  "background": {
+    "kind": "solid"
+  },
+  "shape": {
+    "radius": 32,
+    "stroke": 0,
+    "dash": null,
+    "fill": "tint",
+    "strokeFrom": "accent",
+    "shadow": "clay",
+    "doubleBorder": false
+  },
+  "motion": {
+    "pace": 1.1,
+    "easing": "inOutSine",
+    "entrance": "pop"
+  }
+}

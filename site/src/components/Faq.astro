@@ -1,0 +1,40 @@
+---
+import {GITHUB_URL} from '../config';
+const items = [
+  {q: 'What exactly is TellMotion?', a: 'A skill (a folder of instructions, tools and templates) for AI coding agents. You describe what you want to explain, choose a visual theme, and the agent builds a Motion Canvas animation project for you.'},
+  {q: 'Do I need Figma?', a: 'No. Theme previews are generated directly from the theme files. Figma is an optional route if you want to refine a design visually.'},
+  {q: 'What can it animate? What can it not?', a: '2D explainers: architectures, flows, algorithms, charts, timelines, code, concepts and natural processes. It does not do 3D scenes or live-action video editing.'},
+  {q: 'How do themes work?', a: 'Each theme is one JSON file: colors, fonts, shapes, shadows and motion (pace, easing, entrances). The same file drives the preview and the animation, so switching style is one command. You can also ask for a custom design and keep it as your own theme.'},
+  {q: 'Can I contribute a theme?', a: `Yes. Copy a theme, change the tokens, run the validator and open a pull request. See CONTRIBUTING in the repository. Themes are shared under CC BY 4.0.`},
+  {q: 'What is the license?', a: 'The code is MIT. Themes, site content and examples are CC BY 4.0. Fonts keep their own open licenses (SIL OFL / Apache 2.0).'},
+  {q: 'How do I get a video file?', a: 'The skill produces a Motion Canvas project. Run it, preview in the editor, then use the Render tab with the FFmpeg exporter to export an mp4.'},
+];
+---
+<section id="faq">
+  <div class="wrap">
+    <div class="section-head reveal" style="text-align:center;margin-inline:auto">
+      <span class="eyebrow">FAQ</span>
+      <h2>Good questions.</h2>
+    </div>
+    <div class="faq reveal">
+      {items.map(i => (
+        <details>
+          <summary>{i.q}</summary>
+          <p>{i.a}</p>
+        </details>
+      ))}
+    </div>
+  </div>
+</section>
+<section class="final">
+  <div class="wrap">
+    <div class="box reveal">
+      <h2>Your next explainer is <span class="grad">one prompt away</span>.</h2>
+      <p>Free, open source and yours to remix. Star the repo, try a theme, tell a story.</p>
+      <div class="cta" style="margin:0">
+        <a class="btn primary" href={GITHUB_URL} target="_blank" rel="noopener">View on GitHub</a>
+        <a class="btn" href="#themes">Pick a theme</a>
+      </div>
+    </div>
+  </div>
+</section>

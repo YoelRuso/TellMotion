@@ -1,0 +1,1 @@
+{"name":"flowchart","description":"Flowchart symbols: terminator, process, decision, input/output and branch tags.","components":["Terminator","Process","Decision","DataIO","Tag"],"dependencies":{}}

@@ -1,0 +1,48 @@
+---
+import themes from '../../public/themes.json';
+const base = import.meta.env.BASE_URL;
+const first = themes.find((t: any) => t.id === 'blueprint') ?? themes[0];
+const packs = 8;
+---
+<section class="hero" id="top">
+  <div class="wrap">
+    <span class="pill"><i></i> Open-source skill for AI coding agents</span>
+    <h1>Turn any idea into a <span class="grad">motion story</span>.</h1>
+    <p class="lead">
+      Describe what you want to explain. Pick a look from {themes.length}+ themes — or have one designed for you — and TellMotion builds the animation, ready to render.
+    </p>
+    <div class="cta">
+      <a class="btn primary" href="#install">
+        Get the skill
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6" /></svg>
+      </a>
+      <a class="btn" href="#themes">Browse the themes</a>
+    </div>
+    <p class="prompt-line" aria-live="polite"><span class="p">&gt;</span> <span id="typed"></span><span class="caret"></span></p>
+
+    <div class="demo-shell" id="demo-shell">
+      <div class="demo-glow"></div>
+      <div class="window">
+        <div class="window-bar"><i></i><i></i><i></i><span id="demo-title">tellmotion · {first.name}</span><em>LIVE PREVIEW</em></div>
+        <div class="stage" id="stage">
+          <div class="layer on" id="layerA"><img src={`${base}${first.preview}`} alt={`${first.name} theme preview`} /></div>
+          <div class="layer" id="layerB"></div>
+        </div>
+      </div>
+      <div class="chips" id="chips" role="group" aria-label="Choose a theme">
+        {themes.map((t: any) => <button class="chip" data-id={t.id} aria-pressed={t.id === first.id ? 'true' : 'false'}>{t.name}</button>)}
+      </div>
+    </div>
+
+    <div class="stats reveal">
+      <div><strong>{themes.length}+</strong><span>visual themes</span></div>
+      <div><strong>{packs}</strong><span>component packs</span></div>
+      <div><strong>1080p</strong><span>Motion Canvas output</span></div>
+      <div><strong>MIT</strong><span>open source</span></div>
+    </div>
+  </div>
+</section>
+
+<script>
+  import '../scripts/hero.ts';
+</script>

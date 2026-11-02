@@ -1,0 +1,14 @@
+---
+import {GITHUB_URL, NAME} from '../config';
+---
+<footer>
+  <div class="wrap">
+    <div>© {new Date().getFullYear()} {NAME} · Code MIT · Themes CC BY 4.0</div>
+    <nav aria-label="Footer">
+      <a href="#how">How it works</a>
+      <a href="#themes">Themes</a>
+      <a href={`${GITHUB_URL}/blob/main/CONTRIBUTING.md`} target="_blank" rel="noopener">Contribute</a>
+      <a href={GITHUB_URL} target="_blank" rel="noopener">GitHub</a>
+    </nav>
+  </div>
+</footer>

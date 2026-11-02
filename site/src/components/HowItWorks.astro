@@ -1,0 +1,53 @@
+---
+const steps = [
+  {
+    n: '01',
+    title: 'Describe it',
+    text: 'Tell your agent what to explain. It asks only what is missing: topic, length, pace.',
+    viz: 'bubble',
+  },
+  {
+    n: '02',
+    title: 'Pick a look',
+    text: 'Choose a ready-made theme, ask for three custom proposals, or bring your own brand colors.',
+    viz: 'swatches',
+  },
+  {
+    n: '03',
+    title: 'It animates',
+    text: 'A Motion Canvas project is scaffolded with your theme and the right component packs.',
+    viz: 'mini',
+  },
+  {
+    n: '04',
+    title: 'Review & render',
+    text: 'Type-checked and reviewed frame by frame. Render to mp4 or tweak any text, color or timing.',
+    viz: 'check',
+  },
+];
+const colors = ['#7c5cff', '#22d3ee', '#fbbf24', '#ff6aa9', '#34d399'];
+---
+<section id="how">
+  <div class="wrap">
+    <div class="section-head reveal">
+      <span class="eyebrow">How it works</span>
+      <h2>From a sentence to a finished animation.</h2>
+      <p>One repeatable flow — you stay in control of the story and the style, the skill handles the boilerplate.</p>
+    </div>
+    <div class="steps">
+      {steps.map((s, i) => (
+        <article class={`step reveal d${i % 4}`}>
+          <div class="n">{s.n}</div>
+          <h3>{s.title}</h3>
+          <p>{s.text}</p>
+          <div class="viz" aria-hidden="true">
+            {s.viz === 'bubble' && <div class="bubble">Explain how Git branches work</div>}
+            {s.viz === 'swatches' && <div class="sw">{colors.map(c => <i style={`background:${c}`}></i>)}</div>}
+            {s.viz === 'mini' && <div class="mini"><b></b><u></u><b style="border-color:#fbbf24"></b><u></u><b style="border-color:#ff6aa9"></b></div>}
+            {s.viz === 'check' && <div class="check"><span>typecheck passes</span><span>scenes reviewed</span><span>ready to render</span></div>}
+          </div>
+        </article>
+      ))}
+    </div>
+  </div>
+</section>

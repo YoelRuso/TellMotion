@@ -1,0 +1,66 @@
+{
+  "id": "ink-paper",
+  "name": "Ink & Paper",
+  "family": "academic",
+  "moods": [
+    "academic",
+    "handcrafted",
+    "methodical"
+  ],
+  "description": "Cream drafting paper with blue ink, double-line boxes, corner crop marks and an approval stamp.",
+  "prompt": "Drafting paper look: warm cream sheet with a faint blue grid, blue-ink double-line boxes with square corners, corner crop marks, numbered blue step markers, orange-red accents for events and a rotated APPROVED rubber stamp. Academic and handcrafted.",
+  "fonts": {
+    "family": "Space Mono",
+    "fontsource": "space-mono",
+    "google": "Space+Mono:wght@400;700",
+    "fallback": "monospace",
+    "weights": [
+      400,
+      700
+    ]
+  },
+  "colors": {
+    "ok": "#1f7a3d",
+    "error": "#c92a2a",
+    "background": "#f6f3ea",
+    "surface": "#fffdf6",
+    "text": "#14307a",
+    "muted": "#4a64b8",
+    "line": "#1f3fbf",
+    "onAccent": "#fffdf6",
+    "async": "#d9480f",
+    "categories": [
+      "#1f3fbf",
+      "#d9480f",
+      "#1f3fbf",
+      "#d9480f",
+      "#4a64b8"
+    ]
+  },
+  "background": {
+    "kind": "grid",
+    "color": "#2b5fd9",
+    "opacity": 0.08,
+    "step": 48
+  },
+  "shape": {
+    "radius": 0,
+    "stroke": 2,
+    "dash": null,
+    "fill": "surface",
+    "strokeFrom": "line",
+    "shadow": "none",
+    "doubleBorder": true
+  },
+  "decor": [
+    "corner-marks",
+    "stamp",
+    "step-numbers",
+    "title-block"
+  ],
+  "motion": {
+    "pace": 1.1,
+    "easing": "inOutQuad",
+    "entrance": "fade"
+  }
+}

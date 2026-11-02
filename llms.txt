@@ -1,0 +1,62 @@
+# TellMotion
+
+> An open-source skill that turns an idea into a polished 2D explainer animation (1920x1080). The user picks a ready-made visual theme (or asks for a custom design), and the agent builds a Motion Canvas project with reusable component packs: cloud, algorithms, charts, flowchart, timeline, code, typography and science.
+
+Version: 0.1.0
+Repository: https://github.com/YoelRuso/TellMotion
+Website: https://yoelruso.github.io/TellMotion/
+License: code MIT, themes and content CC BY 4.0
+
+## Install for the user
+
+If you are an agent asked to install TellMotion, do only the steps below. Tell the user what each command will run and wait for them to confirm the scope before installing. Do not create a project, generate an animation or change anything else.
+
+Confirm first:
+
+- Scope: global (`--global`) or the current project only.
+- Target agent: the agent you are running in, unless the user names others (for example `claude-code`, `cursor`, `codex`, `opencode`, `github-copilot`).
+
+1. Discover the skill (lists only, installs nothing):
+
+   `npx -y skills@latest add YoelRuso/TellMotion --list --full-depth`
+
+   Stop unless the listing contains exactly one skill named `tellmotion`.
+
+2. Install it for the confirmed agent. `--copy` copies files instead of symlinking. If the installer reports a conflict with existing files, stop and tell the user; never delete their files.
+
+   `npx -y skills@latest add YoelRuso/TellMotion --skill tellmotion --agent <agent> --global --copy --yes`
+
+   Omit `--global` for a project-only install. Do not add other skills, agents or force flags.
+
+   If `npx` is unavailable, install manually instead:
+
+   `git clone https://github.com/YoelRuso/TellMotion.git` and copy `TellMotion/skills/tellmotion` to the agent's skills folder (Claude Code: `~/.claude/skills/tellmotion` globally or `.claude/skills/tellmotion` per project).
+
+3. Verify with the installed copy. `<installed-path>` is the directory the installer reported:
+
+   `node <installed-path>/tools/doctor.mjs`
+
+   Report the result for each target. Say TellMotion is ready only if `doctor` ended with "TellMotion is ready."
+
+## How the user uses it
+
+The user describes what to explain, for example:
+
+- "Make an animation explaining how Git branches work. Theme: blueprint."
+- "Visualize quicksort step by step with animated bars. Use the neon-night theme."
+- "Animate our onboarding flow. Show me 3 visual proposals first."
+
+The skill (`skills/tellmotion/SKILL.md`) then runs this flow: short brief, design (template theme, three custom proposals, or bring-your-own brand), scaffold a Motion Canvas project, write the scenes, verify, deliver.
+
+## Docs
+
+- Skill instructions: skills/tellmotion/SKILL.md
+- Theme format: skills/tellmotion/references/theme-format.md
+- Component packs: skills/tellmotion/references/packs.md
+- Motion Canvas guide: skills/tellmotion/references/motion-guide.md
+- Contributing a theme: CONTRIBUTING.md
+- Theme catalog (JSON, generated): https://yoelruso.github.io/TellMotion/themes.json
+
+## Requirements
+
+Node 18+ and npm. An AI agent that supports skills (built for Claude Code). Figma is optional.
