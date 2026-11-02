@@ -12,7 +12,7 @@ const STROKE_FROM = ['accent', 'line', 'stroke'];
 const SHADOWS = ['none', 'soft', 'hard', 'glow', 'clay'];
 const EASINGS = ['inOutCubic', 'inOutSine', 'inOutQuad', 'linear'];
 const ENTRANCES = ['pop', 'fade', 'slide'];
-export const DECOR = ['scanlines', 'hazard-stripes', 'corner-marks', 'title-block', 'step-numbers', 'dimension-line', 'stamp', 'dust', 'blobs'];
+export const DECOR = ['scanlines', 'hazard-stripes', 'corner-marks', 'title-block', 'step-numbers', 'dimension-line', 'stamp', 'dust', 'blobs', 'horizon', 'topbar', 'ruled-lines', 'waves', 'masthead', 'traces'];
 
 const COLOR = /^(#[0-9a-fA-F]{6}|#[0-9a-fA-F]{8}|rgba?\([^)]*\))$/;
 

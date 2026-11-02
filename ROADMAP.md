@@ -3,9 +3,9 @@
 Plans can change. Ideas and votes are welcome in [issues](https://github.com/YoelRuso/TellMotion/issues).
 
 ## Now
-- [ ] **50+ themes** across all families (technical, editorial, playful, neon, retro, academic, futuristic, nature, corporate, dark, light)
+- [ ] **Keep growing the theme catalog** (gaps: more neon, light and corporate looks; community themes welcome)
 - [ ] **Example videos** in different domains (Git branches, water cycle, quicksort) with real renders on the website
-- [ ] Verify the `npx skills add` install path end to end and document per-agent install locations
+- [ ] Verify the full `npx skills add` install per agent (discovery with `--list` is confirmed) and document install locations
 
 ## Next
 - [ ] Test the optional Figma helper end to end
@@ -20,6 +20,6 @@ Plans can change. Ideas and votes are welcome in [issues](https://github.com/Yoe
 
 ## Done
 - [x] Theme format, preview generator and `apply-theme`
-- [x] 12 themes, 8 component packs, generic template
+- [x] 24 themes, 8 component packs, generic template
 - [x] Website with live demo and gallery
 - [x] `llms.txt`, `doctor`, tests and CI

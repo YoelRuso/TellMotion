@@ -1,0 +1,32 @@
+{
+  "id": "notebook",
+  "name": "Notebook",
+  "family": "academic",
+  "moods": ["school", "handwritten", "friendly"],
+  "description": "Ruled notebook paper with a red margin line, pen-blue outlines and a handwritten typeface.",
+  "prompt": "School notebook page: cream paper with faint blue ruled lines and a red margin line, boxes drawn in pen with colored outlines (blue, red, green, amber, violet) and a small offset ink shadow, handwritten lettering in blue-black ink. Friendly, familiar and easy to follow.",
+  "fonts": {
+    "family": "Patrick Hand",
+    "fontsource": "patrick-hand",
+    "google": "Patrick+Hand",
+    "fallback": "cursive",
+    "weights": [400],
+    "scale": 1.2
+  },
+  "colors": {
+    "background": "#fbf8ee",
+    "surface": "#fffdf5",
+    "text": "#1f2a44",
+    "muted": "#6b7390",
+    "line": "#2b4acb",
+    "onAccent": "#fffdf5",
+    "async": "#e0483e",
+    "ok": "#2f9e6a",
+    "error": "#e0483e",
+    "categories": ["#2b4acb", "#e0483e", "#2f9e6a", "#f0a400", "#8a4fd1"]
+  },
+  "background": {"kind": "solid"},
+  "shape": {"radius": 6, "stroke": 3, "dash": null, "fill": "surface", "strokeFrom": "accent", "shadow": "hard", "doubleBorder": false},
+  "decor": ["ruled-lines"],
+  "motion": {"pace": 1, "easing": "inOutQuad", "entrance": "pop"}
+}

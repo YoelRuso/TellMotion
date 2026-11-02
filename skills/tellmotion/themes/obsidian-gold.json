@@ -1,0 +1,31 @@
+{
+  "id": "obsidian-gold",
+  "name": "Obsidian Gold",
+  "family": "dark",
+  "moods": ["luxury", "elegant", "premium"],
+  "description": "Near-black canvas with thin gold double-line frames, gold corner marks and an elegant high-contrast serif.",
+  "prompt": "Luxury dark style: near-black background, charcoal cards framed by thin gold double lines with square corners, gold corner marks on the slide, warm ivory text, an elegant high-contrast display serif, metallic palette of gold, champagne, bronze, ivory and brass. Premium, restrained and unhurried.",
+  "fonts": {
+    "family": "Playfair Display",
+    "fontsource": "playfair-display",
+    "google": "Playfair+Display:wght@400;700",
+    "fallback": "serif",
+    "weights": [400, 700]
+  },
+  "colors": {
+    "background": "#0b0b0d",
+    "surface": "#141418",
+    "text": "#f5efe0",
+    "muted": "#a89f88",
+    "line": "#d4af37",
+    "onAccent": "#0b0b0d",
+    "async": "#f0d98a",
+    "ok": "#9ad98a",
+    "error": "#e0705f",
+    "categories": ["#d4af37", "#f0d98a", "#b87333", "#e8e2d0", "#8c7a4a"]
+  },
+  "background": {"kind": "solid"},
+  "shape": {"radius": 2, "stroke": 2, "dash": null, "fill": "surface", "strokeFrom": "line", "shadow": "soft", "doubleBorder": true},
+  "decor": ["corner-marks"],
+  "motion": {"pace": 1.2, "easing": "inOutCubic", "entrance": "fade"}
+}

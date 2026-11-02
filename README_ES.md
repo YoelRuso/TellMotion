@@ -11,7 +11,7 @@ Elige un estilo de un catálogo de temas en crecimiento, describe lo que quieres
 
 [![Licencia: MIT](https://img.shields.io/badge/c%C3%B3digo-MIT-7c5cff?style=for-the-badge)](LICENSE)
 [![Temas: CC BY 4.0](https://img.shields.io/badge/temas-CC%20BY%204.0-22d3ee?style=for-the-badge)](LICENSE-CONTENT.md)
-[![Temas](https://img.shields.io/badge/temas-12%2B-fbbf24?style=for-the-badge)](skills/tellmotion/themes)
+[![Temas](https://img.shields.io/badge/temas-24-fbbf24?style=for-the-badge)](skills/tellmotion/themes)
 [![Packs](https://img.shields.io/badge/packs-8-ff6aa9?style=for-the-badge)](skills/tellmotion/references/packs.md)
 [![PRs bienvenidos](https://img.shields.io/badge/PRs-bienvenidos-34d399?style=for-the-badge)](CONTRIBUTING.md)
 
@@ -132,9 +132,9 @@ docs/assets/         imágenes del README
 ## 🛣️ Hoja de ruta (lista completa en [ROADMAP.md](ROADMAP.md))
 
 - [x] Formato de tema, generador de vistas previas (sin Figma) y `apply-theme`
-- [x] 12 temas, 8 packs de componentes, plantilla genérica de Motion Canvas
+- [x] 24 temas, 8 packs de componentes, plantilla genérica de Motion Canvas
 - [x] Web con demo en vivo y galería con búsqueda
-- [ ] 50+ temas
+- [ ] Seguir ampliando el catálogo (temas de la comunidad bienvenidos)
 - [ ] Vídeos de ejemplo en distintos ámbitos (software, ciencia, algoritmos)
 - [ ] Empaquetado como plugin instalable
 

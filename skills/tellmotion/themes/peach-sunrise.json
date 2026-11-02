@@ -1,0 +1,33 @@
+{
+  "id": "peach-sunrise",
+  "name": "Peach Sunrise",
+  "family": "light",
+  "moods": ["warm", "friendly", "optimistic"],
+  "description": "Soft peach-to-lavender sunrise gradient with white rounded cards and warm colored outlines.",
+  "prompt": "Warm light style: a soft diagonal gradient from peach through pink to lavender, white very rounded cards with thin warm-colored outlines (coral, plum, teal, amber, violet) and gentle shadows, a friendly geometric sans-serif. Optimistic, welcoming and bright.",
+  "fonts": {
+    "family": "Poppins",
+    "fontsource": "poppins",
+    "google": "Poppins:wght@400;600;700",
+    "fallback": "sans-serif",
+    "weights": [400, 600, 700]
+  },
+  "colors": {
+    "background": "#ffd9cc",
+    "surface": "#ffffff",
+    "text": "#3a2540",
+    "muted": "#7d6483",
+    "line": "#7d6483",
+    "onAccent": "#ffffff",
+    "async": "#e11d74",
+    "ok": "#18a56a",
+    "error": "#d6336c",
+    "categories": ["#ff6b4a", "#a63d8f", "#13a89e", "#f5a524", "#6d5ae6"]
+  },
+  "background": {
+    "kind": "gradient",
+    "gradient": {"angle": 135, "stops": [["#ffe3d1", 0], ["#ffd1e8", 0.55], ["#d9d4ff", 1]]}
+  },
+  "shape": {"radius": 24, "stroke": 2, "dash": null, "fill": "surface", "strokeFrom": "accent", "shadow": "soft", "doubleBorder": false},
+  "motion": {"pace": 1, "easing": "inOutSine", "entrance": "pop"}
+}

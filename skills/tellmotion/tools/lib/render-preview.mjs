@@ -8,6 +8,8 @@ function rgbaOf(color, opacity = 1) {
   return [color, opacity];
 }
 
+const isLight = hex => /^#[0-9a-f]{6}$/i.test(hex) && [1, 3, 5].reduce((a, i) => a + parseInt(hex.slice(i, i + 2), 16), 0) / 3 > 140;
+
 export function renderPreview(theme, opts = {}) {
   const {colors: c, shape: s, fonts: f, background: bg, motion} = theme;
   const decor = theme.decor || [];
@@ -63,6 +65,49 @@ export function renderPreview(theme, opts = {}) {
     for (let i = 0; i < 46; i++) out.push(`<circle cx="${(rnd() * 1900).toFixed(0)}" cy="${(rnd() * 1060).toFixed(0)}" r="${(2 + rnd() * 13).toFixed(1)}" fill="#fff" opacity="${(0.03 + rnd() * 0.04).toFixed(3)}"/>`);
   }
 
+  if (decor.includes('horizon')) {
+    defs.push(`<linearGradient id="sun" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="${c.categories[3]}"/><stop offset="1" stop-color="${c.categories[1]}"/></linearGradient><clipPath id="skyclip"><rect width="1920" height="800"/></clipPath>`);
+    out.push(`<g clip-path="url(#skyclip)"><circle cx="960" cy="640" r="300" fill="url(#sun)" opacity="0.5"/>`);
+    for (let k = 0; k < 7; k++) out.push(`<rect x="640" y="${560 + k * 40}" width="640" height="${4 + k * 3}" fill="${c.background}"/>`);
+    out.push('</g>', `<line x1="0" y1="800" x2="1920" y2="800" stroke="${c.categories[1]}" stroke-width="3" opacity="0.8"/>`);
+    for (let i = -12; i <= 12; i++) out.push(`<line x1="${960 + i * 28}" y1="800" x2="${960 + i * 140}" y2="1080" stroke="${c.categories[0]}" stroke-width="2" opacity="0.3"/>`);
+    for (let k = 1; k <= 7; k++) out.push(`<line x1="0" y1="${800 + (k / 7) ** 2 * 280}" x2="1920" y2="${800 + (k / 7) ** 2 * 280}" stroke="${c.categories[0]}" stroke-width="2" opacity="0.3"/>`);
+  }
+  if (decor.includes('topbar')) {
+    defs.push(`<linearGradient id="tb" x1="0" y1="0" x2="1" y2="0">${c.categories.map((col, i) => `<stop offset="${i / 4}" stop-color="${col}"/>`).join('')}</linearGradient>`);
+    out.push('<rect width="1920" height="12" fill="url(#tb)"/>');
+  }
+
+  if (decor.includes('traces')) {
+    let seed = 11;
+    const rnd = () => (seed = (seed * 16807) % 2147483647) / 2147483647;
+    for (let i = 0; i < 14; i++) {
+      let x = Math.round(rnd() * 38) * 48, y = Math.round(rnd() * 22) * 48;
+      let d = `M${x} ${y}`, horiz = rnd() > 0.5;
+      for (let k = 0, n = 2 + Math.floor(rnd() * 3); k < n; k++) {
+        const len = (1 + Math.floor(rnd() * 4)) * 48 * (rnd() > 0.5 ? 1 : -1);
+        if (horiz) x += len; else y += len;
+        d += ` L${x} ${y}`;
+        horiz = !horiz;
+      }
+      out.push(`<path d="${d}" fill="none" stroke="${c.categories[0]}" stroke-width="3" opacity="0.2"/><circle cx="${x}" cy="${y}" r="7" fill="none" stroke="${c.categories[0]}" stroke-width="3" opacity="0.3"/>`);
+    }
+  }
+  if (decor.includes('ruled-lines')) {
+    for (let y = 150; y < 1080; y += 48) out.push(`<rect x="0" y="${y}" width="1920" height="2" fill="${c.categories[0]}" opacity="0.18"/>`);
+    out.push(`<rect x="44" y="0" width="3" height="1080" fill="${c.categories[1]}" opacity="0.45"/>`);
+  }
+  if (decor.includes('waves')) {
+    const wave = (y0, amp, wl, ph, op) => {
+      let d = `M0 1080 L0 ${y0}`;
+      for (let x = 0; x <= 1920; x += 24) d += ` L${x} ${(y0 + Math.sin((x / wl) * Math.PI * 2 + ph) * amp).toFixed(1)}`;
+      return `<path d="${d} L1920 1080 Z" fill="${c.categories[0]}" opacity="${op}"/>`;
+    };
+    out.push(wave(900, 22, 520, 0, 0.1), wave(950, 28, 380, 1.5, 0.14), wave(1000, 20, 300, 3, 0.18));
+  }
+
+  if (decor.includes('masthead')) out.push(`<rect x="70" y="152" width="1780" height="6" fill="${c.line}"/><rect x="70" y="163" width="1780" height="2" fill="${c.line}"/>`);
+
   // ---------- text ----------
   const text = (x, y, str, size, weight, fill, opts = {}) =>
     `<text x="${x}" y="${y}" font-family="${fam}" font-size="${size}" font-weight="${weight}" fill="${fill}" text-anchor="${opts.anchor || 'middle'}"${opts.ls ? ` letter-spacing="${opts.ls}"` : ''}>${esc(str)}</text>`;
@@ -73,7 +118,7 @@ export function renderPreview(theme, opts = {}) {
 
   // ---------- container ----------
   const dash = s.dash ? `${s.dash[0]} ${s.dash[1]}` : '12 10';
-  out.push(`<rect x="620" y="170" width="1230" height="780" rx="${Math.max(s.radius, 6) + 10}" fill="${s.fill === 'accent' ? '#ffffff' : 'none'}" stroke="${c.line}" stroke-opacity="0.45" stroke-width="2" stroke-dasharray="${dash}"/>`);
+  out.push(`<rect x="620" y="170" width="1230" height="780" rx="${Math.max(s.radius, 6) + 10}" fill="${s.fill === 'accent' && isLight(c.background) ? '#ffffff' : 'none'}" stroke="${c.line}" stroke-opacity="0.45" stroke-width="2" stroke-dasharray="${dash}"/>`);
   out.push(text(652, 205, 'SERVICES', 15, 700, c.muted, {anchor: 'start', ls: 3}));
 
   // ---------- cards ----------
@@ -173,5 +218,10 @@ export function renderPreview(theme, opts = {}) {
   }
 
   const font = opts.fonts === false ? '' : `<style>@import url('https://fonts.googleapis.com/css2?family=${f.google}&amp;display=swap');</style>`;
-  return `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 ${W} ${H}" width="${W}" height="${H}" role="img" aria-label="${esc(theme.name)} theme preview">${font}<defs>${defs.join('')}</defs>${out.join('')}</svg>`;
+  let svg = `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 ${W} ${H}" width="${W}" height="${H}" role="img" aria-label="${esc(theme.name)} theme preview">${font}<defs>${defs.join('')}</defs>${out.join('')}</svg>`;
+  // Make every id unique per theme: several inline SVGs on one page would otherwise share gradients and filters.
+  for (const id of new Set([...svg.matchAll(/ id="([^"]+)"/g)].map(m => m[1]))) {
+    svg = svg.split(`id="${id}"`).join(`id="${id}-${theme.id}"`).split(`url(#${id})`).join(`url(#${id}-${theme.id})`);
+  }
+  return svg;
 }

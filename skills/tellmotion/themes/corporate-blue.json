@@ -1,0 +1,31 @@
+{
+  "id": "corporate-blue",
+  "name": "Corporate Blue",
+  "family": "corporate",
+  "moods": ["trustworthy", "clear", "business"],
+  "description": "Cool white-blue canvas, crisp colored outlines, a gradient top bar and a neutral business sans-serif.",
+  "prompt": "Clean corporate presentation style: very light blue-white background, a thin multicolor gradient bar across the top, white cards with crisp 2px outlines in blue, cyan, teal, violet and slate, soft shadows, a neutral highly legible business sans-serif. Trustworthy, clear and professional.",
+  "fonts": {
+    "family": "IBM Plex Sans",
+    "fontsource": "ibm-plex-sans",
+    "google": "IBM+Plex+Sans:wght@400;600;700",
+    "fallback": "sans-serif",
+    "weights": [400, 600, 700]
+  },
+  "colors": {
+    "background": "#f4f7fb",
+    "surface": "#ffffff",
+    "text": "#0f2742",
+    "muted": "#5a6f8a",
+    "line": "#5a6f8a",
+    "onAccent": "#ffffff",
+    "async": "#0ea5e9",
+    "ok": "#16a34a",
+    "error": "#dc2626",
+    "categories": ["#1d4ed8", "#0ea5e9", "#0f766e", "#7c3aed", "#475569"]
+  },
+  "background": {"kind": "solid"},
+  "shape": {"radius": 10, "stroke": 2, "dash": null, "fill": "surface", "strokeFrom": "accent", "shadow": "soft", "doubleBorder": false},
+  "decor": ["topbar"],
+  "motion": {"pace": 0.9, "easing": "inOutCubic", "entrance": "slide"}
+}

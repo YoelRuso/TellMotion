@@ -1,0 +1,31 @@
+{
+  "id": "forest-canopy",
+  "name": "Forest Canopy",
+  "family": "nature",
+  "moods": ["organic", "calm", "earthy"],
+  "description": "Warm moss-paper background, very rounded cream cards and earthy greens, terracotta and bark browns.",
+  "prompt": "Organic forest look: warm moss-green paper with faint pollen dots, very rounded cream cards with thin sage outlines and soft shadows, earthy palette of leaf green, terracotta, olive, bark brown and lake blue, an elegant soft serif typeface. Calm, natural and unhurried.",
+  "fonts": {
+    "family": "Fraunces",
+    "fontsource": "fraunces",
+    "google": "Fraunces:wght@400;700",
+    "fallback": "serif",
+    "weights": [400, 700]
+  },
+  "colors": {
+    "background": "#eef0e2",
+    "surface": "#fbfaf2",
+    "text": "#26372a",
+    "muted": "#5f7260",
+    "line": "#3f5a43",
+    "stroke": "#c9d2b6",
+    "onAccent": "#fbfaf2",
+    "async": "#c2703d",
+    "ok": "#3f8f4f",
+    "error": "#b5483a",
+    "categories": ["#3f7d58", "#c2703d", "#6b8f3a", "#8a6a3f", "#4a7c8c"]
+  },
+  "background": {"kind": "dots", "color": "#3f5a43", "opacity": 0.14, "step": 40},
+  "shape": {"radius": 28, "stroke": 2, "dash": null, "fill": "surface", "strokeFrom": "stroke", "shadow": "soft", "doubleBorder": false},
+  "motion": {"pace": 1.15, "easing": "inOutSine", "entrance": "fade"}
+}

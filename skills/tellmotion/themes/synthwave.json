@@ -1,0 +1,35 @@
+{
+  "id": "synthwave",
+  "name": "Synthwave",
+  "family": "retro",
+  "moods": ["80s", "neon", "nostalgic"],
+  "description": "Purple dusk with a striped retro sun, a neon perspective grid and glowing outlines.",
+  "prompt": "1980s synthwave: deep purple dusk gradient, a big striped sunset sun on the horizon above a glowing cyan perspective grid, dark violet cards with neon pink and cyan outlines and a soft glow, wide futuristic display type. Nostalgic, energetic and cinematic.",
+  "fonts": {
+    "family": "Orbitron",
+    "fontsource": "orbitron",
+    "google": "Orbitron:wght@400;700",
+    "fallback": "sans-serif",
+    "weights": [400, 700],
+    "scale": 0.9
+  },
+  "colors": {
+    "background": "#140a2e",
+    "surface": "#1f1147",
+    "text": "#fdf2ff",
+    "muted": "#b8a1e8",
+    "line": "#ff6ad5",
+    "onAccent": "#140a2e",
+    "async": "#fff35c",
+    "ok": "#5cffb0",
+    "error": "#ff5c7a",
+    "categories": ["#00e5ff", "#ff6ad5", "#b794ff", "#fff35c", "#5cffb0"]
+  },
+  "background": {
+    "kind": "gradient",
+    "gradient": {"angle": 90, "stops": [["#140a2e", 0], ["#2b1060", 0.6], ["#5a1a7a", 1]]}
+  },
+  "shape": {"radius": 6, "stroke": 2, "dash": null, "fill": "surface", "strokeFrom": "accent", "shadow": "glow", "doubleBorder": false},
+  "decor": ["horizon"],
+  "motion": {"pace": 0.95, "easing": "inOutSine", "entrance": "slide"}
+}

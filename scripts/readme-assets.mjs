@@ -37,7 +37,7 @@ const FFMPEG = findFfmpeg();
 if (!CHROME) throw new Error('Chrome not found: set the CHROME environment variable');
 
 const all = loadAllThemes().map(x => x.theme);
-// pick up to 12 themes spread across families
+// pick up to 16 themes spread across families
 function pickSpread(n) {
   const byFam = new Map();
   all.forEach(t => (byFam.get(t.family) || byFam.set(t.family, []).get(t.family)).push(t));
@@ -86,7 +86,7 @@ p{font-size:23px;line-height:1.5;color:#a1a6bd;margin:0}
 );
 
 // ---------------- themes grid ----------------
-const g = pickSpread(12);
+const g = pickSpread(16);
 const cols = 4, cw = 372, ch = Math.round((cw * 9) / 16), gap = 20, pad = 40;
 const rows = Math.ceil(g.length / cols);
 const gh = pad * 2 + rows * (ch + 56) + (rows - 1) * gap + 70;

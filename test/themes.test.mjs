@@ -44,3 +44,13 @@ for (const {file, theme} of themes) {
 test('an invalid theme is rejected', () => {
   assert.ok(validateTheme({id: 'Bad Id'}).length > 0);
 });
+
+test('inline previews of different themes never share ids', () => {
+  const ids = new Map();
+  for (const {theme} of themes) {
+    for (const m of renderPreview(theme).matchAll(/ id="([^"]+)"/g)) {
+      assert.ok(!ids.has(m[1]) || ids.get(m[1]) === theme.id, `id "${m[1]}" is used by ${ids.get(m[1])} and ${theme.id}`);
+      ids.set(m[1], theme.id);
+    }
+  }
+});

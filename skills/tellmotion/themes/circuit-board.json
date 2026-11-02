@@ -1,0 +1,32 @@
+{
+  "id": "circuit-board",
+  "name": "Circuit Board",
+  "family": "technical",
+  "moods": ["electronics", "hardware", "geeky"],
+  "description": "Printed-circuit green with copper traces and solder pads, square components and a technical mono font.",
+  "prompt": "Printed circuit board: deep PCB green background with faint copper traces ending in solder pads, dark green components with square corners and gold-copper outlines, a technical monospace typeface, accents of copper, gold, silver, mint and amber. Geeky, tactile and precise.",
+  "fonts": {
+    "family": "Share Tech Mono",
+    "fontsource": "share-tech-mono",
+    "google": "Share+Tech+Mono",
+    "fallback": "monospace",
+    "weights": [400],
+    "scale": 1.05
+  },
+  "colors": {
+    "background": "#0b3d2e",
+    "surface": "#0e4a38",
+    "text": "#e9f5ee",
+    "muted": "#9cc9b3",
+    "line": "#d9b26a",
+    "onAccent": "#0b3d2e",
+    "async": "#ffd166",
+    "ok": "#7dffb0",
+    "error": "#ff8a7a",
+    "categories": ["#e2a35a", "#ffd166", "#c8d3cc", "#7de3c4", "#f08a5d"]
+  },
+  "background": {"kind": "grid", "color": "#7de3c4", "opacity": 0.04, "step": 48},
+  "shape": {"radius": 3, "stroke": 2, "dash": null, "fill": "surface", "strokeFrom": "accent", "shadow": "none", "doubleBorder": false},
+  "decor": ["traces"],
+  "motion": {"pace": 1, "easing": "linear", "entrance": "slide"}
+}

@@ -1,0 +1,31 @@
+{
+  "id": "sticker-pop",
+  "name": "Sticker Pop",
+  "family": "playful",
+  "moods": ["fun", "youthful", "bubbly"],
+  "description": "Saturated sticker-like blocks with thick white borders on a deep navy dotted background.",
+  "prompt": "Die-cut stickers on a dark notebook: deep navy background with a faint dot pattern, flat saturated candy-colored blocks (pink, sunshine yellow, mint, sky blue, lavender) with a thick white sticker border and a soft shadow, a rounded bubbly typeface. Fun, youthful and energetic.",
+  "fonts": {
+    "family": "Fredoka",
+    "fontsource": "fredoka",
+    "google": "Fredoka:wght@400;600;700",
+    "fallback": "sans-serif",
+    "weights": [400, 600, 700]
+  },
+  "colors": {
+    "background": "#25263f",
+    "surface": "#ffffff",
+    "text": "#ffffff",
+    "muted": "#c4c6ea",
+    "line": "#ffffff",
+    "stroke": "#ffffff",
+    "onAccent": "#1a1a2e",
+    "async": "#ffd23f",
+    "ok": "#3ddc97",
+    "error": "#ff5c8a",
+    "categories": ["#ff5c8a", "#ffd23f", "#3ddc97", "#4cc9f0", "#b388ff"]
+  },
+  "background": {"kind": "dots", "color": "#ffffff", "opacity": 0.1, "step": 40},
+  "shape": {"radius": 22, "stroke": 5, "dash": null, "fill": "accent", "strokeFrom": "stroke", "shadow": "soft", "doubleBorder": false},
+  "motion": {"pace": 0.9, "easing": "inOutQuad", "entrance": "pop"}
+}

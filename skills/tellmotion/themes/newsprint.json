@@ -1,0 +1,31 @@
+{
+  "id": "newsprint",
+  "name": "Newsprint",
+  "family": "editorial",
+  "moods": ["newspaper", "classic", "serious"],
+  "description": "Aged newspaper stock with halftone dots, a double masthead rule, double-line boxes and a classic serif.",
+  "prompt": "Classic newspaper: aged off-white newsprint with a faint halftone dot texture, a thick-and-thin double rule under the headline, boxes framed in black double lines with square corners, a single red ink accent, a classic book serif. Serious, credible and timeless.",
+  "fonts": {
+    "family": "Libre Baskerville",
+    "fontsource": "libre-baskerville",
+    "google": "Libre+Baskerville:wght@400;700",
+    "fallback": "serif",
+    "weights": [400, 700]
+  },
+  "colors": {
+    "background": "#efe9da",
+    "surface": "#f7f2e4",
+    "text": "#161616",
+    "muted": "#5a5448",
+    "line": "#161616",
+    "onAccent": "#f7f2e4",
+    "async": "#b3261e",
+    "ok": "#2f6b3a",
+    "error": "#b3261e",
+    "categories": ["#161616", "#b3261e", "#161616", "#b3261e", "#6b6454"]
+  },
+  "background": {"kind": "dots", "color": "#161616", "opacity": 0.08, "step": 16},
+  "shape": {"radius": 0, "stroke": 2, "dash": null, "fill": "surface", "strokeFrom": "line", "shadow": "none", "doubleBorder": true},
+  "decor": ["masthead"],
+  "motion": {"pace": 1, "easing": "inOutCubic", "entrance": "fade"}
+}

@@ -24,7 +24,7 @@ A theme is one JSON file in `themes/<id>.json` (`id` = file name, kebab-case). V
              "shadow": "none",          // none|soft|hard|glow|clay
              "doubleBorder": false },
   "motion": { "pace": 1, "easing": "inOutCubic", "entrance": "pop" },    // pace 0.5-2 (>1 slower); easing inOutCubic|inOutSine|inOutQuad|linear; entrance pop|fade|slide
-  "decor": ["title-block"]          // optional: scanlines|hazard-stripes|corner-marks|title-block|step-numbers|dimension-line|stamp|dust|blobs
+  "decor": ["title-block"]          // optional: scanlines|hazard-stripes|corner-marks|title-block|step-numbers|dimension-line|stamp|dust|blobs|horizon|topbar|ruled-lines|waves|masthead|traces
 }
 ```
 

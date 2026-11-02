@@ -1,0 +1,32 @@
+{
+  "id": "hud-cyan",
+  "name": "HUD Cyan",
+  "family": "futuristic",
+  "moods": ["sci-fi", "interface", "precise"],
+  "description": "Dark teal sci-fi interface: transparent cyan-outlined panels, corner brackets and a faint grid.",
+  "prompt": "Sci-fi heads-up display: very dark teal background with a faint cyan grid, transparent panels with thin glowing cyan outlines and square corners, bracket marks in the screen corners, a narrow technical sans-serif, accents of cyan, amber, mint, pink and periwinkle. Precise, futuristic and information-dense.",
+  "fonts": {
+    "family": "Rajdhani",
+    "fontsource": "rajdhani",
+    "google": "Rajdhani:wght@400;700",
+    "fallback": "sans-serif",
+    "weights": [400, 700],
+    "scale": 1.1
+  },
+  "colors": {
+    "background": "#041419",
+    "surface": "#041419",
+    "text": "#d8fbff",
+    "muted": "#6fb7c2",
+    "line": "#22d3ee",
+    "onAccent": "#041419",
+    "async": "#ffd166",
+    "ok": "#5cffb0",
+    "error": "#ff6b81",
+    "categories": ["#22d3ee", "#ffd166", "#7dffd9", "#ff6b9a", "#9aa8ff"]
+  },
+  "background": {"kind": "grid", "color": "#22d3ee", "opacity": 0.05, "step": 48},
+  "shape": {"radius": 0, "stroke": 1.5, "dash": null, "fill": "none", "strokeFrom": "accent", "shadow": "glow", "doubleBorder": false},
+  "decor": ["corner-marks"],
+  "motion": {"pace": 0.9, "easing": "inOutQuad", "entrance": "slide"}
+}

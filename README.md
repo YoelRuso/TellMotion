@@ -11,7 +11,7 @@ Pick a look from a growing theme catalog, describe what you want to explain, get
 
 [![License: MIT](https://img.shields.io/badge/code-MIT-7c5cff?style=for-the-badge)](LICENSE)
 [![Themes: CC BY 4.0](https://img.shields.io/badge/themes-CC%20BY%204.0-22d3ee?style=for-the-badge)](LICENSE-CONTENT.md)
-[![Themes](https://img.shields.io/badge/themes-12%2B-fbbf24?style=for-the-badge)](skills/tellmotion/themes)
+[![Themes](https://img.shields.io/badge/themes-24-fbbf24?style=for-the-badge)](skills/tellmotion/themes)
 [![Packs](https://img.shields.io/badge/packs-8-ff6aa9?style=for-the-badge)](skills/tellmotion/references/packs.md)
 [![PRs welcome](https://img.shields.io/badge/PRs-welcome-34d399?style=for-the-badge)](CONTRIBUTING.md)
 
@@ -47,7 +47,7 @@ Pick a look from a growing theme catalog, describe what you want to explain, get
 Every theme is **one JSON file** — colors, fonts, shapes, shadows and motion (pace, easing, entrances). The same file drives the preview *and* the animation, so changing style is one command.
 
 <div align="center">
-<img src="docs/assets/themes-grid.png" alt="A grid of TellMotion themes: Aurora Glass, Blueprint, Chalkboard, Clean Editorial, Neo Brutal, Neon Night, Retro Terminal, Cyanotype, Ink & Paper, Swiss Minimal, Soft Clay, Industrial Amber" width="100%">
+<img src="docs/assets/themes-grid.png" alt="A grid of TellMotion themes, from Blueprint and Synthwave to Newsprint and Ocean Deep" width="100%">
 </div>
 
 Browse them all, with palettes and copy-paste prompts, on the **[website gallery](https://yoelruso.github.io/TellMotion/#themes)**.
@@ -132,9 +132,9 @@ docs/assets/         README images
 ## 🛣️ Roadmap (full list in [ROADMAP.md](ROADMAP.md))
 
 - [x] Theme format, preview generator (no Figma needed) and `apply-theme`
-- [x] 12 themes, 8 component packs, generic Motion Canvas template
+- [x] 24 themes, 8 component packs, generic Motion Canvas template
 - [x] Website with live theme demo and searchable gallery
-- [ ] 50+ themes
+- [ ] Keep growing the catalog (community themes welcome)
 - [ ] Example videos in different domains (software, science, algorithms)
 - [ ] Packaging as an installable plugin
 

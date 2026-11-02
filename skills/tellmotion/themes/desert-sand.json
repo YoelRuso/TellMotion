@@ -1,0 +1,34 @@
+{
+  "id": "desert-sand",
+  "name": "Desert Sand",
+  "family": "nature",
+  "moods": ["warm", "earthy", "handcrafted"],
+  "description": "Sandy gradient with stitched dashed outlines in terracotta, ochre, sage and clay.",
+  "prompt": "Desert craft look: a warm sand-to-apricot gradient, cream cards with stitched dashed outlines like leather work in terracotta, ochre, sage green, clay brown and oasis blue, no shadows, a light geometric sans-serif with generous spacing. Warm, earthy and handmade.",
+  "fonts": {
+    "family": "Josefin Sans",
+    "fontsource": "josefin-sans",
+    "google": "Josefin+Sans:wght@400;700",
+    "fallback": "sans-serif",
+    "weights": [400, 700],
+    "scale": 1.1
+  },
+  "colors": {
+    "background": "#f3d9b5",
+    "surface": "#fff7e8",
+    "text": "#4a2f22",
+    "muted": "#8a6a55",
+    "line": "#8a5a44",
+    "onAccent": "#fff7e8",
+    "async": "#c8553d",
+    "ok": "#4f8a4f",
+    "error": "#b23a2e",
+    "categories": ["#c8553d", "#d98a1e", "#5b8c5a", "#8a5a44", "#3d7ea6"]
+  },
+  "background": {
+    "kind": "gradient",
+    "gradient": {"angle": 160, "stops": [["#f6e3c5", 0], ["#f0c79a", 1]]}
+  },
+  "shape": {"radius": 14, "stroke": 2.5, "dash": [10, 6], "fill": "surface", "strokeFrom": "accent", "shadow": "none", "doubleBorder": false},
+  "motion": {"pace": 1.15, "easing": "inOutSine", "entrance": "fade"}
+}
