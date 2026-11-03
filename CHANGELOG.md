@@ -4,6 +4,8 @@ All notable changes are documented here. The format follows [Keep a Changelog](h
 
 ## [Unreleased]
 
+## [0.3.0] - 2026-11-03
+
 ### Added
 - `connect(parent, a, b)`: an arrow between two pieces, with the elbows it needs.
 - `Packet` shapes (`dot`, `diamond`, `envelope`) and `Piece.ping()`; `send(..., {to: piece})` makes the piece react on arrival.
@@ -38,6 +40,7 @@ All notable changes are documented here. The format follows [Keep a Changelog](h
 
 ### Changed
 - `Packet` follows its route without stopping at corners, and by default takes a time that depends on the distance.
+- `LineChart` can draw several lines, so `line` became `lines` and `dots` holds one list per line. Projects keep their own copy of the components, so existing ones are not affected.
 - `storyboard.mjs validate` warns when a scene has more text than can be read in its length.
 - From a first test with a real agent: `SKILL.md` asks for only the packs the custom scenes use, to stop the preview server after approval, and to update `CLAUDE.md` only if the workspace has one.
 

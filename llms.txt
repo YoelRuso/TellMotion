@@ -2,7 +2,7 @@
 
 > An open-source skill that turns an idea into a polished 2D explainer animation (1920x1080). The user picks a ready-made visual theme (or asks for a custom design), and the agent builds a Motion Canvas project with reusable component packs: cloud, algorithms, charts, flowchart, timeline, code, typography and science.
 
-Version: 0.2.0
+Version: 0.3.0
 Repository: https://github.com/YoelRuso/TellMotion
 Website: https://yoelruso.github.io/TellMotion/
 License: code MIT, themes and content CC BY 4.0

@@ -80,7 +80,7 @@ p{font-size:23px;line-height:1.5;color:#a1a6bd;margin:0}
 <div class="txt"><div class="logo"><i></i>TellMotion</div>
 <h1>Turn any idea into a <span class="grad">motion story</span></h1>
 <p>An open-source skill for AI coding agents. Pick a look, describe your idea, get a ready-to-render animation.</p>
-<div class="pills"><span>${all.length}+ themes</span><span>8 packs</span><span>Motion Canvas</span></div></div>
+<div class="pills"><span>${all.length}+ themes</span><span>${readdirSync(join(root, 'skills', 'tellmotion', 'assets', 'packs')).length} packs</span><span>Motion Canvas</span></div></div>
 <div class="card c1">${svg(bt[0])}</div><div class="card c2">${svg(bt[1])}</div><div class="card c3">${svg(bt[2])}</div>`,
   join(out, 'banner.png'), 1600, 700,
 );

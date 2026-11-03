@@ -33,3 +33,4 @@ Plans can change. Ideas and votes are welcome in [issues](https://github.com/Yoe
 - [x] Render command: mp4, WebM, GIF, thumbnails, vertical and square, size estimates
 - [x] Scene recipes: intro, chapter, compare, before/after, steps, outro
 - [x] Storyboard to approve before animating
+- [x] Packs reviewed: one API for every piece, labels that fit, moving packets, `connect()`, and the math, UI and maps packs
