@@ -19,7 +19,9 @@ import {LineChart} from '../components/LineChart';
 import {send} from '../components/Packet';
 import {Queue} from '../components/Queue';
 import {prepareScene} from '../components/Scene';
+import {Cycle} from '../components/Science';
 import {Service} from '../components/Service';
+import {BulletList, Compare} from '../components/Typography';
 import {Terminal} from '../components/Terminal';
 import {TreeNode} from '../components/TreeNode';
 import {C, t} from '../config';
@@ -150,6 +152,15 @@ export default makeScene2D(function* (view) {
   yield* waitFor(t(0.5));
   yield* tree.clearMarks();
   yield* all(tree.hide(), bus.hide(), web.hide(), person.hide(), gate.hide(), producer.hide(), first.hide(), second.hide(), ...busArrows.map(a => a.hide()));
+
+  // appear() of the elements built from several parts
+  yield* sub.say('The elements built from several parts show them all with appear().');
+  const cycle = new Cycle(root, {x: -500, y: -130, rx: 300, ry: 170, boxW: 200, boxH: 70, steps: [{label: 'Plan'}, {label: 'Build'}, {label: 'Check'}]});
+  const list = new BulletList(root, {x: 450, y: -180, items: ['First point', 'Second point']});
+  const versus = new Compare(root, {x: 0, y: 240, w: 1200, h: 300, left: {title: 'Before', items: ['Slow']}, right: {title: 'After', items: ['Fast']}});
+  yield* all(cycle.appear(), list.appear(), versus.appear());
+  yield* waitFor(t(0.5));
+  yield* all(cycle.hide(), list.hide(), versus.hide());
 
   // More rows than the window holds, and lines wider than it
   yield* sub.say('The terminal wraps long lines and scrolls when it is full.');

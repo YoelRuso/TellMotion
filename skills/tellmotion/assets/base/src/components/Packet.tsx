@@ -1,7 +1,7 @@
 import {Circle, Line, Node, Rect, Txt} from '@motion-canvas/2d';
 import {all, createRef, easeOutBack, tween} from '@motion-canvas/core';
 import {C, FONT, MOVE, P, fs, t} from '../config';
-import {Piece} from './Piece';
+import {Group} from './Piece';
 
 export type PacketShape = 'envelope' | 'dot' | 'diamond';
 
@@ -112,8 +112,8 @@ export class Packet {
   }
 }
 
-/** Create a packet, send it along `pts` and remove it. Pass `to` and that piece reacts when the packet arrives. */
-export function* send(parent: Node, pts: P[], o: PacketOpts & {d?: number; to?: Piece} = {}) {
+/** Create a packet, send it along `pts` and remove it. Pass `to` and that element reacts when the packet arrives. */
+export function* send(parent: Node, pts: P[], o: PacketOpts & {d?: number; to?: Group} = {}) {
   const p = new Packet(parent, o);
   yield* p.appear(pts[0]);
   yield* p.travel(pts.slice(1), o.d);

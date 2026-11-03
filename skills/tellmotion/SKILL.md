@@ -17,7 +17,7 @@ If the user already gave content/structure, do not ask again. Use `AskUserQuesti
    - **Template**: use a theme from the catalog. Run `node tools/list-themes.mjs` (compact list) and ask for the id; to browse visually run `node tools/build-catalog.mjs <tmpdir>` and open `gallery.html` (serve with `node tools/serve.mjs <tmpdir>`).
    - **Custom design**: write 3 contrasting `theme.json` proposals (see `references/theme-format.md`), render previews and let the user choose (step 2).
    - **Bring your own**: user supplies brand colors/fonts or a Figma file → derive a `theme.json` from it.
-4. **Packs**: infer from the topic, do not ask unless unclear, and add only what the custom scenes will use: `cloud` (architectures), `algorithms` (sorting, trees), `charts` (data), `flowchart` (processes), `timeline` (history/roadmaps), `code` (programming, CLI), `typography` (intros, quotes, A vs B), `science` (cycles, layers, waves). Combine freely; `references/packs.md` lists every component.
+4. **Packs**: infer from the topic, do not ask unless unclear, and add only what the custom scenes will use: `cloud` (architectures), `algorithms` (sorting, trees), `charts` (data), `flowchart` (processes), `timeline` (history/roadmaps), `code` (programming, CLI), `typography` (intros, quotes, A vs B), `science` (cycles, layers, waves), `math` (equations, functions), `ui` (product demos, user flows), `maps` (places, journeys). Combine freely; `references/packs.md` lists every component.
 
 ## 2. Custom design (skip when a template was chosen)
 1. Write 3 proposals as `theme.json` files in a temp folder (copy the closest catalog theme and change tokens; different families, e.g. technical / playful / editorial).

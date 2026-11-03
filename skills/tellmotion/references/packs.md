@@ -22,10 +22,16 @@ Labels wrap inside their piece, and shrink if they still do not fit; a shrunk la
 | **code** | `CodeView` (`focus(from,to)`, `unfocus`, `change`), `Terminal` (`run(cmd, output)`) | programming tutorials, CLI demos |
 | **typography** | `KineticTitle` (`reveal`, `emphasize`), `BulletList` (`showAll`, `focus`), `Quote`, `Compare` (`showLeft/Right/Vs`, `emphasize`) | intros, key points, quotes, A vs B |
 | **science** | `Cycle` (`show`, `go`, `orbit`), `Layers` (`reveal`, `focus`), `Wave` (`travel`), `Particles` (`drift`) | natural cycles, strata, waves, molecules |
+| **math** | `Formula` (LaTeX; `to`), `Graph` (`plot`, `trace`, `point`), `NumberLine` (`showMarker`, `moveTo`, `shade`) | equations, functions, intervals |
+| **ui** | `Browser` and `Phone` (`content()`), `Button` (`press`), `TextField` (`type`), `Cursor` (`moveTo`, `click`, `clickOn`), `Toast` | product demos, user flows, onboarding |
+| **maps** | `WorldMap` (`at`, `pin`, `route`, `send`, `showPins`, `focus`), `Pin` | global reach, journeys, where things happen |
 
 ## Notes
 - Join pieces with `connect(parent, a, b)` from `Arrow.tsx`; it picks the facing sides and adds elbows. Tree and graph edges use `link()`, created before the nodes so they sit behind.
 - `Terminal` wraps long lines and scrolls when it is full.
+- `Formula.to()` moves only the parts named the same in both equations: `'{{2x}} + {{3}} = {{7}}'` to `'{{2x}} = {{7}} - {{3}}'`. The rest fades.
+- Pieces inside a `Browser` or a `Phone` go in `frame.content()`, with positions relative to its center. `cursor.clickOn(piece)` finds them wherever they are.
+- `WorldMap` is stylized and has no borders: use it to show where things happen, not to measure or to show countries. Pins and routes belong to the map, so `map.hide()` hides them too.
 - `EventBus.publish(producer, [consumers], {name})` plays a whole event; `bus.from(piece)` and `bus.to(piece)` draw the arrows.
 - `ticks` draws the value labels to the left of the plot: leave about 120 px there. The top of the scale rounds up unless you set `max`.
 - `Timeline` moves labels that would collide to the other side or up to three heights; keep it near the vertical center, and leave a few milestones per stretch: past that they overlap.

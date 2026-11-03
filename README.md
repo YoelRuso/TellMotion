@@ -12,7 +12,7 @@ Pick a look from a growing theme catalog, describe what you want to explain, get
 [![License: MIT](https://img.shields.io/badge/code-MIT-7c5cff?style=for-the-badge)](LICENSE)
 [![Themes: CC BY 4.0](https://img.shields.io/badge/themes-CC%20BY%204.0-22d3ee?style=for-the-badge)](LICENSE-CONTENT.md)
 [![Themes](https://img.shields.io/badge/themes-24-fbbf24?style=for-the-badge)](skills/tellmotion/themes)
-[![Packs](https://img.shields.io/badge/packs-8-ff6aa9?style=for-the-badge)](skills/tellmotion/references/packs.md)
+[![Packs](https://img.shields.io/badge/packs-11-ff6aa9?style=for-the-badge)](skills/tellmotion/references/packs.md)
 [![PRs welcome](https://img.shields.io/badge/PRs-welcome-34d399?style=for-the-badge)](CONTRIBUTING.md)
 
 [**Website**](https://yoelruso.github.io/TellMotion/) · [**Theme gallery**](https://yoelruso.github.io/TellMotion/#themes) · [**Install**](#-install-in-2-minutes) · [**Contribute a theme**](CONTRIBUTING.md) · [Español](README_ES.md)
@@ -31,7 +31,7 @@ Pick a look from a growing theme catalog, describe what you want to explain, get
 
 | 🎨 **Look first, code later** | 🧩 **Built for any topic** | ⚡ **One conversation** |
 |---|---|---|
-| Choose a ready-made theme, ask for three custom proposals, or bring your own brand. Previews are generated without Figma. | Eight component packs — cloud, algorithms, charts, flowcharts, timelines, code, typography and science. | Brief, design, animation and review in one flow. You keep control of the story; the skill handles the boilerplate. |
+| Choose a ready-made theme, ask for three custom proposals, or bring your own brand. Previews are generated without Figma. | Eleven component packs — cloud, algorithms, charts, flowcharts, timelines, code, typography, science, math, UI and maps. | Brief, design, animation and review in one flow. You keep control of the story; the skill handles the boilerplate. |
 
 ## 🎬 How it works
 
@@ -59,14 +59,17 @@ Ready-made animated pieces that adapt to any theme.
 
 | Pack | Pieces | Great for |
 |---|---|---|
-| **algorithms** | Cell · Bar · Pointer · TreeNode · swap | sorting, searching, data structures |
+| **algorithms** | Cell · Bar · Pointer · Tree · TreeNode · swap | sorting, searching, data structures |
 | **charts** | BarChart · LineChart · PieChart · Counter | data stories and metrics |
 | **flowchart** | Terminator · Process · Decision · DataIO | processes and decisions |
 | **timeline** | Timeline with milestones and phases | history, roadmaps |
 | **code** | CodeView (themed syntax) · Terminal | programming tutorials, CLI demos |
 | **typography** | KineticTitle · BulletList · Quote · Compare | intros, key points, A vs B |
 | **science** | Cycle · Layers · Wave · Particles | natural processes, systems |
-| **cloud** | Service · Queue · Lambda · Database | architectures, event flows |
+| **cloud** | Client · Gateway · Service · Cache · EventBus · Queue · Lambda · Database | architectures, event flows |
+| **math** | Formula (LaTeX) · Graph · NumberLine | equations, functions, intervals |
+| **ui** | Browser · Phone · Button · TextField · Cursor · Toast | product demos, user flows |
+| **maps** | WorldMap · Pin | places, journeys, global reach |
 
 Full API: [`references/packs.md`](skills/tellmotion/references/packs.md).
 
@@ -175,7 +178,7 @@ docs/assets/         README images
 ## 🛣️ Roadmap (full list in [ROADMAP.md](ROADMAP.md))
 
 - [x] Theme format, preview generator (no Figma needed) and `apply-theme`
-- [x] 24 themes, 8 component packs, generic Motion Canvas template
+- [x] 24 themes, 11 component packs, generic Motion Canvas template
 - [x] Website with live theme demo and searchable gallery
 - [x] Render command: mp4, WebM, GIF, thumbnails, vertical and square, size estimates
 - [x] Scene recipes: intro, chapter, compare, before/after, steps, outro

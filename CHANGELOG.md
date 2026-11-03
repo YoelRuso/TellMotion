@@ -11,6 +11,7 @@ All notable changes are documented here. The format follows [Keep a Changelog](h
 - Every piece now shares `appear()`, `glow()`, `ping()`, `dim()` and `hide()` through a `Group` base class; a test checks it.
 - `mark()` and `unmark()` on every boxed piece, such as `TreeNode` and `Box`.
 - Labels wrap inside their piece and shrink if they still do not fit.
+- Three new packs: `math` (`Formula`, `Graph`, `NumberLine`), `ui` (`Browser`, `Phone`, `Button`, `TextField`, `Cursor`, `Toast`) and `maps` (`WorldMap`, `Pin`).
 - `cloud` pack: `Client`, `Gateway`, `Cache` and `EventBus`.
 - `Tree`: lays a tree out from its data.
 - `BarChart` and `LineChart`: `ticks` for a value axis with grid lines. `LineChart`: several lines (`series`), `highlight()` and `highlightLine()`.

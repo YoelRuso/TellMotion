@@ -15,7 +15,6 @@ Plans can change. Ideas and votes are welcome in [issues](https://github.com/Yoe
 - [ ] Test the optional Figma helper end to end
 - [ ] Theme submission flow: issue template → PR with preview comment
 - [ ] Spanish site translation
-- [ ] More packs (maps, math/formulas, UI mockups)
 - [ ] Native vertical and square layouts in the recipes (today the video is fitted with bars)
 - [ ] Theme editor on the website
 - [ ] `tellmotion check`: automatic warnings about cut-off text, low contrast and dense scenes
@@ -28,7 +27,7 @@ Plans can change. Ideas and votes are welcome in [issues](https://github.com/Yoe
 
 ## Done
 - [x] Theme format, preview generator and `apply-theme`
-- [x] 24 themes, 8 component packs, generic template
+- [x] 24 themes, 11 component packs, generic template
 - [x] Website with live demo and gallery
 - [x] `llms.txt`, `doctor`, tests and CI
 - [x] Render command: mp4, WebM, GIF, thumbnails, vertical and square, size estimates

@@ -2,7 +2,7 @@
 # Usage: new-project.sh <name> [--theme <id|path.json>] [--pack a,b|all] [--demos] [--no-install]
 # Creates a Motion Canvas project in the CURRENT directory from the TellMotion template,
 # applies a theme, adds component packs and registers the project in .claude/launch.json.
-#   --pack   comma-separated packs from assets/packs (cloud, algorithms, charts, flowchart, timeline, code, typography, science) or "all"
+#   --pack   comma-separated packs from assets/packs (cloud, algorithms, charts, flowchart, timeline, code, typography, science, math, ui, maps) or "all"
 #   --demos  also copy each pack's demo scene(s) into src/scenes and register them (handy to see what a pack offers)
 set -euo pipefail
 

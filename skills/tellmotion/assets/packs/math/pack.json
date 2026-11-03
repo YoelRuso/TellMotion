@@ -1,0 +1,1 @@
+{"name":"math","description":"Equations in LaTeX that turn into each other, function graphs with a point that travels along the curve, and number lines.","components":["Formula","Graph","NumberLine"],"dependencies":{}}

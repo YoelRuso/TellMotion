@@ -12,7 +12,7 @@ Elige un estilo de un catálogo de temas en crecimiento, describe lo que quieres
 [![Licencia: MIT](https://img.shields.io/badge/c%C3%B3digo-MIT-7c5cff?style=for-the-badge)](LICENSE)
 [![Temas: CC BY 4.0](https://img.shields.io/badge/temas-CC%20BY%204.0-22d3ee?style=for-the-badge)](LICENSE-CONTENT.md)
 [![Temas](https://img.shields.io/badge/temas-24-fbbf24?style=for-the-badge)](skills/tellmotion/themes)
-[![Packs](https://img.shields.io/badge/packs-8-ff6aa9?style=for-the-badge)](skills/tellmotion/references/packs.md)
+[![Packs](https://img.shields.io/badge/packs-11-ff6aa9?style=for-the-badge)](skills/tellmotion/references/packs.md)
 [![PRs bienvenidos](https://img.shields.io/badge/PRs-bienvenidos-34d399?style=for-the-badge)](CONTRIBUTING.md)
 
 [**Web**](https://yoelruso.github.io/TellMotion/) · [**Galería de temas**](https://yoelruso.github.io/TellMotion/#themes) · [**Instalar**](#-instalación-en-2-minutos) · [**Aportar un tema**](CONTRIBUTING.md) · [English](README.md)
@@ -31,7 +31,7 @@ Elige un estilo de un catálogo de temas en crecimiento, describe lo que quieres
 
 | 🎨 **Primero el estilo, luego el código** | 🧩 **Sirve para cualquier tema** | ⚡ **Una sola conversación** |
 |---|---|---|
-| Elige un tema listo, pide tres propuestas a medida o trae tu marca. Las vistas previas se generan sin Figma. | Ocho packs de componentes: cloud, algoritmos, gráficas, diagramas de flujo, líneas de tiempo, código, tipografía y ciencia. | Brief, diseño, animación y revisión en un solo flujo. Tú controlas la historia y el estilo; la skill se ocupa del resto. |
+| Elige un tema listo, pide tres propuestas a medida o trae tu marca. Las vistas previas se generan sin Figma. | Once packs de componentes: cloud, algoritmos, gráficas, diagramas de flujo, líneas de tiempo, código, tipografía, ciencia, matemáticas, interfaces y mapas. | Brief, diseño, animación y revisión en un solo flujo. Tú controlas la historia y el estilo; la skill se ocupa del resto. |
 
 ## 🎬 Cómo funciona
 
@@ -59,14 +59,17 @@ Piezas animadas listas para usar que se adaptan a cualquier tema.
 
 | Pack | Piezas | Ideal para |
 |---|---|---|
-| **algorithms** | Cell · Bar · Pointer · TreeNode · swap | ordenación, búsqueda, estructuras de datos |
+| **algorithms** | Cell · Bar · Pointer · Tree · TreeNode · swap | ordenación, búsqueda, estructuras de datos |
 | **charts** | BarChart · LineChart · PieChart · Counter | historias con datos y métricas |
 | **flowchart** | Terminator · Process · Decision · DataIO | procesos y decisiones |
 | **timeline** | Timeline con hitos y fases | historia, hojas de ruta |
 | **code** | CodeView (sintaxis con el tema) · Terminal | tutoriales de programación, demos de CLI |
 | **typography** | KineticTitle · BulletList · Quote · Compare | intros, ideas clave, A contra B |
 | **science** | Cycle · Layers · Wave · Particles | procesos naturales, sistemas |
-| **cloud** | Service · Queue · Lambda · Database | arquitecturas, flujos de eventos |
+| **cloud** | Client · Gateway · Service · Cache · EventBus · Queue · Lambda · Database | arquitecturas, flujos de eventos |
+| **math** | Formula (LaTeX) · Graph · NumberLine | ecuaciones, funciones, intervalos |
+| **ui** | Browser · Phone · Button · TextField · Cursor · Toast | demos de producto, flujos de usuario |
+| **maps** | WorldMap · Pin | lugares, recorridos, alcance global |
 
 API completa: [`references/packs.md`](skills/tellmotion/references/packs.md).
 
@@ -175,7 +178,7 @@ docs/assets/         imágenes del README
 ## 🛣️ Hoja de ruta (lista completa en [ROADMAP.md](ROADMAP.md))
 
 - [x] Formato de tema, generador de vistas previas (sin Figma) y `apply-theme`
-- [x] 24 temas, 8 packs de componentes, plantilla genérica de Motion Canvas
+- [x] 24 temas, 11 packs de componentes, plantilla genérica de Motion Canvas
 - [x] Web con demo en vivo y galería con búsqueda
 - [x] Comando de render: mp4, WebM, GIF, miniaturas, vertical y cuadrado, estimación de peso
 - [x] Recetas de escena: intro, capítulo, comparativa, antes/después, pasos, cierre
