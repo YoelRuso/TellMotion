@@ -28,14 +28,14 @@ export default makeScene2D(function* (view) {
   yield* waitFor(t(1));
 
   yield* sub.say(S[1]);
-  yield* all(bars.root().opacity(0, t(0.4)), counter.root().opacity(0, t(0.4)));
+  yield* all(bars.hide(), counter.hide());
   yield* line.appear();
   yield* line.draw(2);
   yield* waitFor(t(1));
 
   yield* sub.say(S[2]);
-  yield* line.root().opacity(0, t(0.4));
-  yield* pie.sweep(2.4);
+  yield* line.hide();
+  yield* pie.appear(2.4);
   yield* pie.highlight(0);
   yield* waitFor(t(1.2));
   yield* all(sub.hide(), leave());

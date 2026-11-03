@@ -8,6 +8,9 @@ All notable changes are documented here. The format follows [Keep a Changelog](h
 - `connect(parent, a, b)`: an arrow between two pieces, with the elbows it needs.
 - `Packet` shapes (`dot`, `diamond`, `envelope`) and `Piece.ping()`; `send(..., {to: piece})` makes the piece react on arrival.
 - `BarChart` value labels accept `prefix`, `suffix` and `decimals`.
+- Every piece now shares `appear()`, `glow()`, `ping()`, `dim()` and `hide()` through a `Group` base class; a test checks it.
+- `mark()` and `unmark()` on every boxed piece, such as `TreeNode` and `Box`.
+- Labels wrap inside their piece and shrink if they still do not fit.
 - A demo for the `cloud` pack, and `npm run sheets:packs` to review the packs in contrasting themes.
 - Website: five playable example videos: Git branches, DNS, quicksort, the water cycle and the history of the web.
 - `examples/`: the projects behind quicksort, the water cycle and the history of the web.

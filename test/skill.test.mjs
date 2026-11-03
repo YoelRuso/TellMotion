@@ -33,6 +33,8 @@ test('each pack has valid metadata and the components it declares', () => {
       .map(f => readFileSync(join(dir, p.name, f), 'utf8'))
       .join('\n');
     for (const c of meta.components) assert.match(src, new RegExp(`(class|function\\*?)\\s+${c}\\b`), `${p.name}: component ${c} not found`);
+    // Every piece shares appear, glow, ping, dim and hide through its base class (functions such as link and swap are not pieces)
+    for (const c of meta.components.filter(name => /^[A-Z]/.test(name))) assert.match(src, new RegExp(`class\\s+${c}\\s+extends\\s+(Group|Piece|FlowShape)\\b`), `${p.name}: ${c} does not extend Group or Piece`);
   }
 });
 

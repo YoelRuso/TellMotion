@@ -34,7 +34,7 @@ export class Service extends Piece {
     parent.add(
       <Node ref={this.root} position={hs.position} opacity={hs.opacity} scale={hs.scale}>
         <Rect ref={this.box} width={w} height={h} {...boxProps(color)} />
-        <Txt text={o.label} fontFamily={FONT} fontWeight={700} fontSize={fs(28)} fill={textOn()} textAlign={'center'} />
+        <Txt ref={this.label} text={o.label} fontFamily={FONT} fontWeight={700} fontSize={fs(28)} fill={textOn()} textAlign={'center'} {...this.wrapped(o.label)} />
         {o.db ? dbIcon(color, w / 2 - 8, h / 2 - 4) : null}
       </Node>,
     );

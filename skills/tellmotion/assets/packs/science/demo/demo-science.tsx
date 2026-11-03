@@ -26,12 +26,12 @@ export default makeScene2D(function* (view) {
 
   yield* sub.say(S[1]);
   yield* all(...cycle.nodes.map(n => n.hide()), cycle.ring().opacity(0, t(0.4)));
-  yield* layers.reveal(0.4);
+  yield* layers.appear();
   yield* layers.focus(1);
   yield* waitFor(t(1));
 
   yield* sub.say(S[2]);
-  yield* layers.root().opacity(0, t(0.4));
+  yield* layers.hide();
   yield* all(wave.appear(), dots.appear());
   yield* all(wave.travel(3, 2), dots.drift(120, -160, 3));
   yield* waitFor(t(1));

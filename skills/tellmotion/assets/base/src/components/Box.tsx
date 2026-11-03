@@ -1,5 +1,5 @@
 import {Node, Rect, Txt} from '@motion-canvas/2d';
-import {all, createRef} from '@motion-canvas/core';
+import {all} from '@motion-canvas/core';
 import {C, FONT, fs, S, t} from '../config';
 import {Piece, boxProps, hiddenState, textOn} from './Piece';
 
@@ -19,7 +19,7 @@ export interface BoxOpts {
 
 /** The generic building block: a labelled box. Use C.cat[n] colors to group element types. */
 export class Box extends Piece {
-  public txt = createRef<Txt>();
+  public txt = this.label;
 
   constructor(parent: Node, o: BoxOpts) {
     const w = o.w ?? 260;
@@ -33,7 +33,7 @@ export class Box extends Piece {
         {S.doubleBorder ? (
           <Rect width={w - 14} height={h - 14} radius={Math.max(props.radius - 3, 0)} stroke={props.stroke} lineWidth={1} opacity={0.4} />
         ) : null}
-        <Txt ref={this.txt} text={o.label} fontFamily={FONT} fontWeight={o.weight ?? 700} fontSize={fs(o.fs ?? 28)} fill={textOn()} textAlign={'center'} />
+        <Txt ref={this.label} text={o.label} fontFamily={FONT} fontWeight={o.weight ?? 700} fontSize={fs(o.fs ?? 28)} fill={textOn()} textAlign={'center'} {...this.wrapped(o.label)} />
       </Node>,
     );
   }

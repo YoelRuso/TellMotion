@@ -8,7 +8,9 @@ bash <skill>/scripts/new-project.sh <name> --theme <id> --pack all --demos      
 ```
 Each pack lives in `assets/packs/<pack>/` (`*.tsx` components, `pack.json` metadata and dependencies, `demo/` scene). The demo of a pack is the fastest way to see its API in use.
 
-All packs follow the same conventions: constructor `new X(parent, opts)` (positions in scene coordinates), then generator methods (`appear()`, `glow()`, `dim()`, and pack-specific ones) used with `yield*`.
+All packs follow the same conventions: constructor `new X(parent, opts)` (positions in scene coordinates), then generator methods used with `yield*`. Every piece has `appear()`, `glow(on)`, `ping()`, `dim(on)` and `hide()`; pieces with a box and a label also have `mark(color, solid)` and `unmark()`. The table lists what each one adds. `appear()` shows the whole element, also when it is built from several parts; use its specific methods (`reveal`, `showAll`, `drawAxis`...) to control the steps.
+
+Labels wrap inside their piece, and shrink if they still do not fit; a shrunk label goes below the 28 px minimum, so shorten it or widen the piece. Text with its own `\n` keeps those line breaks.
 
 | Pack | Components | Good for |
 |---|---|---|
@@ -26,6 +28,6 @@ All packs follow the same conventions: constructor `new X(parent, opts)` (positi
 - `Terminal` wraps long lines and scrolls when it is full.
 - `code` adds dependencies (`@lezer/*`, `@codemirror/language`) automatically through `pack.json`; code uses the theme font when it is monospace, otherwise a system monospace font (`MONO` in `config.ts`).
 - Line numbers in `CodeView.focus(from, to)` are 0-based and inclusive.
-- Keep one idea per scene: show a chart, then hide it (`root().opacity(0)`) before the next element.
-- Build your own pack: extend `Piece` (boxed elements) or write a plain class with `root` and generator methods; add `pack.json` and a `demo/` scene.
+- Keep one idea per scene: show a chart, then `hide()` it before the next element.
+- Build your own pack: extend `Piece` (boxed elements) or `Group` (anything else), both in `Piece.tsx`; add `pack.json` and a `demo/` scene.
 - Pitfall found while testing: in a `.map()` that renders several siblings that need refs/signals, wrap them in one `<Node>` instead of a fragment.

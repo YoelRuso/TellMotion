@@ -6,11 +6,16 @@ import {Bar} from '../components/Bar';
 import {BarChart} from '../components/BarChart';
 import {Box} from '../components/Box';
 import {Cell} from '../components/Cell';
-import {DataIO, Process} from '../components/Flow';
+import {Database} from '../components/Database';
+import {DataIO, Decision, Process, Terminator} from '../components/Flow';
+import {Lambda} from '../components/Lambda';
 import {LineChart} from '../components/LineChart';
 import {send} from '../components/Packet';
+import {Queue} from '../components/Queue';
 import {prepareScene} from '../components/Scene';
+import {Service} from '../components/Service';
 import {Terminal} from '../components/Terminal';
+import {TreeNode} from '../components/TreeNode';
 import {C, t} from '../config';
 
 export default makeScene2D(function* (view) {
@@ -33,6 +38,31 @@ export default makeScene2D(function* (view) {
   const inward = connect(root, a, io, {from: 'left', to: 'right'});
 
   yield* enter();
+
+  // Labels too long for their piece: they wrap, and shrink only if that is not enough. Marks on any piece.
+  yield* sub.say('Long labels wrap inside their piece, and shrink only if they still do not fit.');
+  const longLabels = [
+    new Box(root, {x: -620, y: -300, label: 'Customer notification and billing service', color: C.cat[0]}),
+    new Process(root, {x: -200, y: -300, label: 'Validate the shipping address of the order', w: 260}),
+    new Terminator(root, {x: 220, y: -300, label: 'End of the whole process', w: 240}),
+    new DataIO(root, {x: 640, y: -300, label: 'Read the monthly sales report', w: 320}),
+    new Decision(root, {x: -620, y: -90, label: 'Is the customer eligible for the discount?'}),
+    new Service(root, {x: -200, y: -90, label: 'Internationalization and localization service', db: true}),
+    new Lambda(root, {x: 220, y: -90, label: 'Resize every uploaded image'}),
+    new Database(root, {x: 640, y: -90, label: 'Customer analytics warehouse', w: 260, h: 120}),
+    new Queue(root, {x: -620, y: 120, label: 'Pending customer notifications queue'}),
+    new Box(root, {x: -200, y: 120, label: 'Line one\nLine two', color: C.cat[1]}),
+    new Box(root, {x: 220, y: 120, label: 'Supercalifragilisticexpialidocious', color: C.cat[2]}),
+    new Cell(root, {x: 520, y: 120, value: 1000000}),
+    new TreeNode(root, {x: 720, y: 120, value: 123456}),
+  ];
+  yield* all(...longLabels.map(p => p.appear()));
+  yield* waitFor(t(1));
+  yield* all(longLabels[0].mark(C.ok, true), longLabels[6].mark(C.error), longLabels[12].mark(C.ok, true));
+  yield* waitFor(t(1));
+  yield* all(...longLabels.map(p => p.unmark()));
+  yield* all(...longLabels.map(p => p.hide()));
+
   yield* sub.say('Marked cells stay readable, bar labels follow their value, arrows touch the shapes.');
   yield* all(...cells.map(x => x.appear()), bar.appear(), io.appear(), step.appear(), a.appear(), b.appear(), c.appear(), d.appear());
   yield* all(ab.draw(), bc.draw(), cd.draw(), down.draw(), inward.draw());
@@ -53,7 +83,12 @@ export default makeScene2D(function* (view) {
   yield* all(chart.grow(1), line.draw(2));
   yield* chart.update([40, 120.5, 75]);
   yield* waitFor(t(0.8));
-  yield* all(chart.root().opacity(0, t(0.4)), line.root().opacity(0, t(0.4)));
+  // The animations every element shares
+  yield* all(chart.glow(), line.dim());
+  yield* waitFor(t(0.5));
+  yield* all(chart.glow(false), line.dim(false));
+  yield* chart.ping();
+  yield* all(chart.hide(), line.hide());
 
   // More rows than the window holds, and lines wider than it
   yield* sub.say('The terminal wraps long lines and scrolls when it is full.');

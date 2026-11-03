@@ -1,6 +1,7 @@
 import {Line, Node, Rect, Txt} from '@motion-canvas/2d';
-import {SimpleSignal, all, createRef, createSignal, makeRef, sequence} from '@motion-canvas/core';
+import {SimpleSignal, all, createSignal, makeRef, sequence} from '@motion-canvas/core';
 import {C, FONT, MOVE, fs, t} from '../config';
+import {Group} from './Piece';
 
 export interface BarChartOpts {
   /** Center-bottom of the plot area (the baseline). */
@@ -18,8 +19,7 @@ export interface BarChartOpts {
 }
 
 /** Charts pack · animated bar chart with axes, category labels and live value counters. */
-export class BarChart {
-  public root = createRef<Node>();
+export class BarChart extends Group {
   public bars: Rect[] = [];
   private values: SimpleSignal<number>[];
   private targets: number[];
@@ -27,6 +27,7 @@ export class BarChart {
   private max: SimpleSignal<number>;
 
   constructor(parent: Node, o: BarChartOpts) {
+    super();
     const w = o.w ?? 1000, h = o.h ?? 420;
     this.targets = o.data.map(d => d.value);
     this.baseMax = o.max ?? (Math.max(...this.targets) || 1);
@@ -63,10 +64,6 @@ export class BarChart {
         ))}
       </Node>,
     );
-  }
-
-  *appear(d = 0.4) {
-    yield* this.root().opacity(1, t(d));
   }
 
   /** Bars grow from the baseline (values count up live). */

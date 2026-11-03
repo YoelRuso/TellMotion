@@ -1,4 +1,4 @@
-import {Node, Shape} from '@motion-canvas/2d';
+import {Node, Shape, Txt} from '@motion-canvas/2d';
 import {all, createRef, easeOutBack} from '@motion-canvas/core';
 import {C, MOVE, P, S, t} from '../config';
 import {THEME} from '../theme';
@@ -38,11 +38,42 @@ export function hiddenState(x: number, y: number) {
   return {opacity: 0, scale: e === 'pop' ? 0.85 : 1, position: [x, e === 'slide' ? y + 30 : y] as P};
 }
 
-/** Base of every boxed component: position, connection points and shared animations. */
-export class Piece {
+/** Base of every element: the animations they all share, so that any of them can be shown, hidden or emphasized the same way. */
+export class Group {
   public root = createRef<Node>();
+
+  /** Show the element. Those built from several parts show them all. */
+  *appear(d = 0.4) {
+    yield* this.root().opacity(1, t(d));
+  }
+
+  /** Highlight or return to normal. */
+  *glow(on = true, d = 0.3) {
+    yield* this.root().scale(on ? 1.05 : 1, t(d));
+  }
+
+  /** Brief reaction when something reaches this element. */
+  *ping(d = 0.6) {
+    yield* this.root().scale(1.08, t(d * 0.3));
+    yield* this.root().scale(1, t(d * 0.7));
+  }
+
+  /** Dim (true) or restore (false). */
+  *dim(on = true, d = 0.3) {
+    yield* this.root().opacity(on ? 0.2 : 1, t(d));
+  }
+
+  *hide(d = 0.4) {
+    yield* this.root().opacity(0, t(d));
+  }
+}
+
+/** Base of every boxed component: position, connection points, label and shared animations. */
+export class Piece extends Group {
   /** The outline shape (Rect, Line polygon, Circle...). Glow and state changes act on it. */
   public box = createRef<Shape>();
+  /** The main text of the piece. */
+  public label = createRef<Txt>();
   private base: ReturnType<typeof shadowOf>;
 
   constructor(
@@ -51,8 +82,33 @@ export class Piece {
     public w: number,
     public h: number,
     public color: string,
+    /** Space the label can use inside the piece: width and height. */
+    protected room: P = [w - 32, h - 16],
   ) {
+    super();
     this.base = shadowOf(color);
+  }
+
+  /** Txt props that wrap a label inside the piece. Text with its own line breaks keeps them. */
+  protected wrapped(text: string) {
+    return text.includes('\n') ? {} : {width: this.room[0], textWrap: true};
+  }
+
+  /** Last resort for a label that does not fit even wrapped: scale it down. Measured here because the fonts have loaded by now. */
+  private shrinkLabel() {
+    const label = this.label();
+    if (!label) return;
+    const ctx = document.createElement('canvas').getContext('2d')!;
+    ctx.font = `${label.fontWeight()} ${label.fontSize()}px ${label.fontFamily()}`;
+    const wraps = label.textWrap() === true;
+    const parts = wraps ? label.text().split(/\s+/) : label.text().split('\n');
+    const widest = Math.max(...parts.map(part => ctx.measureText(part).width));
+    // A word wider than the wrapping width would stick out on one side, so the text box must hold it.
+    if (wraps && widest > this.room[0]) label.width(widest);
+    const scale = () => Math.min(1, this.room[0] / Math.max(widest, wraps ? label.width() : 0), this.room[1] / label.height());
+    // Once it has to shrink, the wider lines that fit let it shrink less.
+    if (wraps && scale() < 1) label.width(this.room[0] / scale());
+    label.scale(scale());
   }
 
   // Connection points for arrows
@@ -71,6 +127,7 @@ export class Piece {
 
   /** Entrance animation (style comes from the theme). */
   *appear(d = 0.5) {
+    this.shrinkLabel();
     const e = THEME.motion.entrance;
     yield* all(
       this.root().opacity(1, t(d)),
@@ -102,12 +159,19 @@ export class Piece {
     ring.remove();
   }
 
-  /** Dim (true) or restore (false). */
-  *dim(on = true, d = 0.3) {
-    yield* this.root().opacity(on ? 0.2 : 1, t(d));
+  /** Mark the piece with a color (compare, found, sorted...). `solid` also fills it. */
+  *mark(color: string, solid = false, d = 0.3) {
+    const label = this.label();
+    yield* all(
+      this.box().stroke(color, t(d)),
+      this.box().fill(solid ? color : boxProps(this.color).fill, t(d)),
+      ...(label ? [label.fill(solid ? C.onAccent : textOn(), t(d))] : []),
+    );
   }
 
-  *hide(d = 0.4) {
-    yield* this.root().opacity(0, t(d));
+  *unmark(d = 0.3) {
+    const label = this.label();
+    const base = boxProps(this.color);
+    yield* all(this.box().stroke(base.stroke, t(d)), this.box().fill(base.fill, t(d)), ...(label ? [label.fill(textOn(), t(d))] : []));
   }
 }

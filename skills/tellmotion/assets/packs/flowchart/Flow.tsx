@@ -1,7 +1,6 @@
 import {Line, Node, Rect, Txt} from '@motion-canvas/2d';
-import {createRef} from '@motion-canvas/core';
 import {C, FONT, P, fs, t} from '../config';
-import {Piece, boxProps, hiddenState, textOn} from './Piece';
+import {Group, Piece, boxProps, hiddenState, textOn} from './Piece';
 
 export interface FlowOpts {
   x: number;
@@ -19,7 +18,8 @@ class FlowShape extends Piece {
   constructor(parent: Node, o: FlowOpts, kind: Kind, defaults: {w: number; h: number; color: string}) {
     const w = o.w ?? defaults.w, h = o.h ?? defaults.h;
     const color = o.color ?? defaults.color;
-    super(o.x, o.y, w, h, color);
+    const room: P = kind === 'decision' ? [w * 0.55, h * 0.55] : kind === 'io' ? [w - 72, h - 16] : kind === 'terminator' ? [w - h * 0.6, h - 16] : [w - 32, h - 16];
+    super(o.x, o.y, w, h, color, room);
     const bp = boxProps(color);
     const hs = hiddenState(o.x, o.y);
     const poly: [number, number][] | null =
@@ -31,7 +31,7 @@ class FlowShape extends Piece {
         ) : (
           <Rect ref={this.box} width={w} height={h} {...bp} radius={kind === 'terminator' ? h / 2 : bp.radius} />
         )}
-        <Txt text={o.label} fontFamily={FONT} fontWeight={700} fontSize={fs(28)} fill={textOn()} textAlign={'center'} />
+        <Txt ref={this.label} text={o.label} fontFamily={FONT} fontWeight={700} fontSize={fs(28)} fill={textOn()} textAlign={'center'} {...this.wrapped(o.label)} />
       </Node>,
     );
   }
@@ -74,10 +74,9 @@ export class DataIO extends FlowShape {
 }
 
 /** Small branch label next to an arrow ("Yes" / "No"). */
-export class Tag {
-  public root = createRef<Node>();
-
+export class Tag extends Group {
   constructor(parent: Node, o: {x: number; y: number; text: string; color?: string}) {
+    super();
     parent.add(
       <Node ref={this.root} position={[o.x, o.y]} opacity={0}>
         <Txt text={o.text} fontFamily={FONT} fontWeight={700} fontSize={fs(32)} fill={o.color ?? C.text} stroke={C.bg} lineWidth={8} strokeFirst />

@@ -1,6 +1,7 @@
 import {Node, Rect, Txt} from '@motion-canvas/2d';
 import {all, createRef, createSignal} from '@motion-canvas/core';
 import {C, FONT, MOVE, fs, t} from '../config';
+import {Group} from './Piece';
 
 const decimalsOf = (v: number) => (String(v).split('.')[1] ?? '').length;
 
@@ -17,8 +18,7 @@ export interface BarOpts {
 }
 
 /** Algorithms pack · sortable bar (value label on top). Move with `moveTo`, color with `mark`. */
-export class Bar {
-  public root = createRef<Node>();
+export class Bar extends Group {
   public rect = createRef<Rect>();
   public value: number;
   private color: string;
@@ -28,6 +28,7 @@ export class Bar {
   private decimals: number;
 
   constructor(parent: Node, o: BarOpts) {
+    super();
     this.value = o.value;
     this.shown(o.value);
     this.decimals = decimalsOf(o.value);
@@ -41,10 +42,6 @@ export class Bar {
         <Txt text={() => this.shown().toFixed(this.decimals)} fontFamily={FONT} fontWeight={700} fontSize={fs(28)} fill={C.text} y={() => -this.rect().height() - 30} />
       </Node>,
     );
-  }
-
-  *appear(d = 0.4) {
-    yield* all(this.root().opacity(1, t(d)), this.root().scale(1, 0));
   }
 
   *moveTo(x: number, d = 0.5) {

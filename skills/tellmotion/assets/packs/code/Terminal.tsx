@@ -1,6 +1,7 @@
 import {Circle, Node, Rect, Txt} from '@motion-canvas/2d';
 import {createRef, waitFor} from '@motion-canvas/core';
 import {C, MONO, MOVE, S, fs, t} from '../config';
+import {Group} from './Piece';
 import {captionFill} from './Scene';
 
 export interface TerminalOpts {
@@ -31,8 +32,7 @@ function wrap(text: string, cols: number) {
 }
 
 /** Code pack · terminal window. `run(cmd, output)` types the command and prints the output lines; long lines wrap and old ones scroll away. */
-export class Terminal {
-  public root = createRef<Node>();
+export class Terminal extends Group {
   private lines = createRef<Node>();
   private next = 0;
   private lh = 46;
@@ -42,6 +42,7 @@ export class Terminal {
   private cols: number;
 
   constructor(parent: Node, private o: TerminalOpts) {
+    super();
     const w = o.w ?? 1300, h = o.h ?? 560;
     const bodyH = h - BAR;
     const r = Math.min(S.radius, 20);
@@ -59,10 +60,6 @@ export class Terminal {
         <Txt text={o.title ?? 'terminal'} fontFamily={MONO} fontSize={fs(28)} fill={C.muted} y={-h / 2 + BAR / 2} />
       </Node>,
     );
-  }
-
-  *appear(d = 0.5) {
-    yield* this.root().opacity(1, t(d));
   }
 
   /** Take the next row, scrolling up if the window is full. */

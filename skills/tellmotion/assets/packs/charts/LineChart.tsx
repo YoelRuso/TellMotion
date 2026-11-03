@@ -1,6 +1,7 @@
 import {Circle, Line, Node, Txt} from '@motion-canvas/2d';
 import {clamp, createRef, easeOutBack, makeRef} from '@motion-canvas/core';
 import {C, FONT, MOVE, P, fs, t} from '../config';
+import {Group} from './Piece';
 
 export interface LineChartOpts {
   x: number;
@@ -17,12 +18,12 @@ export interface LineChartOpts {
 const DOT_POP = 0.04;
 
 /** Charts pack · line chart: axes, a line that draws itself and dots that pop in as it reaches them. */
-export class LineChart {
-  public root = createRef<Node>();
+export class LineChart extends Group {
   public line = createRef<Line>();
   public dots: Circle[] = [];
 
   constructor(parent: Node, o: LineChartOpts) {
+    super();
     const w = o.w ?? 1000, h = o.h ?? 420;
     const max = o.max ?? (Math.max(...o.data) || 1);
     const step = w / Math.max(o.data.length - 1, 1);
@@ -52,10 +53,6 @@ export class LineChart {
         ))}
       </Node>,
     );
-  }
-
-  *appear(d = 0.4) {
-    yield* this.root().opacity(1, t(d));
   }
 
   /** The line draws itself and each dot pops in when the line reaches it. */

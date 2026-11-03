@@ -5,7 +5,7 @@ import {parser as jsParser} from '@lezer/javascript';
 import {parser as pyParser} from '@lezer/python';
 import {DEFAULT, createRef} from '@motion-canvas/core';
 import {C, MONO, S, fs, t} from '../config';
-import {boxProps} from './Piece';
+import {Group, boxProps} from './Piece';
 
 /** Syntax colors taken from the active theme. */
 const style = HighlightStyle.define([
@@ -34,11 +34,11 @@ export interface CodeViewOpts {
  * Code pack · code panel with themed syntax highlighting.
  * `focus(from, to)` highlights lines (0-based, like `lines()` of Motion Canvas), `change()` animates edits.
  */
-export class CodeView {
-  public root = createRef<Node>();
+export class CodeView extends Group {
   public code = createRef<Code>();
 
   constructor(parent: Node, o: CodeViewOpts) {
+    super();
     const w = o.w ?? 1300, h = o.h ?? 560;
     const highlighter = new LezerHighlighter(o.language === 'python' ? pyParser : jsParser, style);
     const bp = boxProps(C.cat[0]);
@@ -48,10 +48,6 @@ export class CodeView {
         <Code ref={this.code} code={o.code} highlighter={highlighter} fontFamily={MONO} fontSize={fs(o.size ?? 32)} fill={C.text} offset={[-1, -1]} position={[-w / 2 + 44, -h / 2 + 40]} />
       </Node>,
     );
-  }
-
-  *appear(d = 0.5) {
-    yield* this.root().opacity(1, t(d));
   }
 
   /** Highlight lines `from`..`to` (0-based, inclusive); the rest is dimmed. */

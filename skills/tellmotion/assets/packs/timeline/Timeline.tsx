@@ -1,6 +1,7 @@
 import {Circle, Line, Node, Rect, Txt} from '@motion-canvas/2d';
 import {all, createRef, makeRef, sequence} from '@motion-canvas/core';
 import {C, FONT, MOVE, fs, t} from '../config';
+import {Group} from './Piece';
 
 export interface Milestone {
   label: string;
@@ -22,14 +23,14 @@ export interface TimelineOpts {
 }
 
 /** Timeline pack · horizontal axis with milestones (alternating above/below) and optional phase bands. */
-export class Timeline {
-  public root = createRef<Node>();
+export class Timeline extends Group {
   public axis = createRef<Line>();
   public groups: Node[] = [];
   public bands: Node[] = [];
   private w: number;
 
   constructor(parent: Node, o: TimelineOpts) {
+    super();
     const w = (this.w = o.w ?? 1500);
     parent.add(
       <Node ref={this.root} position={[o.x, o.y]}>
@@ -56,6 +57,13 @@ export class Timeline {
         })}
       </Node>,
     );
+  }
+
+  /** The axis, the bands and every milestone. */
+  *appear(d = 1) {
+    yield* this.root().opacity(1, 0);
+    yield* all(this.drawAxis(d), this.showBands());
+    yield* this.revealAll();
   }
 
   *drawAxis(d = 1) {

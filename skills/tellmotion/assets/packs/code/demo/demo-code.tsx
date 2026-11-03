@@ -40,7 +40,7 @@ export default makeScene2D(function* (view) {
   yield* code.change(CODE2, 1.4);
   yield* waitFor(t(1));
   yield* sub.say(S[3]);
-  yield* all(code.root().opacity(0, t(0.4)));
+  yield* code.hide();
   yield* term.appear();
   yield* term.run('node add.js', ['9']);
   yield* term.run('npm test', ['PASS  add.test.js', '1 passed']);

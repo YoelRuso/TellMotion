@@ -1,6 +1,7 @@
 import {Node, Txt} from '@motion-canvas/2d';
-import {createRef, createSignal, all} from '@motion-canvas/core';
+import {createSignal, all} from '@motion-canvas/core';
 import {C, FONT, MOVE, fs, t} from '../config';
+import {Group} from './Piece';
 
 export interface CounterOpts {
   x: number;
@@ -17,11 +18,11 @@ export interface CounterOpts {
 }
 
 /** Charts pack · big animated number ("12,480 users") that counts up or down. */
-export class Counter {
-  public root = createRef<Node>();
+export class Counter extends Group {
   public value = createSignal(0);
 
   constructor(parent: Node, o: CounterOpts) {
+    super();
     this.value(o.value ?? 0);
     const dec = o.decimals ?? 0;
     parent.add(
@@ -36,10 +37,6 @@ export class Counter {
         {o.label ? <Txt text={o.label} fontFamily={FONT} fontSize={fs(32)} fill={C.muted} y={(o.size ?? 120) * 0.8} /> : null}
       </Node>,
     );
-  }
-
-  *appear(d = 0.4) {
-    yield* this.root().opacity(1, t(d));
   }
 
   *countTo(v: number, d = 1.5) {

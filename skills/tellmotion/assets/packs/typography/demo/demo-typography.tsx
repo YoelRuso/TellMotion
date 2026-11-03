@@ -19,23 +19,23 @@ export default makeScene2D(function* (view) {
 
   yield* enter();
   yield* sub.say(S[0]);
-  yield* title.reveal();
+  yield* title.appear();
   yield* title.emphasize(2);
   yield* waitFor(t(1.2));
 
   yield* sub.say(S[1]);
-  yield* title.root().opacity(0, t(0.4));
+  yield* title.hide();
   yield* list.showAll(0.6);
   yield* list.focus(1);
   yield* waitFor(t(1));
 
   yield* sub.say(S[2]);
-  yield* list.root().opacity(0, t(0.4));
-  yield* quote.reveal();
+  yield* list.hide();
+  yield* quote.appear();
   yield* waitFor(t(2));
 
   yield* sub.say(S[3]);
-  yield* quote.root().opacity(0, t(0.4));
+  yield* quote.hide();
   yield* all(cmp.showLeft(), cmp.showRight());
   yield* cmp.showVs();
   yield* cmp.emphasize('left');

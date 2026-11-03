@@ -1,6 +1,7 @@
 import {Circle, Node, Txt} from '@motion-canvas/2d';
-import {all, chain, createRef, makeRef} from '@motion-canvas/core';
+import {all, chain, makeRef} from '@motion-canvas/core';
 import {C, FONT, MOVE, fs, t} from '../config';
+import {Group} from './Piece';
 
 export interface PieChartOpts {
   x: number;
@@ -10,13 +11,13 @@ export interface PieChartOpts {
 }
 
 /** Charts pack · pie chart whose slices sweep in one after another, with percentage labels outside. */
-export class PieChart {
-  public root = createRef<Node>();
+export class PieChart extends Group {
   public slices: Circle[] = [];
   public labels: Txt[] = [];
   private ends: number[] = [];
 
   constructor(parent: Node, o: PieChartOpts) {
+    super();
     const r = o.radius ?? 260;
     const total = o.data.reduce((a, d) => a + d.value, 0);
     let angle = -90; // start at 12 o'clock
@@ -62,6 +63,11 @@ export class PieChart {
         })}
       </Node>,
     );
+  }
+
+  *appear(d = 2) {
+    yield* this.root().opacity(1, 0);
+    yield* this.sweep(d);
   }
 
   /** Slices sweep in clockwise; labels fade in with each slice. */

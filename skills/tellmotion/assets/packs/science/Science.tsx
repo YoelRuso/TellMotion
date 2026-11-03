@@ -2,6 +2,7 @@ import {Circle, Line, Node, Rect, Txt} from '@motion-canvas/2d';
 import {all, createRef, createSignal, linear, makeRef, sequence, tween, easeInOutSine} from '@motion-canvas/core';
 import {Box} from './Box';
 import {Packet} from './Packet';
+import {Group} from './Piece';
 import {C, FONT, MOVE, P, fs, t} from '../config';
 
 // ---------------------------------------------------------------- Cycle
@@ -17,8 +18,7 @@ export interface CycleOpts {
 }
 
 /** Science pack · circular process (water cycle, life cycle, loops): nodes on an ellipse + an orbiting packet. */
-export class Cycle {
-  public root = createRef<Node>();
+export class Cycle extends Group {
   public ring = createRef<Circle>();
   public nodes: Box[] = [];
   private rx: number;
@@ -26,6 +26,7 @@ export class Cycle {
   private packet?: Packet;
 
   constructor(parent: Node, o: CycleOpts) {
+    super();
     this.rx = o.rx ?? 560;
     this.ry = o.ry ?? 290;
     parent.add(
@@ -37,6 +38,11 @@ export class Cycle {
       const a = -Math.PI / 2 + (i / o.steps.length) * Math.PI * 2;
       this.nodes.push(new Box(this.root(), {x: Math.cos(a) * this.rx, y: Math.sin(a) * this.ry, label: s.label, color: s.color ?? C.cat[i % 5], w: o.boxW ?? 280, h: o.boxH ?? 90}));
     });
+  }
+
+  *appear() {
+    yield* this.root().opacity(1, 0);
+    yield* this.show();
   }
 
   *show(stagger = 0.4) {
@@ -71,11 +77,11 @@ export interface LayersOpts {
 }
 
 /** Science pack · stacked strata (atmosphere, soil, OSI layers, org charts): reveal top to bottom. */
-export class Layers {
-  public root = createRef<Node>();
+export class Layers extends Group {
   public rows: Node[] = [];
 
   constructor(parent: Node, o: LayersOpts) {
+    super();
     const w = o.w ?? 1100, h = o.layerH ?? 110;
     const total = o.layers.length * h;
     parent.add(
@@ -88,6 +94,11 @@ export class Layers {
         ))}
       </Node>,
     );
+  }
+
+  *appear() {
+    yield* this.root().opacity(1, 0);
+    yield* this.reveal();
   }
 
   *reveal(stagger = 0.4) {
@@ -110,11 +121,11 @@ export interface WaveOpts {
 }
 
 /** Science pack · sine wave (sound, light, signals) that can travel. */
-export class Wave {
-  public root = createRef<Node>();
+export class Wave extends Group {
   public phase = createSignal(0);
 
   constructor(parent: Node, o: WaveOpts) {
+    super();
     const w = o.w ?? 1400, amp = o.amp ?? 120, wl = o.wavelength ?? 360;
     parent.add(
       <Node ref={this.root} position={[o.x, o.y]} opacity={0}>
@@ -127,10 +138,6 @@ export class Wave {
         />
       </Node>,
     );
-  }
-
-  *appear(d = 0.5) {
-    yield* this.root().opacity(1, t(d));
   }
 
   /** The wave travels to the right for `cycles` wavelengths. */
@@ -152,12 +159,12 @@ export interface ParticlesOpts {
 }
 
 /** Science pack · cloud of dots (molecules, rain, electrons) with a gentle drift. */
-export class Particles {
-  public root = createRef<Node>();
+export class Particles extends Group {
   public dots: Circle[] = [];
   private rnd: () => number;
 
   constructor(parent: Node, o: ParticlesOpts) {
+    super();
     const w = o.w ?? 600, h = o.h ?? 400, n = o.n ?? 40;
     let seed = o.seed ?? 7;
     this.rnd = () => (seed = (seed * 16807) % 2147483647) / 2147483647;
@@ -168,10 +175,6 @@ export class Particles {
         ))}
       </Node>,
     );
-  }
-
-  *appear(d = 0.5) {
-    yield* this.root().opacity(1, t(d));
   }
 
   /** Every dot moves by (dx, dy) with a little variation: rise, fall, spread. */

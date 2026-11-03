@@ -25,7 +25,7 @@ export class Queue extends Piece {
     const w = o.w ?? 320;
     const h = o.h ?? 100;
     const color = o.dlq ? C.error : C.cat[3];
-    super(o.x, o.y, w, h, color);
+    super(o.x, o.y, w, h, color, [w - 32, 40]);
     // On a box filled with its own color, slots in that color would be invisible.
     this.slotColor = S.fill === 'accent' ? C.onAccent : color;
     const n = o.n ?? 6;
@@ -33,7 +33,7 @@ export class Queue extends Piece {
     parent.add(
       <Node ref={this.root} position={hs.position} opacity={hs.opacity} scale={hs.scale}>
         <Rect ref={this.box} width={w} height={h} {...boxProps(color)} lineDash={o.dlq ? [12, 8] : boxProps(color).lineDash} />
-        <Txt text={o.label} fontFamily={FONT} fontWeight={700} fontSize={fs(28)} fill={textOn()} y={-h / 2 + 30} />
+        <Txt ref={this.label} text={o.label} fontFamily={FONT} fontWeight={700} fontSize={fs(28)} fill={textOn()} y={-h / 2 + 30} />
         {Array.from({length: n}, (_, i) => (
           <Rect ref={makeRef(this.slots, i)} width={26} height={26} radius={4} stroke={this.slotColor} lineWidth={2} fill={'rgba(0,0,0,0)'} x={(i - (n - 1) / 2) * 36} y={h / 2 - 24} />
         ))}

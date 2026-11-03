@@ -1,6 +1,7 @@
 import {Line, Node, Txt} from '@motion-canvas/2d';
-import {all, createRef} from '@motion-canvas/core';
+import {all} from '@motion-canvas/core';
 import {C, FONT, MOVE, fs, t} from '../config';
+import {Group} from './Piece';
 
 export interface PointerOpts {
   /** Position of the TIP of the arrow (the element it points at). */
@@ -13,10 +14,9 @@ export interface PointerOpts {
 }
 
 /** Algorithms pack · labelled pointer (i, j, pivot, head...). */
-export class Pointer {
-  public root = createRef<Node>();
-
+export class Pointer extends Group {
   constructor(parent: Node, o: PointerOpts) {
+    super();
     const color = o.color ?? C.cat[1];
     const up = (o.dir ?? 'up') === 'up';
     const s = up ? 1 : -1; // label side
@@ -28,15 +28,7 @@ export class Pointer {
     );
   }
 
-  *appear(d = 0.3) {
-    yield* this.root().opacity(1, t(d));
-  }
-
   *moveTo(x: number, y?: number, d = 0.5) {
     yield* all(this.root().x(x, t(d), MOVE), y === undefined ? this.root().y(this.root().y(), 0) : this.root().y(y, t(d), MOVE));
-  }
-
-  *hide(d = 0.3) {
-    yield* this.root().opacity(0, t(d));
   }
 }

@@ -1,7 +1,7 @@
 import {Circle, Layout, Node, Rect, Txt} from '@motion-canvas/2d';
 import {all, createRef, makeRef, sequence} from '@motion-canvas/core';
 import {C, FONT, MOVE, fs, t} from '../config';
-import {boxProps, textOn} from './Piece';
+import {Group, boxProps, textOn} from './Piece';
 
 // ---------------------------------------------------------------- KineticTitle
 export interface KineticTitleOpts {
@@ -14,11 +14,11 @@ export interface KineticTitleOpts {
 }
 
 /** Typography pack · big title whose words pop in one after another. */
-export class KineticTitle {
-  public root = createRef<Node>();
+export class KineticTitle extends Group {
   public words: Txt[] = [];
 
   constructor(parent: Node, o: KineticTitleOpts) {
+    super();
     let k = 0;
     parent.add(
       <Layout ref={this.root as any} layout direction={'column'} alignItems={'center'} gap={16} position={[o.x, o.y]}>
@@ -31,6 +31,11 @@ export class KineticTitle {
         ))}
       </Layout>,
     );
+  }
+
+  *appear() {
+    yield* this.root().opacity(1, 0);
+    yield* this.reveal();
   }
 
   *reveal(stagger = 0.15) {
@@ -53,11 +58,11 @@ export interface BulletListOpts {
 }
 
 /** Typography pack · list whose items appear one by one; `focus(i)` dims the others. */
-export class BulletList {
-  public root = createRef<Node>();
+export class BulletList extends Group {
   public rows: Node[] = [];
 
   constructor(parent: Node, o: BulletListOpts) {
+    super();
     parent.add(
       <Layout ref={this.root as any} layout direction={'column'} alignItems={'start'} gap={36} position={[o.x, o.y]}>
         {o.items.map((it, i) => (
@@ -68,6 +73,11 @@ export class BulletList {
         ))}
       </Layout>,
     );
+  }
+
+  *appear() {
+    yield* this.root().opacity(1, 0);
+    yield* this.showAll();
   }
 
   *show(i: number, d = 0.45) {
@@ -98,10 +108,9 @@ export interface QuoteOpts {
 }
 
 /** Typography pack · pull quote with a big quotation mark. */
-export class Quote {
-  public root = createRef<Node>();
-
+export class Quote extends Group {
   constructor(parent: Node, o: QuoteOpts) {
+    super();
     const w = o.w ?? 1300;
     parent.add(
       <Node ref={this.root} position={[o.x, o.y]} opacity={0}>
@@ -134,13 +143,13 @@ export interface CompareOpts {
 }
 
 /** Typography pack · A vs B comparison with two panels and a "VS" badge. */
-export class Compare {
-  public root = createRef<Node>();
+export class Compare extends Group {
   public left = createRef<Node>();
   public right = createRef<Node>();
   public vs = createRef<Node>();
 
   constructor(parent: Node, o: CompareOpts) {
+    super();
     const w = o.w ?? 1500, h = o.h ?? 560;
     const pw = (w - 120) / 2;
     const panel = (side: CompareSide, ref: ReturnType<typeof createRef<Node>>, x: number, fallback: string) => {
@@ -163,6 +172,13 @@ export class Compare {
         </Node>
       </Node>,
     );
+  }
+
+  *appear() {
+    yield* this.root().opacity(1, 0);
+    yield* this.showLeft();
+    yield* this.showRight();
+    yield* this.showVs();
   }
 
   *showLeft(d = 0.6) {

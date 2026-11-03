@@ -8,7 +8,8 @@ Components live in `src/components/`. Everything reads the active theme through 
 - `Arrow(parent, points, {async?, color?, plain?})` — `draw(d)`, `hide()`, `show()`; elbows via extra points; `arrow.points` holds its route.
 - `connect(parent, a, b, {from?, to?, async?, color?, plain?})` — arrow between two pieces of the same parent, with the elbows it needs. Prefer it to writing coordinates.
 - `Packet` / `send(parent, points, {shape?, name?, color?, d?, below?, to?})` — marker that follows the points without stopping at corners. `shape`: `dot` for requests, `diamond` for events, `envelope` (default) for real messages such as emails. `d` is optional: by default the time depends on the distance. Pass `to: piece` and it reacts on arrival: `send(root, arrow.points, {shape: 'dot', to: gateway})`.
-- `Piece` base (all boxes): `appear(d)`, `glow(on)`, `ping()` (brief reaction), `dim(on)`, `hide()`, and `left/right/top/bottom` points.
+- `Group` base (every element): `appear(d)`, `glow(on)`, `ping()` (brief reaction), `dim(on)`, `hide()`.
+- `Piece` base (all boxes, extends `Group`): also `mark(color, solid)`, `unmark()`, `left/right/top/bottom` points, and a `label` that wraps and shrinks to fit.
 - Theme helpers: `boxProps(color)`, `textOn()`, `shadowOf(color)`.
 
 ## Cloud pack (`--pack cloud`)
