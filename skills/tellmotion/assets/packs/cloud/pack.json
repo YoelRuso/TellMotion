@@ -1,1 +1,1 @@
-{"name":"cloud","description":"Cloud architecture pieces: service with database, message queue, serverless function, data store.","components":["Service","Queue","Lambda","Database"],"dependencies":{}}
+{"name":"cloud","description":"Cloud architecture pieces: client, gateway, service with database, cache, event bus, message queue, serverless function, data store.","components":["Client","Gateway","Service","Cache","EventBus","Queue","Lambda","Database"],"dependencies":{}}

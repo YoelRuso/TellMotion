@@ -13,7 +13,7 @@ Components live in `src/components/`. Everything reads the active theme through 
 - Theme helpers: `boxProps(color)`, `textOn()`, `shadowOf(color)`.
 
 ## Cloud pack (`--pack cloud`)
-`Service` (with `db` icon), `Queue` (`push(n)`, `pop(n)`, `dlq`), `Lambda` (λ badge), `Database` (cylinder). Build your own pack by extending `Piece` (see `assets/packs/cloud`).
+`Client` (`device`), `Gateway` (hexagon), `Service` (with `db` icon), `Cache` (`hit()`, `miss()`), `EventBus` (`from(piece)`, `to(piece)`, `publish(producer, consumers)`), `Queue` (`push(n)`, `pop(n)`, `dlq`), `Lambda` (λ badge), `Database` (cylinder). Build your own pack by extending `Piece` (see `assets/packs/cloud`).
 
 ## Layout recipe (1920x1080, origin at the center)
 - Header y≈-500 (title + legend). Content y -440…+400. Caption y=455.

@@ -5,8 +5,14 @@ import {connect} from '../components/Arrow';
 import {Bar} from '../components/Bar';
 import {BarChart} from '../components/BarChart';
 import {Box} from '../components/Box';
+import {Cache} from '../components/Cache';
 import {Cell} from '../components/Cell';
+import {Client} from '../components/Client';
 import {Database} from '../components/Database';
+import {EventBus} from '../components/EventBus';
+import {Gateway} from '../components/Gateway';
+import {Timeline} from '../components/Timeline';
+import {Tree} from '../components/Tree';
 import {DataIO, Decision, Process, Terminator} from '../components/Flow';
 import {Lambda} from '../components/Lambda';
 import {LineChart} from '../components/LineChart';
@@ -89,6 +95,61 @@ export default makeScene2D(function* (view) {
   yield* all(chart.glow(false), line.dim(false));
   yield* chart.ping();
   yield* all(chart.hide(), line.hide());
+
+  // Scale, several lines and the focus on a point
+  yield* sub.say('Value axes use round numbers, and any line or point can take the focus.');
+  const bars = new BarChart(root, {x: -480, y: 320, w: 620, h: 460, ticks: 4, suffix: '%', data: [{label: 'A', value: 37}, {label: 'B', value: 82}, {label: 'C', value: 64}]});
+  const lines = new LineChart(root, {x: 400, y: 320, w: 760, h: 460, ticks: 5, labels: ['Q1', 'Q2', 'Q3', 'Q4'], series: [{label: 'Web', data: [12, 34, 28, 47]}, {label: 'App', data: [5, 9, 24, 31]}, {data: [20, 18, 15, 11]}]});
+  yield* all(bars.appear(), lines.appear());
+  yield* all(bars.grow(0.8), lines.draw(1.2));
+  yield* all(lines.highlight(3), bars.update([37, 140, 64]));
+  yield* waitFor(t(0.8));
+  yield* lines.clearHighlight();
+  yield* lines.highlightLine(1);
+  yield* waitFor(t(0.8));
+  yield* all(bars.hide(), lines.hide());
+
+  // Neighbouring milestones, and stems under the names of the phases
+  yield* sub.say('Close milestones rise above each other instead of colliding.');
+  const timeline = new Timeline(root, {
+    x: 0,
+    y: 0,
+    w: 1500,
+    ranges: [{from: 0.05, to: 0.4, label: 'Research'}, {from: 0.4, to: 0.95, label: 'Rollout'}],
+    milestones: [
+      {at: 0.04, label: 'Kickoff meeting', date: 'Jan 2'},
+      {at: 0.1, label: 'First interviews', date: 'Jan 20'},
+      {at: 0.16, label: 'Competitor review', date: 'Feb 3'},
+      {at: 0.22, label: 'Usability testing', date: 'Mar 1'},
+      {at: 0.28, label: 'Design freeze', date: 'Mar 15'},
+      {at: 0.34, label: 'Budget approval', date: 'Apr 9'},
+      {at: 0.6, label: 'Rollout', date: 'Jul'},
+      {at: 0.98, label: 'Done', date: 'Dec'},
+    ],
+  });
+  yield* timeline.appear();
+  yield* waitFor(t(0.8));
+  yield* timeline.hide();
+
+  // A tree from its data, including a lone right child, and every new cloud piece
+  yield* sub.say('Trees are laid out from their data; the bus delivers events to every consumer.');
+  const tree = new Tree(root, {x: -520, y: -220, gap: 110, levelH: 130, size: 80, data: {value: 8, children: [{value: 3, children: [{value: 1}, {value: 6, children: [{value: 4}, {value: 7}]}]}, {value: 10, children: [null, {value: 14, children: [{value: 13}, null]}]}]}});
+  const bus = new EventBus(root, {x: 400, y: -240, label: 'Event bus', w: 860});
+  const web = new Client(root, {x: 100, y: 240, label: 'Phone', device: 'mobile'});
+  const person = new Client(root, {x: 400, y: 240, label: 'Customer', device: 'user'});
+  const gate = new Gateway(root, {x: 700, y: 240, label: 'Load balancer'});
+  const producer = new Service(root, {x: 120, y: -30, label: 'Orders', w: 240});
+  const first = new Cache(root, {x: 420, y: -30, label: 'Sessions'});
+  const second = new Service(root, {x: 700, y: -30, label: 'Alerts', w: 220});
+  yield* tree.appear(0.25);
+  const busArrows = [bus.from(producer), bus.to(first), bus.to(second)];
+  yield* all(bus.appear(), web.appear(), person.appear(), gate.appear(), producer.appear(), first.appear(), second.appear(), ...busArrows.map(a => a.draw()));
+  yield* all(tree.visit([8, 3, 6, 4], C.cat[1], 0.3), bus.publish(producer, [first, second], {name: 'OrderPlaced'}));
+  yield* first.hit();
+  yield* first.miss();
+  yield* waitFor(t(0.5));
+  yield* tree.clearMarks();
+  yield* all(tree.hide(), bus.hide(), web.hide(), person.hide(), gate.hide(), producer.hide(), first.hide(), second.hide(), ...busArrows.map(a => a.hide()));
 
   // More rows than the window holds, and lines wider than it
   yield* sub.say('The terminal wraps long lines and scrolls when it is full.');

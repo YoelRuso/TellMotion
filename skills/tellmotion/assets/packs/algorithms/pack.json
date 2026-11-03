@@ -1,1 +1,1 @@
-{"name":"algorithms","description":"Array cells, sortable bars, pointers, tree/graph nodes and a swap animation: sorting, searching and data structures.","components":["Cell","Bar","Pointer","TreeNode","link","swap"],"dependencies":{}}
+{"name":"algorithms","description":"Array cells, sortable bars, pointers, automatic trees, graph nodes and a swap animation: sorting, searching and data structures.","components":["Cell","Bar","Pointer","TreeNode","Tree","link","swap"],"dependencies":{}}

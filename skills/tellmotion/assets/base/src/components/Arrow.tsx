@@ -26,7 +26,7 @@ export class Arrow {
         ref={this.ref}
         points={points}
         stroke={o.color ?? (o.async ? C.async : C.line)}
-        lineWidth={3}
+        lineWidth={() => (this.ref().end() > 0 ? 3 : 0)}
         lineCap={'round'}
         lineJoin={'round'}
         endArrow={!o.plain}

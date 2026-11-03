@@ -11,6 +11,9 @@ All notable changes are documented here. The format follows [Keep a Changelog](h
 - Every piece now shares `appear()`, `glow()`, `ping()`, `dim()` and `hide()` through a `Group` base class; a test checks it.
 - `mark()` and `unmark()` on every boxed piece, such as `TreeNode` and `Box`.
 - Labels wrap inside their piece and shrink if they still do not fit.
+- `cloud` pack: `Client`, `Gateway`, `Cache` and `EventBus`.
+- `Tree`: lays a tree out from its data.
+- `BarChart` and `LineChart`: `ticks` for a value axis with grid lines. `LineChart`: several lines (`series`), `highlight()` and `highlightLine()`.
 - A demo for the `cloud` pack, and `npm run sheets:packs` to review the packs in contrasting themes.
 - Website: five playable example videos: Git branches, DNS, quicksort, the water cycle and the history of the web.
 - `examples/`: the projects behind quicksort, the water cycle and the history of the web.
@@ -21,6 +24,9 @@ All notable changes are documented here. The format follows [Keep a Changelog](h
 - `BarChart`: `update()` adapts the scale to values beyond the top of the plot.
 - `LineChart`: each dot appears when the line reaches it.
 - `PieChart`: slices that had not swept in yet drew a stray line over whatever was behind them.
+- `Timeline`: close milestones no longer collide, and stems no longer hide the names of the phases.
+- `Lambda`: the badge stands out in themes with color-filled boxes.
+- `Arrow`: an arrow not drawn yet left a small dot on screen.
 - `DataIO`: arrows reach its slanted sides.
 - `Queue`: messages were invisible in themes with color-filled boxes.
 - `Terminal`: long lines wrap and old rows scroll away instead of leaving the window.

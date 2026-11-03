@@ -14,9 +14,9 @@ Labels wrap inside their piece, and shrink if they still do not fit; a shrunk la
 
 | Pack | Components | Good for |
 |---|---|---|
-| **cloud** | `Service` (db icon), `Queue` (`push`/`pop`, `dlq`), `Lambda`, `Database` | architectures, pipelines, event flows |
-| **algorithms** | `Cell` (`setValue`, `mark`), `Bar` (`moveTo`, `setValue`, `mark`), `Pointer`, `TreeNode` + `link()`, `swap(a, b)` | sorting, searching, arrays, stacks, trees, graphs |
-| **charts** | `BarChart` (`prefix`, `suffix`, `decimals`; `grow`, `update`, `highlight`), `LineChart` (`draw`), `PieChart` (`sweep`, `highlight`), `Counter` (`countTo`) | data stories, metrics, comparisons |
+| **cloud** | `Client` (`device`: web, mobile, user), `Gateway`, `Service` (db icon), `Cache` (`hit`, `miss`), `EventBus` (`from`, `to`, `publish`), `Queue` (`push`/`pop`, `dlq`), `Lambda`, `Database` | architectures, pipelines, event flows |
+| **algorithms** | `Cell` (`setValue`), `Bar` (`moveTo`, `setValue`, `mark`), `Pointer`, `Tree` (from data; `visit`, `clearMarks`), `TreeNode` + `link()` (graphs), `swap(a, b)` | sorting, searching, arrays, stacks, trees, graphs |
+| **charts** | `BarChart` (`grow`, `update`, `highlight`), `LineChart` (`series`; `draw`, `highlight`, `highlightLine`), `PieChart` (`sweep`, `highlight`), `Counter` (`countTo`). `BarChart` and `LineChart` take `ticks`, `prefix`, `suffix` and `decimals` | data stories, metrics, comparisons |
 | **flowchart** | `Terminator`, `Process`, `Decision`, `DataIO`, `Tag` (Yes/No) | processes, decision trees, procedures |
 | **timeline** | `Timeline` (`drawAxis`, `showBands`, `reveal`, `revealAll`, `focus`) | history, roadmaps, project phases |
 | **code** | `CodeView` (`focus(from,to)`, `unfocus`, `change`), `Terminal` (`run(cmd, output)`) | programming tutorials, CLI demos |
@@ -26,6 +26,9 @@ Labels wrap inside their piece, and shrink if they still do not fit; a shrunk la
 ## Notes
 - Join pieces with `connect(parent, a, b)` from `Arrow.tsx`; it picks the facing sides and adds elbows. Tree and graph edges use `link()`, created before the nodes so they sit behind.
 - `Terminal` wraps long lines and scrolls when it is full.
+- `EventBus.publish(producer, [consumers], {name})` plays a whole event; `bus.from(piece)` and `bus.to(piece)` draw the arrows.
+- `ticks` draws the value labels to the left of the plot: leave about 120 px there. The top of the scale rounds up unless you set `max`.
+- `Timeline` moves labels that would collide to the other side or up to three heights; keep it near the vertical center, and leave a few milestones per stretch: past that they overlap.
 - `code` adds dependencies (`@lezer/*`, `@codemirror/language`) automatically through `pack.json`; code uses the theme font when it is monospace, otherwise a system monospace font (`MONO` in `config.ts`).
 - Line numbers in `CodeView.focus(from, to)` are 0-based and inclusive.
 - Keep one idea per scene: show a chart, then `hide()` it before the next element.

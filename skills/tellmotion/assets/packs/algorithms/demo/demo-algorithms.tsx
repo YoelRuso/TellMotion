@@ -4,7 +4,7 @@ import {Bar} from '../components/Bar';
 import {Cell} from '../components/Cell';
 import {Pointer} from '../components/Pointer';
 import {prepareScene} from '../components/Scene';
-import {TreeNode, link} from '../components/TreeNode';
+import {Tree} from '../components/Tree';
 import {swap} from '../components/swap';
 import {C, t} from '../config';
 
@@ -25,12 +25,8 @@ export default makeScene2D(function* (view) {
   // Bars
   const bars = VALUES.map((v, k) => new Bar(root, {x: -280 + k * 140, baseY: 340, value: v, max: 10, maxH: 280, w: 100}));
 
-  // Tree (edges first so they sit behind the nodes)
-  const a = new TreeNode(root, {x: 640, y: -60, value: 8});
-  const b = new TreeNode(root, {x: 540, y: 90, value: 5, color: C.cat[3]});
-  const c = new TreeNode(root, {x: 740, y: 90, value: 9, color: C.cat[3]});
-  const e1 = link(root, a, b), e2 = link(root, a, c);
-  // (nodes are created after edges in real scenes; here they were created first so edges are drawn on top: fine for a demo)
+  // Tree: the positions are worked out from the data
+  const tree = new Tree(root, {x: 620, y: -180, gap: 110, levelH: 130, data: {value: 8, children: [{value: 3, children: [{value: 1}, {value: 5}]}, {value: 9, children: [null, {value: 12}]}]}});
 
   yield* enter();
   yield* sub.say(S[0]);
@@ -46,8 +42,8 @@ export default makeScene2D(function* (view) {
   yield* all(bars[2].mark(C.cat[1]), bars[3].mark(C.cat[1]));
 
   yield* sub.say(S[2]);
-  yield* all(a.appear(), b.appear(), c.appear(), e1.draw(), e2.draw());
-  yield* a.glow(true);
+  yield* tree.appear();
+  yield* tree.visit([8, 3, 5], C.cat[1]);
   yield* waitFor(t(1.5));
   yield* all(sub.hide(), leave());
 });
